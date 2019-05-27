@@ -80,11 +80,5 @@
             "allow-contrib": false,
             "require": "4.2.*"
         }
-    },
-	"repositories": [
-        {
-            "type": "path",
-            "url": "FR3DLdapBundle"
-        }
-    ]
+    }
 }
