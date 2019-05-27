@@ -1,0 +1,15 @@
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@import '~bootstrap-sass/assets/stylesheets/_bootstrap';
+@import 'style';
+
+//$acceVerde: #84a640;
+$acceVerde: red;
+$acceAzul: #396696;
+
+h1 {
+    color: $acceVerde;
+
+    s {
+        color: $acceAzul;
+    }
+}
