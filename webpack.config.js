@@ -13,6 +13,7 @@ Encore
 
     // uncomment to define the assets of the project
     .addEntry('app', './assets/js/app.js')
+	.addEntry('contact_new', './assets/js/contacts/new_view.js')
     // .addStyleEntry('css/app', './assets/css/app.scss')
 
     // uncomment if you use Sass/SCSS files
@@ -21,11 +22,14 @@ Encore
     // uncomment for legacy applications that require $/jQuery as a global variable
     .autoProvidejQuery()
 	
+	.splitEntryChunks()
+	
 	.disableSingleRuntimeChunk()
 
-    .addPlugin(new CopyWebpackPlugin([
-        { from: './assets/images', to: 'images' }
-    ]))
+	.copyFiles({
+		from: './assets/images', to: 'images/[path][name].[hash:8].[ext]'
+	})
+
 ;
 
 module.exports = Encore.getWebpackConfig();

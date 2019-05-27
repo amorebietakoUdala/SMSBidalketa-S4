@@ -1,5 +1,6 @@
 import $ from 'jquery';
-import 'bootstrap-sass';
 import 'bootstrap';
+
+import './common';
 
 import '../css/app.scss';
