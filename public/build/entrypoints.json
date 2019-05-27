@@ -2,18 +2,11 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/vendors~app~contact_new.js",
         "/build/vendors~app.js",
         "/build/app.js"
       ],
       "css": [
         "/build/app.css"
-      ]
-    },
-    "contact_new": {
-      "js": [
-        "/build/vendors~app~contact_new.js",
-        "/build/contact_new.js"
       ]
     }
   }

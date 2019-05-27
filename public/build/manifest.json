@@ -1,9 +1,7 @@
 {
   "build/app.css": "/build/app.css",
   "build/app.js": "/build/app.js",
-  "build/contact_new.js": "/build/contact_new.js",
   "build/vendors~app.js": "/build/vendors~app.js",
-  "build/vendors~app~contact_new.js": "/build/vendors~app~contact_new.js",
   "build/fonts/fontawesome-webfont.eot": "/build/fonts/fontawesome-webfont.674f50d2.eot",
   "build/fonts/fontawesome-webfont.woff2": "/build/fonts/fontawesome-webfont.af7ae505.woff2",
   "build/fonts/fontawesome-webfont.ttf": "/build/fonts/fontawesome-webfont.b06871f2.ttf",
