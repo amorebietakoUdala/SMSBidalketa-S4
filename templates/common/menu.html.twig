@@ -7,19 +7,23 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
 	<li class='nav-item'>
-	  <a class='nav-link' href="{{ path('homepage') }}">{{"home" | trans | capitalize}}</a>
+	  <a class='nav-link' href="{{ path ('contact_list') }}">{{"navitem.home" | trans | capitalize}}</a>
 	</li>
-      <li class="nav-item dropdown">
+	<li class='nav-item'>
+	  <a class='nav-link' href="{{ path ('label_list') }}">{{ 'navitem.labels' | trans | capitalize }}</a>
+	</li>
+{#      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarTaxes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ 'navitem.taxes' | trans | capitalize }}
+          {{ 'navitem.labels' | trans | capitalize }}
         </a>
         <div id="js-menu-pagos" class="dropdown-menu" aria-labelledby="navbarTaxes">
-{#
+
 	  <a class="dropdown-item" href="{{ path('exam_new') }}">{{"navitem.exams" | trans | capitalize}}</a>
 	  <a class="dropdown-item" href="{{ path('buyTickets_activity',{'activity': 1 }) }}">{{"navitem.cine" | trans | capitalize}}</a>
 	  <a class="dropdown-item" href="{{ path('buyTickets_activity',{'activity': 2 }) }}">{{"navitem.ibiliak" | trans | capitalize}}</a>
-#}        </div>
+        </div>
       </li>
+#}
 {#      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarPaymentTypes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{ 'navitem.paymentTypes' | trans | capitalize }}

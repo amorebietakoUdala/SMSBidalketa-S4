@@ -2,15 +2,14 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\ManyToMany;
-use Doctrine\ORM\Mapping\JoinTable;
 
 /**
  * Contact.
  *
  * @ORM\Table(name="contact")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ContactRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
  */
 class Contact
 {
@@ -75,8 +74,9 @@ class Contact
     /**
      * Labels for the contacts.
      *
-     * @ManyToMany(targetEntity="Label", inversedBy="contacts")
-     * @JoinTable(name="labels_contacts")
+     * @ORM\ManyToMany(targetEntity="Label", inversedBy="contacts", cascade={"persist"})
+     * @ORM\JoinTable(name="labels_contacts")
+     * @ORM\OrderBy({"name" = "ASC"})
      *      )
      */
     private $labels;
@@ -103,7 +103,7 @@ class Contact
      *
      * @return Contact
      */
-    public function setUsername($username)
+    public function setUsername($username): self
     {
         $this->username = $username;
 
@@ -115,7 +115,7 @@ class Contact
      *
      * @return string
      */
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->username;
     }
@@ -127,7 +127,7 @@ class Contact
      *
      * @return Contact
      */
-    public function setTelephone($telephone)
+    public function setTelephone($telephone): self
     {
         $this->telephone = $telephone;
 
@@ -139,7 +139,7 @@ class Contact
      *
      * @return string
      */
-    public function getTelephone()
+    public function getTelephone(): string
     {
         return $this->telephone;
     }
@@ -147,25 +147,25 @@ class Contact
     /**
      * Set nombre.
      *
-     * @param string $nombre
+     * @param string $name
      *
      * @return Contact
      */
-    public function setNombre($nombre)
+    public function setName($name): self
     {
-        $this->nombre = $nombre;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get nombre.
+     * Get name.
      *
      * @return string
      */
-    public function getNombre()
+    public function getName(): string
     {
-        return $this->nombre;
+        return $this->name;
     }
 
     /**
@@ -175,7 +175,7 @@ class Contact
      *
      * @return Contact
      */
-    public function setSurname1($surname1)
+    public function setSurname1($surname1): self
     {
         $this->surname1 = $surname1;
 
@@ -187,7 +187,7 @@ class Contact
      *
      * @return string
      */
-    public function getSurname1()
+    public function getSurname1(): string
     {
         return $this->surname1;
     }
@@ -199,7 +199,7 @@ class Contact
      *
      * @return Contact
      */
-    public function setSurname2($surname2)
+    public function setSurname2($surname2): self
     {
         $this->surname2 = $surname2;
 
@@ -211,7 +211,7 @@ class Contact
      *
      * @return string
      */
-    public function getSurname2()
+    public function getSurname2(): string
     {
         return $this->surname2;
     }
@@ -223,7 +223,7 @@ class Contact
      *
      * @return Contact
      */
-    public function setCompany($company)
+    public function setCompany($company): self
     {
         $this->company = $company;
 
@@ -235,7 +235,7 @@ class Contact
      *
      * @return string
      */
-    public function getCompany()
+    public function getCompany(): string
     {
         return $this->company;
     }
@@ -247,7 +247,7 @@ class Contact
      *
      * @return Contact
      */
-    public function setDepartment($department)
+    public function setDepartment($department): self
     {
         $this->department = $department;
 
@@ -259,7 +259,7 @@ class Contact
      *
      * @return string
      */
-    public function getDepartment()
+    public function getDepartment(): string
     {
         return $this->department;
     }
@@ -271,7 +271,7 @@ class Contact
      *
      * @return Contact
      */
-    public function setLabels($labels)
+    public function setLabels($labels): self
     {
         $this->labels = $labels;
 
@@ -281,10 +281,50 @@ class Contact
     /**
      * Get labels.
      *
-     * @return array
+     * @return ArrayCollection|Labels[]
      */
     public function getLabels()
     {
         return $this->labels;
+    }
+
+    public function addLabel(Label $label)
+    {
+        if ($this->labels->contains($label)) {
+            return;
+        }
+        $this->labels[] = $label;
+    }
+
+    public function removeLabel(Label $label)
+    {
+        if (!$this->labels->contains($label)) {
+            return;
+        }
+        $this->labels->removeElement($label);
+        // not needed for persistence, just keeping both sides in sync
+        $label->removeContact($this);
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getFullName();
+    }
+
+    public function getFullName()
+    {
+        return $this->name.' '.$this->surname1.' '.$this->surname2;
+    }
+
+    public function hasLabel($label)
+    {
+        return $this->labels->contains($label);
     }
 }

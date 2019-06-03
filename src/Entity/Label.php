@@ -3,13 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Label.
  *
  * @ORM\Table(name="label")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\LabelRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\LabelRepository")
+ * @Serializer\ExclusionPolicy("all")
  */
 class Label
 {
@@ -19,6 +21,7 @@ class Label
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Serializer\Expose
      */
     private $id;
 
@@ -26,13 +29,14 @@ class Label
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Serializer\Expose
      */
     private $name;
 
     /**
      * Labels for the contacts.
      *
-     * @ManyToMany(targetEntity="Contact", mappedBy="labels")
+     * @ORM\ManyToMany(targetEntity="Contact", mappedBy="labels")
      */
     private $contacts;
 
@@ -49,6 +53,20 @@ class Label
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set name.
+     *
+     * @param string $id
+     *
+     * @return Label
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -75,6 +93,9 @@ class Label
         return $this->name;
     }
 
+    /**
+     * @return ArrayCollection|Contact[]
+     */
     public function getContacts()
     {
         return $this->contacts;
@@ -85,5 +106,28 @@ class Label
         $this->contacts = $contacts;
 
         return $this;
+    }
+
+    public function addContact(Contact $contact)
+    {
+        if ($this->contacts->contains($contact)) {
+            return;
+        }
+        $this->contacts[] = $contact;
+    }
+
+    public function removeContact(Contact $contact)
+    {
+        if (!$this->contacts->contains($contact)) {
+            return;
+        }
+        $this->contacts->removeElement($contact);
+        // not needed for persistence, just keeping both sides in sync
+        $contact->removeLabel($this);
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

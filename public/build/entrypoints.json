@@ -2,11 +2,77 @@
   "entrypoints": {
     "app": {
       "js": [
+        "/build/runtime.js",
+        "/build/vendors~app~contact_edit_view~contact_list_view~contact_new_view~label_edit_view~label_list_view~lab~378cc04f.js",
         "/build/vendors~app.js",
         "/build/app.js"
       ],
       "css": [
         "/build/app.css"
+      ]
+    },
+    "contact_new_view": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~app~contact_edit_view~contact_list_view~contact_new_view~label_edit_view~label_list_view~lab~378cc04f.js",
+        "/build/vendors~contact_edit_view~contact_new_view.js",
+        "/build/contact_new_view.js"
+      ],
+      "css": [
+        "/build/contact_new_view.css"
+      ]
+    },
+    "contact_list_view": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~app~contact_edit_view~contact_list_view~contact_new_view~label_edit_view~label_list_view~lab~378cc04f.js",
+        "/build/vendors~contact_list_view~label_list_view.js",
+        "/build/contact_list_view.js"
+      ],
+      "css": [
+        "/build/contact_list_view.css"
+      ]
+    },
+    "contact_edit_view": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~app~contact_edit_view~contact_list_view~contact_new_view~label_edit_view~label_list_view~lab~378cc04f.js",
+        "/build/vendors~contact_edit_view~contact_new_view.js",
+        "/build/contact_edit_view.js"
+      ],
+      "css": [
+        "/build/contact_edit_view.css"
+      ]
+    },
+    "label_list_view": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~app~contact_edit_view~contact_list_view~contact_new_view~label_edit_view~label_list_view~lab~378cc04f.js",
+        "/build/vendors~contact_list_view~label_list_view.js",
+        "/build/label_list_view.js"
+      ],
+      "css": [
+        "/build/label_list_view.css"
+      ]
+    },
+    "label_edit_view": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~app~contact_edit_view~contact_list_view~contact_new_view~label_edit_view~label_list_view~lab~378cc04f.js",
+        "/build/label_edit_view.js"
+      ],
+      "css": [
+        "/build/label_edit_view.css"
+      ]
+    },
+    "label_new_view": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~app~contact_edit_view~contact_list_view~contact_new_view~label_edit_view~label_list_view~lab~378cc04f.js",
+        "/build/label_new_view.js"
+      ],
+      "css": [
+        "/build/label_new_view.css"
       ]
     }
   }

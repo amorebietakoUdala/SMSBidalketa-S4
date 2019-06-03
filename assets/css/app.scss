@@ -1,4 +1,4 @@
-@import '~bootstrap';
+@import '~bootstrap/scss/bootstrap'; 
 @import '~font-awesome';
 
 /*$acceVerde: green;
@@ -127,45 +127,12 @@ main {
     color: #000;
 }
 
-.input-group-append {
-    z-index: 0;
-}
-
-.iframe {
-    height: 100%;
-    width: 100%;
-}
-
-.highlight {
-    background: yellow;
-}
-
-.highlight-danger {
-    background: red;
-}
-
-.color-green {
-    color: green;
-}
-
-.color-red {
-    color: red;
-}
-
-.color-blue {
-    color: blue;
-}
-
-.color-yellow {
-    color: yellow;
-}
-
-#event-details pre {
-    overflow-y: hidden;
-}
-
 .btn-rounded {
     border-radius: 1.5rem 1.5rem 1.5rem 1.5rem;
+}
+
+.invalid-feedback{
+	font-size: 0.7rem;
 }
 
 @media (max-width: 767px) {

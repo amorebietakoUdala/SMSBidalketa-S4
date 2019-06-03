@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'messages.appTitle' | trans }}{% endblock %}
+
+{% block message %}
+    {% for msg in app.session.flashBag.get('success') %}
+	<div class="alert alert-success margin-top-13">
+	    {{ msg | trans}}
+	</div>
+    {% endfor %}
+    {% for msg in app.session.flashBag.get('error') %}
+	<div class="alert alert-danger margin-top-13">
+	    {{ msg | trans}}
+	</div>
+    {% endfor %}
+{% endblock %}
+
+
+{% block body %}
+    <main class="container-fluid">
+	<div class="container-fluid">
+	    <table id="taula" class="table bootstrap-table mt-3">
+		<thead>
+		    <tr class="row">
+			<th data-sortable="true">{{"label.id" | trans | capitalize}}</th>
+			<th data-sortable="true">{{"label.name" | trans | capitalize}}</th>
+			<th data-sortable="true" data-field="options">{{"options" | trans | capitalize}}</th>
+		    </tr>
+		</thead>
+		<tbody>
+		    {% if labels is defined and labels|length > 0 %}
+			{% for label in labels %}
+			<tr>
+			    <td>{{label.id}}</td>
+				<td>{{label.name}}</td>
+				<td><a href="{{ path ("label_show",{"label" : label.id}) }}"><i class="fa fa-eye"></i></a>
+				&nbsp;<a href="{{ path ("label_edit",{"label" : label.id}) }}"><i class="fa fa-edit"></i></a>
+				&nbsp;<a class="js-delete" 
+						 href="#" 
+						 data-url="{{ path ("label_delete",{"label" : label.id}) }}" 
+						 data-confirmation="{{ "messages.confirmacion" | trans | capitalize }}"
+						 data-message="{% trans with {'%contactsCount%': label.contacts|length} %}label.delete.confirmation{% endtrans %}"
+						 data-confirm = "{{ "messages.si" | trans | capitalize }}"
+						 data-cancel = "{{ "messages.no" | trans | capitalize }}"
+						 data-affecttedContacts ="{{ label.contacts | length }}"
+					>
+					<i class="fa fa-trash"></i></a>
+			    </td>
+			</tr>
+			{% endfor %}
+		    {% else %}
+			<tr><td class="text-center" colspan="3">{{"messages.results0" | trans }}</td></tr>
+		    {% endif %}
+		</tbody>
+	    </table>
+	    <span class="pull-right"><a href="{{ path ('label_new') }}" class="btn btn-primary btn-rounded fixed-bottom-right"><i class="fa fa-plus" title='{{ "btn.new" | trans | capitalize }}'></i></a></span>
+	</div>
+    </main>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+	{{ encore_entry_link_tags('label_list_view') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{  parent() }}
+	{{ encore_entry_script_tags('label_list_view') }}
+{% endblock javascripts %}

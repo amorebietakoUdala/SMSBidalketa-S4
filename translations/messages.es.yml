@@ -1,0 +1,46 @@
+messages.appTitle: "SMSBidalketa"
+search.title: "Busqueda"
+
+options: "Opciones"
+
+messages.confirmacion: "Confirmación"
+messages.results0: "No se han encontrado resultados"
+messages.si: "Sí"
+messages.no: "No"
+
+link.logout: "Salir"
+
+confirmation.pay: "Pagar"
+confirmation.cancel: "Cancelar"
+
+btn.new: "Nuevo"
+btn.save: "Guardar"
+btn.send: "Enviar"
+btn.buy: "Comprar"
+btn.back: "Volver"
+btn.addLabel: "Añadir etiqueta"
+
+navitem.contacts: "Contactos"
+navitem.import: "Importar"
+navitem.new: "Nuevo"
+navitem.labels: "Etiquetas"
+navitem.home: "Inicio"
+
+label.id: "Id"
+label.name: "Nombre"
+
+contact.id: "Id"
+contact.username: "Username"
+contact.fullname: "Nombre completo"
+contact.telephone: "Teléfono"
+contact.company: "Compañía"
+contact.department: "Departamento"
+
+"Duplicate contact": "Contacto duplicado"
+"Duplicate label": "Etiqueta duplicada"
+"Contact saved": "Contacto guardado"
+"label saved": "Etiqueta guardado"
+
+# "¿Esta seguro de que desea eliminar esta etiqueta?<br/>Esto afectará a %contactsCount% contactos": "¿Esta seguro de que desea eliminar esta etiqueta?<br/>Esto afectará a %contactsCount% contactos"
+"contact.delete.confirmation": "¿Esta seguro de que desea eliminar este contacto?"
+"label.delete.confirmation": "¿Esta seguro de que desea eliminar esta etiqueta?<br/>Esto afectará a %contactsCount% contactos"

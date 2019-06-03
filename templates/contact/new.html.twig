@@ -2,13 +2,6 @@
 
 {% block title %}{{'messages.appTitle' | trans }}{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="{{ asset('bower_components/bootstrap-table/dist/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('bower_components/jquery-ui/themes/base/jquery-ui.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('bower_components/fontawesome/css/all.min.css') }}" rel="stylesheet" type="text/css">
-{% endblock %}
-
 {% block message %}
     {% for msg in app.session.flashBag.get('success') %}
 	<div class="alert alert-success margin-top-13">
@@ -25,23 +18,19 @@
 {% block body %}
     <main class="container-fluid">
 	<div class="mt-2">
-	{{ include('activity/_form.html.twig',{
+	{{ include('contact/_form.html.twig',{
 	    'readonly': false,
 			    }) }}
 	</div>
     </main>
 {% endblock body %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('contact_new_view') }}
+{% endblock %}
 
 {% block javascripts %}
-    {{  parent() }}
-	<script type="text/javascript">
-	$(document).ready(function(){
-	    $('.js-back').on('click',function(e){
-			e.preventDefault();
-			var url = e.currentTarget.dataset.url;
-			document.location.href=url;
-	    });
-	});
-    </script>
+	{{ parent() }}
+	{{ encore_entry_script_tags('contact_new_view') }}
 {% endblock javascripts %}

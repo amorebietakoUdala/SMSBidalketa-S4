@@ -1,25 +1,38 @@
 {
   "devDependencies": {
+    "@babel/core": "^7.4.5",
     "@symfony/webpack-encore": "^0.27.0",
+    "autoprefixer": "^9.5.1",
     "bootstrap-sass": "^3.4.1",
     "copy-webpack-plugin": "^5.0.3",
     "core-js": "^3.1.2",
     "node-sass": "^4.12.0",
+    "postcss-loader": "3.0.0",
     "sass-loader": "^7.1.0",
     "webpack": "^4.32.2",
     "webpack-dev-server": "^3.4.1",
     "webpack-notifier": "1.6.0"
   },
   "dependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "bootstrap": "^4.3.1",
+    "bootstrap-table": "^1.14.2",
+    "devbridge-autocomplete": "^1.4.10",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
-    "popper.js": "^1.15.0"
+    "jquery-ui": "^1.12.1",
+    "popper.js": "^1.15.0",
+    "select2": "^4.0.7",
+    "sweetalert2": "^8.11.6",
+    "tableexport.jquery.plugin": "^1.10.4"
   },
   "scripts": {
     "dev-server": "encore dev-server",
     "dev": "encore dev",
     "watch": "encore dev --watch",
     "build": "encore production --progress"
-  }
+  },
+  "browserslist": [
+    "> 5%"
+  ]
 }

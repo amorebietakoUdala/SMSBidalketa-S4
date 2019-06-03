@@ -38,13 +38,11 @@ security:
             provider: chain_provider
             fr3d_ldap:  ~
             form_login:
-#                service: Symfony\Component\Ldap\Ldap
-#                dn_string: '%env(LDAP_ACCOUNTDOMAINNAME)%\{username}'
-#                csrf_token_generator: security.csrf.token_manager
                 provider: chain_provider
                 csrf_token_generator: security.csrf.token_manager
                 always_use_default_target_path: true
-                default_target_path: /
+                login_path: fos_user_security_login
+                default_target_path: contact_list
             logout_on_user_change: true
             logout:     true
             anonymous:  true
@@ -60,5 +58,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/build/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/, roles: ROLE_USER }

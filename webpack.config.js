@@ -18,7 +18,12 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
-    //.addEntry('page1', './assets/js/page1.js')
+    .addEntry('contact_new_view', './assets/js/contact/new_view.js')
+	.addEntry('contact_list_view', './assets/js/contact/list_view.js')
+	.addEntry('contact_edit_view', './assets/js/contact/edit_view.js')
+    .addEntry('label_list_view', './assets/js/label/list_view.js')
+	.addEntry('label_edit_view', './assets/js/label/edit_view.js')
+	.addEntry('label_new_view', './assets/js/label/new_view.js')
     //.addEntry('page2', './assets/js/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
@@ -26,8 +31,8 @@ Encore
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
-    // .enableSingleRuntimeChunk()
-	.disableSingleRuntimeChunk()
+    .enableSingleRuntimeChunk()
+	// .disableSingleRuntimeChunk()
 
     /*
      * FEATURE CONFIG
@@ -50,6 +55,7 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
+	.enablePostCssLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
