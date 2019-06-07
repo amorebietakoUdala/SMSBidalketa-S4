@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\DTO\ContactDTO;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,7 +22,9 @@ class ContactType extends AbstractType
                 'constraints' => new NotBlank(),
             ])
             ->add('telephone', null, [
-                'constraints' => new NotBlank(),
+                'constraints' => [ new NotBlank(), 
+                                   new Regex('/^(71|72|73|74)\d{7}+$|^6\d{8}+$/')
+                    ]
             ])
             ->add('name', null, [
                 'constraints' => new NotBlank(),

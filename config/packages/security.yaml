@@ -18,11 +18,11 @@ security:
 #                search_dn: '%env(LDAP_USER)%'
 #                search_password: '%env(LDAP_PASSWORD)%'
 #                default_roles: ROLE_USER
-        chain_provider:
-            chain:
-               providers: [fos_userbundle, fr3d_ldapbundle]
-        fr3d_ldapbundle:
-            id: fr3d_ldap.security.user.provider
+#        chain_provider:
+#            chain:
+#               providers: [fos_userbundle, fr3d_ldapbundle]
+#        fr3d_ldapbundle:
+#            id: fr3d_ldap.security.user.provider
         fos_userbundle:
             id: fos_user.user_provider.username
 #        fos_userbundle:
@@ -35,10 +35,10 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            provider: chain_provider
-            fr3d_ldap:  ~
+            provider: fos_userbundle
+ #           fr3d_ldap:  ~
             form_login:
-                provider: chain_provider
+                provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
                 always_use_default_target_path: true
                 login_path: fos_user_security_login

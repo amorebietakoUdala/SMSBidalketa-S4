@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Contact.
@@ -32,7 +33,8 @@ class Contact
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=13, unique=true)
+     * @ORM\Column(name="telephone", type="string", length=13, unique=true, nullable=false)
+     * @Assert\Regex("/^(71|72|73|74)\d{7}+$|^6\d{8}+$/")
      */
     private $telephone;
 

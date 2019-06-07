@@ -29,6 +29,8 @@ services:
         resource: '../src/Controller/Api'
         tags: ['controller.service_arguments']
 
+#    AmorebietakoUdala\SMSServiceBundle\Controller\SmsSender: ~
+    
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 

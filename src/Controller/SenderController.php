@@ -9,7 +9,7 @@ use App\Form\SendByLabelType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\AmorebietakoUdala\SMSServiceBundle\Controller\SmsSender;
+use AmorebietakoUdala\SMSServiceBundle\Controller\SmsSender;
 
 /**
  * @Route("/{_locale}")
@@ -45,26 +45,27 @@ class SenderController extends AbstractController
 
                 return $this->render('sendby/list.html.twig', [
                     'form' => $form->createView(),
-                    'contacts' => $contacts,
+                    'contacts' => [],
                 ]);
             }
-
+            
             $credit = $sender->getCredit();
-            if ($credit < $telephones) {
+
+            if ($credit < count($telephones) ) {
                 $this->addFlash('error', 'Not enough credit');
 
                 return $this->render('sendby/list.html.twig', [
                     'form' => $form->createView(),
-                    'contacts' => $contacts,
+                    'contacts' => [],
                 ]);
             }
 
 //            $sender->sendMessage($telephones, $data->getMessage());
             $this->addFlash('success', 'Messages sended successfully');
-
+            
             return $this->render('sendby/list.html.twig', [
                 'form' => $form->createView(),
-                'contacts' => $contacts,
+                'contacts' => [],
             ]);
         }
     }

@@ -30,7 +30,5 @@
   "build/fonts/fontawesome-webfont.woff": "/build/fonts/fontawesome-webfont.fee66e71.woff",
   "build/images/default-avatar.png": "/build/images/default-avatar.4c55c05b.png",
   "build/images/fontawesome-webfont.svg": "/build/images/fontawesome-webfont.912ec66d.svg",
-  "build/images/logo.jpg": "/build/images/logo.688b34d0.jpg",
-  "build/vendors~app~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~label_edit_view~4e5b9abd.js": "/build/vendors~app~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~label_edit_view~4e5b9abd.js",
-  "build/vendors~contact_list_view~label_list_view.js": "/build/vendors~contact_list_view~label_list_view.js"
+  "build/images/logo.jpg": "/build/images/logo.688b34d0.jpg"
 }
