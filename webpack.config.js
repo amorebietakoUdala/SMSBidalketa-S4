@@ -21,9 +21,11 @@ Encore
     .addEntry('contact_new_view', './assets/js/contact/new_view.js')
 	.addEntry('contact_list_view', './assets/js/contact/list_view.js')
 	.addEntry('contact_edit_view', './assets/js/contact/edit_view.js')
+	.addEntry('contact_import_view', './assets/js/contact/import_view.js')
     .addEntry('label_list_view', './assets/js/label/list_view.js')
 	.addEntry('label_edit_view', './assets/js/label/edit_view.js')
 	.addEntry('label_new_view', './assets/js/label/new_view.js')
+	.addEntry('sendByLabels_view', './assets/js/sender/sendByLabels_view.js')
     //.addEntry('page2', './assets/js/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.

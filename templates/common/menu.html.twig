@@ -9,21 +9,30 @@
 	<li class='nav-item'>
 	  <a class='nav-link' href="{{ path ('contact_list') }}">{{"navitem.home" | trans | capitalize}}</a>
 	</li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarSendMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ 'navitem.send' | trans | capitalize }}
+        </a>
+        <div id="js-menu-sendmessage" class="dropdown-menu" aria-labelledby="navbarSendMessage">
+			<a class="dropdown-item" href="{{ path('sendby_labels_search') }}">{{"navitem.sendby_labels" | trans | capitalize}}</a>
+{#
+			<a class="dropdown-item" href="{{ path('contact_import') }}">{{"navitem.contact_import" | trans | capitalize}}</a>
+#}
+        </div>
+      </li>
 	<li class='nav-item'>
 	  <a class='nav-link' href="{{ path ('label_list') }}">{{ 'navitem.labels' | trans | capitalize }}</a>
 	</li>
-{#      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarTaxes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ 'navitem.labels' | trans | capitalize }}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarContacts" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ 'navitem.contacts' | trans | capitalize }}
         </a>
-        <div id="js-menu-pagos" class="dropdown-menu" aria-labelledby="navbarTaxes">
-
-	  <a class="dropdown-item" href="{{ path('exam_new') }}">{{"navitem.exams" | trans | capitalize}}</a>
-	  <a class="dropdown-item" href="{{ path('buyTickets_activity',{'activity': 1 }) }}">{{"navitem.cine" | trans | capitalize}}</a>
-	  <a class="dropdown-item" href="{{ path('buyTickets_activity',{'activity': 2 }) }}">{{"navitem.ibiliak" | trans | capitalize}}</a>
+        <div id="js-menu-contacts" class="dropdown-menu" aria-labelledby="navbarContacts">
+			<a class="dropdown-item" href="{{ path('contact_list') }}">{{"navitem.contact_list" | trans | capitalize}}</a>
+			<a class="dropdown-item" href="{{ path('contact_import') }}">{{"navitem.contact_import" | trans | capitalize}}</a>
         </div>
       </li>
-#}
+
 {#      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarPaymentTypes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{ 'navitem.paymentTypes' | trans | capitalize }}

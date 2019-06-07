@@ -11,7 +11,11 @@ services:
     App\AmorebietakoUdala\SMSServiceBundle\Controller\SmsSender:
         class: App\AmorebietakoUdala\SMSServiceBundle\Controller\SmsSender
         public: true
-        arguments: ['%username%','%password%','%account%']
+        autowire: false
+        arguments: 
+            $username: '%username%'
+            $password: '%password%'
+            $account: '%account%'
         
     App\AmorebietakoUdala\SMSServiceBundle\Controller\DefaultController:
         tags: ['controller.service_arguments']

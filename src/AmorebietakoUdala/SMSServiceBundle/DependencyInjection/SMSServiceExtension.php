@@ -6,6 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * This is the class that loads and manages your bundle configuration.
@@ -26,8 +27,15 @@ class SMSServiceExtension extends Extension
         $loader->load('services.yml');
 
         $definition = $container->getDefinition('App\AmorebietakoUdala\SMSServiceBundle\Controller\SmsSender');
-        $definition->replaceArgument(0, $config['username']);
-        $definition->replaceArgument(1, $config['password']);
-        $definition->replaceArgument(2, $config['account']);
+        $definition->replaceArgument('$username', $config['username']);
+        $definition->replaceArgument('$password', $config['password']);
+        $definition->replaceArgument('$account', $config['account']);
+//        dump($definition);
+//        die;
+//        $definition->setArgument('$password', new Reference($config['password']));
+//        $definition->setArgument('$account', new Reference($config['account']));
+//        $definition->replaceArgument('$username', $config['username']);
+//        $definition->replaceArgument('$password', $config['password']);
+//        $definition->replaceArgument('$account', $config['account']);
     }
 }

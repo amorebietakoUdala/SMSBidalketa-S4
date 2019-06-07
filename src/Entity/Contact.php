@@ -115,7 +115,7 @@ class Contact
      *
      * @return string
      */
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return $this->username;
     }
@@ -151,7 +151,7 @@ class Contact
      *
      * @return Contact
      */
-    public function setName($name): self
+    public function setName($name): ?self
     {
         $this->name = $name;
 
@@ -187,7 +187,7 @@ class Contact
      *
      * @return string
      */
-    public function getSurname1(): string
+    public function getSurname1(): ?string
     {
         return $this->surname1;
     }
@@ -211,7 +211,7 @@ class Contact
      *
      * @return string
      */
-    public function getSurname2(): string
+    public function getSurname2(): ?string
     {
         return $this->surname2;
     }
@@ -235,7 +235,7 @@ class Contact
      *
      * @return string
      */
-    public function getCompany(): string
+    public function getCompany(): ?string
     {
         return $this->company;
     }
@@ -259,7 +259,7 @@ class Contact
      *
      * @return string
      */
-    public function getDepartment(): string
+    public function getDepartment(): ?string
     {
         return $this->department;
     }
@@ -326,5 +326,19 @@ class Contact
     public function hasLabel($label)
     {
         return $this->labels->contains($label);
+    }
+
+    public function __toArray()
+    {
+        return [
+            'id' => $this->id,
+            'username' => $this->username,
+            'name' => $this->name,
+            'surname1' => $this->surname1,
+            'surname2' => $this->surname2,
+            'company' => $this->company,
+            'department' => $this->department,
+            'labels' => $this->labels->toArray(),
+        ];
     }
 }

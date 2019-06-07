@@ -8,6 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Contact;
+use App\Form\ContactImportType;
+use Psr\Log\LoggerInterface;
+use League\Csv\Reader;
+use App\Entity\Label;
 
 /**
  * @Route("/{_locale}")
@@ -17,11 +21,74 @@ class ContactController extends AbstractController
     /**
      * @Route("/contacts/import", name="contact_import")
      */
-    public function importAction(Request $request)
+    public function importAction(Request $request, LoggerInterface $logger)
     {
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        $logger->debug('-->importAction: Start');
+        //	$user = $this->get('security.token_storage')->getToken()->getUser();
+        $form = $this->createForm(ContactImportType::class, null, [
+//	    'editatzen' => false,
+//	    'role' => $user->getRoles(),
+//    	    'locale' => $request->getLocale(),
         ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $already_existings_contacts = [];
+                $repeated_contacts = [];
+                $contacts_without_repeated = [];
+                $file = $form['file']->getData();
+                $records = $this->__readRecordsFromFile($file);
+                $repo = $em->getRepository(Contact::class);
+                foreach ($records as $record) {
+                    $contactDTO = new ContactDTO();
+                    $contactDTO->extractFromArray($record);
+                    $contact = $repo->findOneBy(['telephone' => $contactDTO->getTelephone()]);
+                    // TODO review this logic to control duplicates and already existing contacts
+                    if (null === $contact) {
+                        /* Telephone not found */
+                        $contact = new Contact();
+                        $contactDTO->fill($contact);
+                    } else {
+                        $already_existing_contacts[] = $contact;
+                    }
+                    if (!array_key_exists($contact->getTelephone(), $contacts_without_repeated)) {
+                        $contacts_without_repeated[$contact->getTelephone()] = $contact;
+                    } else {
+                        $repeated_contacts[$contact->getTelephone()] = $contact;
+                    }
+                }
+                $labels = $form['labels']->getData();
+                $this->__assignLabelsToContacts(array_values($contacts_without_repeated), $labels);
+                $em->flush();
+                $this->addFlash('success', 'File successfully processed');
+                $message = '';
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'there was an error procesing file %message%');
+                $message = $e->getMessage();
+            }
+            $this->__moveProcessedFile($file);
+            $logger->debug('<--importAction: POST End');
+            if (count($already_existing_contacts) > 0) {
+                $this->addFlash('warning', 'There are already existing contacts. the label will be applyied but the contact information has not be updated.');
+            }
+            if (count($repeated_contacts) > 0) {
+                $this->addFlash('warning', 'There are repeated contacts.');
+            }
+
+            return $this->render('contact/upload.html.twig', [
+                'form' => $form->createView(),
+                'message' => $message,
+                'already_existing_contacts' => $already_existing_contacts,
+                'repeated_contacts' => $repeated_contacts,
+                'contacts_without_repeated' => $contacts_without_repeated,
+        ]);
+        }
+        $logger->debug('<--importAction: GET End OK');
+
+        return $this->render('contact/upload.html.twig', [
+            'form' => $form->createView(),
+    ]);
     }
 
     /**
@@ -52,7 +119,7 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /* @var $data ContactDTO */
             $data = $form->getData();
-            $exists = $em->getRepository(\App\Entity\Contact::class)->findOneBy(['username' => $data->getUsername()]);
+            $exists = $em->getRepository(\App\Entity\Contact::class)->findOneBy(['telephone' => $data->getTelephone()]);
             if ($exists) {
                 $this->addFlash('error', 'Duplicate contact');
 
@@ -103,7 +170,7 @@ class ContactController extends AbstractController
             $data->fill($contact);
             $em->persist($contact);
             $em->flush();
-            $this->addFlash('success', 'Contact edited');
+            $this->addFlash('success', 'Contact saved');
 
             return $this->redirectToRoute('contact_list');
         }
@@ -184,5 +251,45 @@ class ContactController extends AbstractController
         }
 
         return $labels;
+    }
+
+    private function __readRecordsFromFile($file)
+    {
+        $reader = Reader::createFromPath($file, 'r');
+        $reader->setDelimiter(';');
+//                $reader->setHeaderOffset(0);
+        $records = $reader->getRecords();
+
+        return $records;
+    }
+
+    private function __moveProcessedFile($file)
+    {
+        $date = new \DateTime();
+        $dateStr = $date->format('Ymdhis');
+        $filename = preg_replace('/\\.[^.\\s]{3,4}$/', '', $file->getClientOriginalName());
+        $directory = $this->getParameter('uploads_directory');
+        $extension = $file->guessExtension();
+        if (!$extension) {
+            // extension cannot be guessed
+            $extension = 'bin';
+        }
+        $file->move($directory, $dateStr.'-'.$filename.'.'.$extension);
+    }
+
+    private function __assignLabelsToContacts($contacts, $labels)
+    {
+        $em = $this->getDoctrine()->getManager();
+        foreach ($contacts as $contact) {
+            foreach ($labels as $label) {
+                $label2 = $em->getRepository(Label::class)->findOneBy(['name' => $label->getName()]);
+                if (null === $label2) {
+                    $contact->addLabel($label);
+                } else {
+                    $contact->addLabel($label2);
+                }
+            }
+            $em->persist($contact);
+        }
     }
 }

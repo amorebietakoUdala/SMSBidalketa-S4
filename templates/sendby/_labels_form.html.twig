@@ -1,0 +1,21 @@
+{{ form_start(form, {'attr': {'id': 'form',
+							  'class': 'container-fluid form-group',
+						      'novalidate': 'novalidate'
+						} 
+}) }}
+<div class="form-row align-items-center border border-dark p-1">
+	<div class="col-lg-2 col-md-2 col-sm-6">
+		{{ form_row(form.labels, { 'attr': { 'id': '', 'class' : 'form-control-sm'} }) }}
+	</div>
+	<div class="col-lg-2 col-md-2 col-sm-6">
+		{{ form_row(form.message, { 'attr': { 'id': '', 'class' : 'form-control-sm'} }) }}
+	</div>
+	<button id="js-btn-search" type="Submit" class="btn btn-primary ml-1" data-url='{{ path ('sendby_labels_search') }}'>{{ "btn.search" | trans | capitalize }}</button>
+	<button id="js-btn-send" type="button" class="btn btn-primary ml-1" data-url='{{ path ('sendby_labels_send') }}'>{{ "btn.send" | trans | capitalize }}</button>
+</div>
+{{ form_widget(form.selected) }}
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false, 
+				   'attr': {'class': '',
+			       } 
+}) }}

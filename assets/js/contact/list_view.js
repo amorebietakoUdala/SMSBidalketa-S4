@@ -49,7 +49,7 @@ $(document).ready(function(){
 		pageSize: 10,
 		pageList: [10,25,50,100],
 		sortable: true,
-		locale: 'es_{{ app.request.getLocale() | upper }}'
+		locale: $('html').attr('lang'),
 	});
 	var $table = $('#taula');
 	$(function () {

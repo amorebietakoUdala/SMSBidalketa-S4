@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'messages.appTitle' | trans }}{% endblock %}
+
+{% block message %}
+    {% for msg in app.session.flashBag.get('success') %}
+	<div class="alert alert-success margin-top-13">
+	    {{ msg | trans}}
+	</div>
+    {% endfor %}
+    {% for msg in app.session.flashBag.get('error') %}
+	<div class="alert alert-danger margin-top-13">
+	    {{ msg | trans}}
+	</div>
+    {% endfor %}
+{% endblock %}
+
+
+{% block body %}
+    <main class="container-fluid">
+	<div class="mt-2 border-light">
+	{{ include('sendby/_labels_form.html.twig',{
+
+			    }) }}
+	</div>
+		
+	<div class="container-fluid">
+	    {% if contacts is defined and contacts|length > 0 %}
+	    <table id="taula" class="table bootstrap-table mt-3">
+		<thead>
+		    <tr class="row">
+			<th data-checkbox="true"></th>
+			<th data-field="id" data-sortable="true">{{"contact.id" | trans | capitalize}}</th>
+			<th data-field="username" data-sortable="true">{{"contact.username" | trans | capitalize}}</th>
+			<th data-field="fullname" data-sortable="true">{{"contact.fullname" | trans | capitalize}}</th>
+			<th data-field="telephone" data-sortable="true">{{"contact.telephone" | trans | capitalize}}</th>
+			<th data-field="company" data-sortable="true">{{"contact.company" | trans | capitalize}}</th>
+			<th data-field="department" data-sortable="true">{{"contact.department" | trans | capitalize}}</th>
+			<th data-sortable="true" data-field="options">{{"options" | trans | capitalize}}</th>
+		    </tr>
+		</thead>
+		<tbody>
+			{% for contact in contacts %}
+			<tr>
+				<td></td>
+				<td>{{contact.id}}</td>
+				<td>{{contact.username}}</td>
+				<td>{{contact.fullname}}</td>
+			    <td>{{contact.telephone}}</td>
+				<td>{{contact.company}}</td>
+				<td>{{contact.department}}</td>
+				<td><a href="{{ path ("contact_show",{'contact': contact.id })}}"><i class="fa fa-eye"></i></a>
+				&nbsp;<a href="{{ path ("contact_edit",{'contact': contact.id })}}"><i class="fa fa-edit"></i></a>
+				&nbsp;<a class="js-delete" 
+						 href="#" 
+						 data-url="{{ path ("contact_delete",{"contact" : contact.id}) }}" 
+						 data-confirmation="{{ "messages.confirmacion" | trans | capitalize }}"
+						 data-message="{{ "contact.delete.confirmation" | trans | capitalize }}"
+						 data-confirm = "{{ "messages.si" | trans | capitalize }}"
+						 data-cancel = "{{ "messages.no" | trans | capitalize }}"
+					>
+					<i class="fa fa-trash"></i></a>
+			    </td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	    </table>
+		{% else %}
+			<div class='border border-secondary rounded-sm text-secondary bg-light text-center p-2'>{{"messages.results0" | trans }}</div>
+		{% endif %}
+	    <span class="pull-right"><a href="{{ path ('label_new') }}" class="btn btn-primary btn-rounded fixed-bottom-right"><i class="fa fa-plus" title='{{ "btn.new" | trans | capitalize }}'></i></a></span>
+	</div>
+    </main>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+	{{ encore_entry_link_tags('sendByLabels_view') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{  parent() }}
+	{{ encore_entry_script_tags('sendByLabels_view') }}
+{% endblock javascripts %}

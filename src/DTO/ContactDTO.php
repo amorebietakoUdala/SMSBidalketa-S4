@@ -3,6 +3,7 @@
 namespace App\DTO;
 
 use App\Entity\Contact;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class ContactDTO
 {
@@ -20,6 +21,8 @@ class ContactDTO
     {
         if ($contact) {
             $this->extract($contact);
+        } else {
+            $this->labels = new ArrayCollection();
         }
     }
 
@@ -144,6 +147,27 @@ class ContactDTO
         $contact->setLabels($this->getLabels());
     }
 
+    /* Assumed:
+     * Field[0] = username
+     * Field[1] = telephone
+     * Field[2] = name
+     * Field[3] = surname1
+     * Field[4] = surname2
+     * Field[5] = company
+     * Field[6] = department
+     */
+
+    public function extractFromArray(array $contactArray)
+    {
+        $this->setUsername($contactArray[0]);
+        $this->setTelephone($contactArray[1]);
+        $this->setName($contactArray[2]);
+        $this->setSurname1($contactArray[3]);
+        $this->setSurname2($contactArray[4]);
+        $this->setCompany($contactArray[5]);
+        $this->setDepartment($contactArray[6]);
+    }
+
     public function extract(Contact $contact)
     {
         $this->setId($contact->getId());
@@ -155,6 +179,21 @@ class ContactDTO
         $this->setCompany($contact->getCompany());
         $this->setDepartment($contact->getDepartment());
         $this->setLabels($contact->getLabels());
+
+        return $this;
+    }
+
+    public function extractFromJson($json)
+    {
+        $this->setId($json->{'id'});
+        $this->setUsername($json->{'username'});
+        $this->setTelephone($json->{'telephone'});
+//        $this->setName($json->{'name'});
+//        $this->setSurname1($json->{'surname1'});
+//        $this->setSurname2($json->{'surname2'});
+        $this->setCompany($json->{'company'});
+        $this->setDepartment($json->{'department'});
+//        $this->setLabels($json->{'labels'});
 
         return $this;
     }
