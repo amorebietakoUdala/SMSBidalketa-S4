@@ -24,10 +24,17 @@ function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
 		  cancelButtonColor: '#d33',
 		  confirmButtonText: confirmationButtonText,
 		}).then((result) => {
-		if (result.value) {
-			console.log(url);
-			document.location.href=url;
-		}
+			var form = $('#form');
+			var selections = $('#taula').bootstrapTable('getSelections');
+	//		var ids = selections.map(function (x) {
+	//			return  { 'id': x.id, 'telephone': x.telephone };
+	//		});
+	//		console.log(ids);
+	//		$('#send_by_label_selected').val(JSON.stringify(ids));
+			$('#send_by_label_selected').val(JSON.stringify(selections));
+			console.log($('#send_by_label_selected').val());
+			$(form).attr('action',url);
+			form.submit();
 		});
 	});
 }
@@ -36,22 +43,22 @@ $(document).ready(function(){
 	console.log("SendByLabels view!!!!");
     $('#send_by_label_labels').select2();
 	$('#taula').bootstrapTable({
-//		cache : false,
-//		showExport: true,
-//		exportTypes: ['excel'],
-//		exportDataType: 'all',
-//		exportOptions: {
-//			fileName: "destinatarios",
+		cache : false,
+		showExport: true,
+		exportTypes: ['excel'],
+		exportDataType: 'all',
+		exportOptions: {
+			fileName: "destinatarios",
 //			ignoreColumn: ['options']
-//		},
+		},
 //		showColumns: false,
-//		pagination: true,
-//		search: true,
-//		striped: true,
-//		sortStable: true,
+		pagination: false,
+		search: true,
+		striped: true,
+		sortStable: true,
 //		pageSize: 10,
 //		pageList: [10,25,50,100],
-//		sortable: true,
+		sortable: true,
 		locale: $('html').attr('lang'),
 		multipleSelectRow: true,
 	});
@@ -66,18 +73,27 @@ $(document).ready(function(){
 	$('#js-btn-send').on('click',function(e){
 		e.preventDefault();
 		console.log('send clicked!!!');
-		var form = $('#form');
+		var message = $('#send_by_label_message').val();
+		console.log(message.length);
+		if ( message.length === 0 ) {
+			var no_message = e.currentTarget.dataset.no_message;
+			var error = e.currentTarget.dataset.error;
+			import('sweetalert2').then((Swal) => {
+				Swal.default.fire(
+					error,
+					no_message,
+					'error'
+				  )
+			});
+			return;
+		}
 		var selections = $('#taula').bootstrapTable('getSelections');
-		console.log(selections);
-//		var ids = selections.map(function (x) {
-//			return  { 'id': x.id, 'telephone': x.telephone };
-//		});
-//		console.log(ids);
-//		$('#send_by_label_selected').val(JSON.stringify(ids));
-		$('#send_by_label_selected').val(JSON.stringify(selections));
-		console.log($('#send_by_label_selected').val());
-		$(form).attr('action',e.currentTarget.dataset.url);
-		form.submit();
+		var url = e.currentTarget.dataset.url;
+		var confirmation = e.currentTarget.dataset.confirmation;
+		var message = e.currentTarget.dataset.message.replace('%message_count%',selections.length);
+		var confirm = e.currentTarget.dataset.confirm;
+		var cancel = e.currentTarget.dataset.cancel;
+		fireAlert(confirmation,message,confirm,cancel,url);
 	});
 	$('#js-btn-search').on('click',function(e){
 		e.preventDefault();
@@ -86,7 +102,7 @@ $(document).ready(function(){
 		$(form).attr('action',e.currentTarget.dataset.url);
 		form.submit();
 	});
-
+	$('#taula').bootstrapTable('checkAll');
 //	$('.js-delete').on('click',function(e){
 //		e.preventDefault();
 //		var url = e.currentTarget.dataset.url;

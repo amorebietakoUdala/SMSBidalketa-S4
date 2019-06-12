@@ -46,28 +46,41 @@ class SenderController extends AbstractController
                 return $this->render('sendby/list.html.twig', [
                     'form' => $form->createView(),
                     'contacts' => [],
+                    'messages_sent' => null,
+                    'credits_needed' => null,
+                    'credits_remaining' => null,
                 ]);
             }
-            
+
             $credit = $sender->getCredit();
 
-            if ($credit < count($telephones) ) {
-                $this->addFlash('error', 'Not enough credit');
+            $credit = 2;
+
+            if ($credit < count($telephones)) {
+                $this->addFlash('error', 'Not enough credit. Needed credtis %credits_needed% remaining %credits_remaining%'
+                );
 
                 return $this->render('sendby/list.html.twig', [
                     'form' => $form->createView(),
                     'contacts' => [],
+                    'credits_needed' => count($telephones),
+                    'credits_remaining' => $credit,
                 ]);
             }
 
 //            $sender->sendMessage($telephones, $data->getMessage());
-            $this->addFlash('success', 'Messages sended successfully');
-            
+            $this->addFlash('success', '%messages_sent% messages sended successfully');
+
             return $this->render('sendby/list.html.twig', [
                 'form' => $form->createView(),
                 'contacts' => [],
+                'messages_sent' => count($telephones),
+                'credits_needed' => count($telephones),
+                'credits_remaining' => $credit,
             ]);
         }
+
+        return $this->redirectToRoute('sendby_labels_search');
     }
 
     /**
@@ -88,7 +101,11 @@ class SenderController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /* @var $data ContactDTO */
             $data = $form->getData();
-            $contacts = $em->getRepository(Contact::class)->findByLabels($data->getLabels());
+            if (count($data->getLabels()) > 0) {
+                $contacts = $em->getRepository(Contact::class)->findByLabels($data->getLabels());
+            } else {
+                $contacts = $em->getRepository(Contact::class)->findAll();
+            }
 
             return $this->render('sendby/list.html.twig', [
                 'form' => $form->createView(),
