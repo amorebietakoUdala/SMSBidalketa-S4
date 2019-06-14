@@ -2,14 +2,16 @@
 
 namespace App\Controller;
 
+use AmorebietakoUdala\SMSServiceBundle\Controller\SmsApi;
 use App\DTO\ContactDTO;
 use App\DTO\SendByLabelDTO;
+use App\Entity\Audit;
 use App\Entity\Contact;
 use App\Form\SendByLabelType;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use AmorebietakoUdala\SMSServiceBundle\Controller\SmsSender;
 
 /**
  * @Route("/{_locale}")
@@ -19,7 +21,7 @@ class SenderController extends AbstractController
     /**
      * @Route("/sendby/labels/send", name="sendby_labels_send")
      */
-    public function sendByLabelsSendAction(Request $request, SmsSender $sender)
+    public function sendByLabelsSendAction(Request $request, SmsApi $smsapi)
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -34,10 +36,12 @@ class SenderController extends AbstractController
             $data = $form->getData();
             $selected = json_decode($data->getSelected());
             $telephones = [];
+            $ids = [];
             foreach ($selected as $jsonContact) {
                 $contactDTO = new ContactDTO();
                 $contactDTO->extractFromJson($jsonContact);
                 $telephones[] = $contactDTO->getTelephone();
+                $ids[] = $contactDTO->getId();
             }
 
             if (0 === count($telephones)) {
@@ -52,7 +56,7 @@ class SenderController extends AbstractController
                 ]);
             }
 
-            $credit = $sender->getCredit();
+            $credit = $smsapi->getCredit();
 
             if ($credit < count($telephones)) {
                 $this->addFlash('error', 'Not enough credit. Needed credtis %credits_needed% remaining %credits_remaining%'
@@ -66,9 +70,21 @@ class SenderController extends AbstractController
                 ]);
             }
 
-            $sender->sendMessage($telephones, $data->getMessage(), $data->getDate());
+            $response = $smsapi->sendMessage($telephones, $data->getMessage(), $data->getDate());
             $this->addFlash('success', '%messages_sent% messages sended successfully');
-            $form = $this->createForm(SendByLabelType::class, $sendByLabelDTO, []);
+            $audit = new Audit();
+            $contacts = [];
+            foreach ($ids as $id) {
+                $contacts[] = $em->getRepository(Contact::class)->find($id);
+            }
+            $audit->setContacts(new ArrayCollection($contacts));
+            $audit->setTimestamp(new \DateTime());
+            $audit->setStatus($response->{'message'});
+            $audit->setResponse(json_encode($response));
+            $audit->setUser($user);
+            $em->persist($audit);
+            $em->flush();
+            $form = $this->createForm(SendByLabelType::class, new sendByLabelDTO(), []);
 
             return $this->render('sendby/list.html.twig', [
                 'form' => $form->createView(),
@@ -117,17 +133,5 @@ class SenderController extends AbstractController
             'readonly' => false,
             'new' => false,
         ]);
-    }
-
-    /**
-     * @Route("/sendby/history", name="sendby_history")
-     */
-    public function historyAction(Request $request, SmsSender $sender)
-    {
-        $today = new \DateTime();
-//        $today->setDate(2019, 01, 01);
-//        dump($today->getTimestamp());
-//        die;
-        $history = $sender->getHistoryOpt(1546339280, 1560333394);
     }
 }

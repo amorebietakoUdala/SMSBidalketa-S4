@@ -2,56 +2,14 @@
 
 namespace AmorebietakoUdala\SMSServiceBundle\Controller;
 
-use Symfony\Component\HttpClient\HttpClient;
-
-/*
- * Copyright (c) 2006, Dinahosting S.L.
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright notice, this
- *       list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright notice,
- *       this list of conditions and the following disclaimer in the documentation
- *       and/or other materials provided with the distribution.
- *     * Neither the name of the Dinahosting S.L. nor the names of its contributors
- *       may be used to endorse or promote products derived from this software
- *       without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- * IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
- * OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
-if (defined('_DINAHOSTING_SMSSENDER_INCLUDED')) {
-    return;
-}
-
-/*
- * Para evitar inclusión multiple.
- */
-define('_DINAHOSTING_SMSSENDER_INCLUDED', true);
-/*
- * url a la que se envian las peticiones.
- */
-define('_DINAHOSTING_URL_SEND', 'https://dinahosting.com/special/api.php');
-
 /**
  * Se encarga del envio de SMS usando la API de dinahosting.com.
  *
  * @version 1.0
  */
-class SmsSender
+class SmsApi
 {
+    private const _DINAHOSTING_URL_SEND = 'https://dinahosting.com/special/api.php';
     /**
      * @var
      */
@@ -107,7 +65,6 @@ class SmsSender
     public function sendMessage(array $numbers, $message, $when = null)
     {
         $params = [
-            'responseType' => 'Json',
             'account' => $this->account,
             'contents' => $message,
             'to' => $numbers,
@@ -122,8 +79,23 @@ class SmsSender
         }
 
         if (!$this->test) {
-            $this->send($params);
+            return $this->send($params);
+        } else {
+            return json_decode('{"trId": "dh5d0363af7c2744.81726264","responseCode": 1000,"message": "Success.","data": true,"command": "Sms_Send_Bulk_Limited_Unicode"}');
         }
+    }
+
+    public function getHistory($start = 0, $end = 100)
+    {
+        //'https://dinahosting.com/special/api.php?AUTH_USER=username&AUTH_PWD=password&account=account&responseType=Json&start=0&end=100&command=Sms_History_GetSent'
+        $params = [
+            'account' => $this->account,
+            'start' => $start,
+            'end' => $end,
+            'command' => 'Sms_History_GetSent',
+        ];
+
+        return $this->send($params);
     }
 
     /**
@@ -142,13 +114,13 @@ class SmsSender
         $args = http_build_query($params, '', '&');
         $headers = array();
 
-        $handle = curl_init(_DINAHOSTING_URL_SEND);
+        $handle = curl_init(self::_DINAHOSTING_URL_SEND);
         if (false === $handle) { // error starting curl
             throw new Exception('0 - Couldn\'t start curl');
         } else {
             curl_setopt($handle, CURLOPT_FOLLOWLOCATION, true);
             curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($handle, CURLOPT_URL, _DINAHOSTING_URL_SEND);
+            curl_setopt($handle, CURLOPT_URL, self::_DINAHOSTING_URL_SEND);
 
             curl_setopt($handle, CURLOPT_USERPWD, $this->username.':'.$this->password);
             curl_setopt($handle, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -186,34 +158,5 @@ class SmsSender
         }
 
         return $response;
-    }
-
-    public function getHistoryOpt($start, $end)
-    {
-        $httpClient = HttpClient::create(['http_version' => '2.0']);
-//        $httpClient = new \Symfony\Component\HttpClient\CurlHttpClient();
-        $response = $httpClient->request('GET', 'https://dinahosting.com/special/api.php?AUTH_USER=ametxerakundea&AUTH_PWD=Amorebieta2006&responseType=Json&account=946300650&start=1&end=100&command=Sms_History_GetSent');
-        dump($response);
-        die;
-
-        $statusCode = $response->getStatusCode();
-        $contentType = $response->getHeaders()['content-type'][0];
-        $content = $response->getContent();
-        $content = $response->toArray();
-
-        return $content;
-    }
-
-    public function getHistory($start, $end)
-    {
-        //		'https://dinahosting.com/special/api.php?AUTH_USER=ametxerakundea&AUTH_PWD=Amorebieta2006&responseType=Json&account=946300650&start=1&end=100&command=Sms_History_GetSent'
-        $params = array('responseType' => 'Json',
-            'account' => $this->account,
-            'start' => $start,
-            'end' => $end,
-            'command' => 'Sms_History_GetSent',
-        );
-
-        $this->send($params);
     }
 }

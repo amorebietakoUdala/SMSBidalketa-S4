@@ -30,6 +30,7 @@ navitem.labels: "Etiquetas"
 navitem.home: "Inicio"
 navitem.contact_list: "Listado"
 navitem.contact_import: "Importar"
+navitem.history: "Histórico"
 
 
 label.id: "Id"

@@ -223,7 +223,7 @@ class Contact
      *
      * @param string $company
      *
-     * @return Contact
+     * @return string
      */
     public function setCompany($company): self
     {

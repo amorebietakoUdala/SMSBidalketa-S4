@@ -25,7 +25,7 @@ class SendByLabelType extends AbstractType
             ])
             ->add('selected', \Symfony\Component\Form\Extension\Core\Type\HiddenType::class)
             ->add('message', \Symfony\Component\Form\Extension\Core\Type\TextareaType::class, [
-                    'attr' => ['maxlength' => 255],
+                    'attr' => ['maxlength' => 335],
                     'label' => 'message',
             ])
             ->add('date', \Symfony\Component\Form\Extension\Core\Type\DateTimeType::class, [

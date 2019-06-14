@@ -10,7 +10,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", name="sms_getCredit", methods={"GET"})
      */
-    public function indexAction(SmsSender $sms)
+    public function indexAction(SmsApi $sms)
     {
         $credit = $sms->getCredit();
 
