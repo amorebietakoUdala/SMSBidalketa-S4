@@ -7,7 +7,7 @@ import 'bootstrap-table/dist/locale/bootstrap-table-es-ES';
 import 'bootstrap-table/dist/locale/bootstrap-table-eu-EU';
 import 'tableexport.jquery.plugin/tableExport';
 import 'jquery-ui';
-// import Swal from 'sweetalert2';
+ import Swal from 'sweetalert2';
 
 function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
 	import('sweetalert2').then((Swal) => {
@@ -22,7 +22,6 @@ function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
 		  confirmButtonText: confirmationButtonText,
 		}).then((result) => {
 		if (result.value) {
-			console.log(url);
 			document.location.href=url;
 		}
 		});
@@ -31,7 +30,6 @@ function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
 
 $(document).ready(function(){
 	console.log("Contact list view!!!!");
-
 	$('#taula').bootstrapTable({
 		cache : false,
 		showExport: true,
@@ -59,7 +57,7 @@ $(document).ready(function(){
 			});
 		});
 	});
-	$('.js-delete').on('click',function(e){
+	$('#taula').on('click','.js-delete',function(e){
 		e.preventDefault();
 		var url = e.currentTarget.dataset.url;
 		var confirmation = e.currentTarget.dataset.confirmation;
@@ -68,5 +66,31 @@ $(document).ready(function(){
 		var cancel = e.currentTarget.dataset.cancel;
 		fireAlert(confirmation,message,confirm,cancel,url);
 	});
-
+	$('#taula').on('click','.js-label-remove',function(e){
+		e.preventDefault();
+		var url = e.currentTarget.dataset.url;
+		var title = e.currentTarget.dataset.confirmation;
+		var html = e.currentTarget.dataset.message;
+		var confirmationButtonText = e.currentTarget.dataset.confirm;
+		var cancelButtonText = e.currentTarget.dataset.cancel;
+		Swal.default.fire({
+		  title: title,
+		  html: html,
+		  type: 'warning',
+		  showCancelButton: true,
+		  cancelButtonText: cancelButtonText,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: confirmationButtonText,
+		}).then((result) => {
+			if (result.value) {
+				$.ajax({
+				  url: url,
+				  method: 'DELETE',
+				}).done(function() {
+					$(e.currentTarget).parent().remove();
+				});
+			}
+		});
+	});
 });

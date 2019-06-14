@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('username')->isRequired()->end()
             ->scalarNode('password')->isRequired()->end()
             ->scalarNode('account')->isRequired()->end()
+            ->booleanNode('test')->isRequired()->end()
             ;
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

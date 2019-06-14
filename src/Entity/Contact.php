@@ -26,7 +26,7 @@ class Contact
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=50, nullable=true, unique=true)
+     * @ORM\Column(name="username", type="string", length=50, nullable=true, unique=false)
      */
     private $username;
 

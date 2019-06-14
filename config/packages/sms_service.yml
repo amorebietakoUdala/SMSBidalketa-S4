@@ -1,6 +1,7 @@
 ## YAML Template.
 ---
 sms_service:
-    username: ametxerakundea
-    password: Amorebieta2006
-    account: 946300650
+    username: '%env(SMS_USERNAME)%'
+    password: '%env(SMS_PASSWORD)%'
+    account: '%env(SMS_ACCOUNT)%'
+    test: '%env(bool:SMS_TEST)%'

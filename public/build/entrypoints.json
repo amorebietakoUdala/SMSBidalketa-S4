@@ -27,6 +27,7 @@
         "/build/runtime.js",
         "/build/vendors~app~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~label_edit_view~b8e0cfcd.js",
         "/build/vendors~contact_list_view~label_list_view~sendByLabels_view.js",
+        "/build/0.js",
         "/build/contact_list_view.js"
       ],
       "css": [

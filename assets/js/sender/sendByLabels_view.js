@@ -10,6 +10,12 @@ import 'bootstrap-table/dist/locale/bootstrap-table-eu-EU';
 import 'tableexport.jquery.plugin/tableExport';
 import 'jquery-ui';
 import 'select2';
+import 'bootstrap-datepicker';
+import 'bootstrap-datepicker/js/locales/bootstrap-datepicker.es';
+import 'bootstrap-datepicker/js/locales/bootstrap-datepicker.eu';
+import 'eonasdan-bootstrap-datetimepicker';
+import 'pc-bootstrap4-datetimepicker';
+
 // import Swal from 'sweetalert2';
 
 function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
@@ -24,17 +30,13 @@ function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
 		  cancelButtonColor: '#d33',
 		  confirmButtonText: confirmationButtonText,
 		}).then((result) => {
-			var form = $('#form');
-			var selections = $('#taula').bootstrapTable('getSelections');
-	//		var ids = selections.map(function (x) {
-	//			return  { 'id': x.id, 'telephone': x.telephone };
-	//		});
-	//		console.log(ids);
-	//		$('#send_by_label_selected').val(JSON.stringify(ids));
-			$('#send_by_label_selected').val(JSON.stringify(selections));
-			console.log($('#send_by_label_selected').val());
-			$(form).attr('action',url);
-			form.submit();
+			if (result.value) {
+				var form = $('#form');
+				var selections = $('#taula').bootstrapTable('getSelections');
+				$('#send_by_label_selected').val(JSON.stringify(selections));
+				$(form).attr('action',url);
+				form.submit();
+		}	
 		});
 	});
 }
@@ -102,15 +104,9 @@ $(document).ready(function(){
 		$(form).attr('action',e.currentTarget.dataset.url);
 		form.submit();
 	});
+    $('.js-datetimepicker').datetimepicker({
+		format: 'YYYY-MM-DD HH:mm',
+		sideBySide: true,
+	});
 	$('#taula').bootstrapTable('checkAll');
-//	$('.js-delete').on('click',function(e){
-//		e.preventDefault();
-//		var url = e.currentTarget.dataset.url;
-//		var confirmation = e.currentTarget.dataset.confirmation;
-//		var message = e.currentTarget.dataset.message;
-//		var confirm = e.currentTarget.dataset.confirm;
-//		var cancel = e.currentTarget.dataset.cancel;
-//		fireAlert(confirmation,message,confirm,cancel,url);
-//	});
-
 });

@@ -54,8 +54,6 @@ class SenderController extends AbstractController
 
             $credit = $sender->getCredit();
 
-            $credit = 2;
-
             if ($credit < count($telephones)) {
                 $this->addFlash('error', 'Not enough credit. Needed credtis %credits_needed% remaining %credits_remaining%'
                 );
@@ -68,8 +66,9 @@ class SenderController extends AbstractController
                 ]);
             }
 
-//            $sender->sendMessage($telephones, $data->getMessage());
+            $sender->sendMessage($telephones, $data->getMessage(), $data->getDate());
             $this->addFlash('success', '%messages_sent% messages sended successfully');
+            $form = $this->createForm(SendByLabelType::class, $sendByLabelDTO, []);
 
             return $this->render('sendby/list.html.twig', [
                 'form' => $form->createView(),
@@ -118,5 +117,17 @@ class SenderController extends AbstractController
             'readonly' => false,
             'new' => false,
         ]);
+    }
+
+    /**
+     * @Route("/sendby/history", name="sendby_history")
+     */
+    public function historyAction(Request $request, SmsSender $sender)
+    {
+        $today = new \DateTime();
+//        $today->setDate(2019, 01, 01);
+//        dump($today->getTimestamp());
+//        die;
+        $history = $sender->getHistoryOpt(1546339280, 1560333394);
     }
 }

@@ -27,6 +27,7 @@
 			<th data-sortable="true">{{"contact.telephone" | trans | capitalize}}</th>
 			<th data-sortable="true">{{"contact.company" | trans | capitalize}}</th>
 			<th data-sortable="true">{{"contact.department" | trans | capitalize}}</th>
+			<th data-sortable="true">{{"labels" | trans | capitalize}}</th>
 			<th data-sortable="true" data-field="options">{{"options" | trans | capitalize}}</th>
 		    </tr>
 		</thead>
@@ -40,6 +41,27 @@
 			    <td>{{contact.telephone}}</td>
 				<td>{{contact.company}}</td>
 				<td>{{contact.department}}</td>
+				<td>
+					{% if contact.labels|length > 0  %}
+						<ul class="list-group" id="menu">
+						{% for label in contact.labels %}
+							<li class="list-group-item">{{ label.name }}
+								<i class="fa fa-remove pull-right js-label-remove" 
+								   data-url="{{ path ("delete_label_remove",
+														{'contact': contact.id , 
+														'label': label.id })
+
+								   }}"
+									data-confirmation="{{ "messages.confirmacion" | trans  }}"
+									data-message="{{ "contact.label.remove.confirmation" | trans }}"
+									data-confirm = "{{ "messages.si" | trans | capitalize }}"
+									data-cancel = "{{ "messages.no" | trans | capitalize }}"
+								   ></i>
+							</li>
+						{% endfor %}
+						</ul>
+					{% endif %}
+				</td>
 				<td><a href="{{ path ("contact_show",{'contact': contact.id })}}"><i class="fa fa-eye"></i></a>
 				&nbsp;<a href="{{ path ("contact_edit",{'contact': contact.id })}}"><i class="fa fa-edit"></i></a>
 				&nbsp;<a class="js-delete" 
@@ -55,7 +77,7 @@
 			</tr>
 			{% endfor %}
 		    {% else %}
-			<tr><td colspan="5">{{"messages.results0" | trans }}</td></tr>
+			<tr><td colspan="6">{{"messages.results0" | trans }}</td></tr>
 		    {% endif %}
 		</tbody>
 	    </table>

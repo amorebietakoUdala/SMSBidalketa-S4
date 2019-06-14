@@ -1,3 +1,7 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+     
+mi_pago:
+    resource: "@SMSServiceBundle/Resources/config/routing.yml"
+    prefix:   /smsBundle

@@ -33,16 +33,18 @@
 			<tr>
 			    <td>{{label.id}}</td>
 				<td>{{label.name}}</td>
-				<td><a href="{{ path ("label_show",{"label" : label.id}) }}"><i class="fa fa-eye"></i></a>
-				&nbsp;<a href="{{ path ("label_edit",{"label" : label.id}) }}"><i class="fa fa-edit"></i></a>
-				&nbsp;<a class="js-delete" 
-						 href="#" 
-						 data-url="{{ path ("label_delete",{"label" : label.id}) }}" 
-						 data-confirmation="{{ "messages.confirmacion" | trans | capitalize }}"
-						 data-message="{% trans with {'%contactsCount%': label.contacts|length} %}label.delete.confirmation{% endtrans %}"
-						 data-confirm = "{{ "messages.si" | trans | capitalize }}"
-						 data-cancel = "{{ "messages.no" | trans | capitalize }}"
-						 data-affecttedContacts ="{{ label.contacts | length }}"
+				<td>
+{#					<a href="{{ path ("label_show",{"label" : label.id}) }}"><i class="fa fa-eye"></i></a>
+#}
+					&nbsp;<a href="{{ path ("label_edit",{"label" : label.id}) }}"><i class="fa fa-edit"></i></a>
+					&nbsp;<a class="js-delete" 
+							href="#" 
+							data-url="{{ path ("label_delete",{"label" : label.id}) }}" 
+							data-confirmation="{{ "messages.confirmacion" | trans | capitalize }}"
+							data-message="{% trans with {'%contactsCount%': label.contacts|length} %}label.delete.confirmation{% endtrans %}"
+							data-confirm = "{{ "messages.si" | trans | capitalize }}"
+							data-cancel = "{{ "messages.no" | trans | capitalize }}"
+							data-affecttedContacts ="{{ label.contacts | length }}"
 					>
 					<i class="fa fa-trash"></i></a>
 			    </td>

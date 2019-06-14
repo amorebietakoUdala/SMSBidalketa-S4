@@ -3,32 +3,36 @@
 {% block title %}{{'messages.appTitle' | trans }}{% endblock %}
 
 {% block message %}
+	{% set error=false %}
     {% for msg in app.session.flashBag.get('success') %}
 	<div class="alert alert-success margin-top-13">
 	    {{ msg | trans}}
 	</div>
     {% endfor %}
     {% for msg in app.session.flashBag.get('error') %}
+	{% set error=true %}
 	<div class="alert alert-danger margin-top-13">
 	    {{ msg | trans({'%message%' : message},"messages", app.request.locale) }}
 	</div>
     {% endfor %}
-    {% for msg in app.session.flashBag.get('warning') %}
-	<div class="alert alert-warning margin-top-13">
-	    {{ msg | trans | capitalize }}
-	</div>
-    {% endfor %}
-	<ul class="list-group col-lg-6">
-		{% if already_existing_contacts is defined and (already_existing_contacts | length) > 0 %}
-				<li class="list-group-item">{{ "Number of already existing contacts" | trans }}: {{ already_existing_contacts | length }}</li>
-		{% endif %}
-		{% if repeated_contacts is defined and (repeated_contacts | length) > 0 %}
-				<li class="list-group-item">{{ "Number of repeated contacts" | trans }}: {{ repeated_contacts | length }}</li>
-		{% endif %}
-		{% if contacts_without_repeated is defined and (contacts_without_repeated | length) > 0 %}
-				<li class="list-group-item">{{ "Number of unrepeated contacts" | trans }}: {{ contacts_without_repeated | length }}</li>
-		{% endif %}
-	</ul>
+	{% if not error %}
+		{% for msg in app.session.flashBag.get('warning') %}
+		<div class="alert alert-warning margin-top-13">
+			{{ msg | trans | capitalize }}
+		</div>
+		{% endfor %}
+		<ul class="list-group col-lg-6">
+			{% if already_existing_contacts is defined and (already_existing_contacts | length) > 0 %}
+					<li class="list-group-item">{{ "Number of already existing contacts" | trans }}: {{ already_existing_contacts | length }}</li>
+			{% endif %}
+			{% if repeated_contacts is defined and (repeated_contacts | length) > 0 %}
+					<li class="list-group-item">{{ "Number of repeated contacts" | trans }}: {{ repeated_contacts | length }}</li>
+			{% endif %}
+			{% if contacts_without_repeated is defined and (contacts_without_repeated | length) > 0 %}
+					<li class="list-group-item">{{ "Number of unrepeated contacts" | trans }}: {{ contacts_without_repeated | length }}</li>
+			{% endif %}
+		</ul>
+	{% endif %}
 {% endblock %}
 
 {% block body %}
@@ -44,7 +48,7 @@
 		  <label id="js-label" class="custom-file-label" for="contact_import_file">{{ 'Choose file' | trans | capitalize }}</label>
 	      {{ form_errors(form.file) }}
 	    </div>
-		<h4 class="col-lg-2 form-row">{{ "Labels" | trans | capitalize }}</h4>
+		<h4 class="col-lg-2 form-row">{{ "labels" | trans | capitalize }}</h4>
 		<div class ="js-labels-wrapper form-row" 
 			 data-prototype="{{ form_widget(form.labels.vars.prototype)|e('html_attr') }}"
 			 data-index="{{ form.labels|length }}"

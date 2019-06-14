@@ -4,7 +4,6 @@ namespace AmorebietakoUdala\SMSServiceBundle\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use AmorebietakoUdala\SMSServiceBundle\Controller\SmsSender;
 
 class DefaultController extends AbstractController
 {
@@ -15,7 +14,7 @@ class DefaultController extends AbstractController
     {
         $credit = $sms->getCredit();
 
-        return $this->render('@SMSServiceBundle/default/index.html.twig', [
+        return $this->render('@SMSService/default/index.html.twig', [
             'credit' => $credit,
         ]);
     }

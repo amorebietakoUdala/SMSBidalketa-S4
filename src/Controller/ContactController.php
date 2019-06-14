@@ -63,18 +63,18 @@ class ContactController extends AbstractController
                 $em->flush();
                 $this->addFlash('success', 'File successfully processed');
                 $message = '';
+                $logger->debug('<--importAction: POST End');
+                if (count($already_existing_contacts) > 0) {
+                    $this->addFlash('warning', 'There are already existing contacts. the label will be applyied but the contact information has not be updated.');
+                }
+                if (count($repeated_contacts) > 0) {
+                    $this->addFlash('warning', 'There are repeated contacts.');
+                }
             } catch (\Exception $e) {
                 $this->addFlash('error', 'there was an error procesing file %message%');
                 $message = $e->getMessage();
             }
             $this->__moveProcessedFile($file);
-            $logger->debug('<--importAction: POST End');
-            if (count($already_existing_contacts) > 0) {
-                $this->addFlash('warning', 'There are already existing contacts. the label will be applyied but the contact information has not be updated.');
-            }
-            if (count($repeated_contacts) > 0) {
-                $this->addFlash('warning', 'There are repeated contacts.');
-            }
 
             return $this->render('contact/upload.html.twig', [
                 'form' => $form->createView(),
@@ -88,6 +88,7 @@ class ContactController extends AbstractController
 
         return $this->render('contact/upload.html.twig', [
             'form' => $form->createView(),
+            'message' => null,
     ]);
     }
 
@@ -215,6 +216,20 @@ class ContactController extends AbstractController
 
         return $this->redirectToRoute('contact_list');
     }
+
+//    /**
+//     * @Route("/contact/{contact}/remove/{label}", name="contact_label_remove")
+//     */
+//    public function labelRemoveAction(Request $request, Contact $contact, Label $label)
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//        $contact->removeLabel($label);
+//        $em->persist($contact);
+//        $em->flush();
+//        $this->addFlash('success', 'Label removed');
+//
+//        return $this->redirectToRoute('contact_list');
+//    }
 
     /**
      * Return the labels array without duplicates.

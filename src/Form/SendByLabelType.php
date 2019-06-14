@@ -27,7 +27,16 @@ class SendByLabelType extends AbstractType
             ->add('message', \Symfony\Component\Form\Extension\Core\Type\TextareaType::class, [
                     'attr' => ['maxlength' => 255],
                     'label' => 'message',
-                ])
+            ])
+            ->add('date', \Symfony\Component\Form\Extension\Core\Type\DateTimeType::class, [
+                    'widget' => 'single_text',
+                    'label' => 'send.date',
+//                    'placeholder' => [
+//                        'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
+//                        'hour' => 'Hour', 'minute' => 'Minute', 'second' => 'Second',
+//                    ],
+                    'html5' => true,
+            ])
 //            ->add('save', SubmitType::class, [
 //            ])
 //            ->add('back', ButtonType::class, [

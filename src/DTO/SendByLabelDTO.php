@@ -10,6 +10,7 @@ class SendByLabelDTO
     private $message;
     private $labels;
     private $selected;
+    private $date;
 
     public function __construct(Contact $contact = null)
     {
@@ -52,6 +53,18 @@ class SendByLabelDTO
     public function setSelected($selected)
     {
         $this->selected = $selected;
+
+        return $this;
+    }
+
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    public function setDate($date)
+    {
+        $this->date = $date;
 
         return $this;
     }

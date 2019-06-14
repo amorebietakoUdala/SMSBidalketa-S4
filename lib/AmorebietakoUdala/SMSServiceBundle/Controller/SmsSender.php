@@ -2,6 +2,8 @@
 
 namespace AmorebietakoUdala\SMSServiceBundle\Controller;
 
+use Symfony\Component\HttpClient\HttpClient;
+
 /*
  * Copyright (c) 2006, Dinahosting S.L.
  * All rights reserved.
@@ -65,11 +67,17 @@ class SmsSender
      */
     private $account;
 
-    public function __construct($username = null, $password = null, $account = null)
+    /**
+     * @var
+     */
+    private $test;
+
+    public function __construct($username = null, $password = null, $account = null, $test = false)
     {
         $this->username = $username;
         $this->password = $password;
         $this->account = $account;
+        $this->test = $test;
     }
 
     /**
@@ -106,12 +114,16 @@ class SmsSender
             'from' => $this->account,
             'command' => 'Sms_Send_Bulk_Limited_Unicode',
         ];
-
+        if (null !== $when) {
+            $when = date_format($when, 'Y-m-d H:i:s');
+        }
         if (!empty($when)) {
             $params['when'] = $when;
         }
 
-        $this->send($params);
+        if (!$this->test) {
+            $this->send($params);
+        }
     }
 
     /**
@@ -169,11 +181,39 @@ class SmsSender
             curl_close($handle);
         }
         $response = json_decode($response);
-
         if (1000 != $response->responseCode) {
             throw new Exception(json_encode($response->errors));
         }
 
         return $response;
+    }
+
+    public function getHistoryOpt($start, $end)
+    {
+        $httpClient = HttpClient::create(['http_version' => '2.0']);
+//        $httpClient = new \Symfony\Component\HttpClient\CurlHttpClient();
+        $response = $httpClient->request('GET', 'https://dinahosting.com/special/api.php?AUTH_USER=ametxerakundea&AUTH_PWD=Amorebieta2006&responseType=Json&account=946300650&start=1&end=100&command=Sms_History_GetSent');
+        dump($response);
+        die;
+
+        $statusCode = $response->getStatusCode();
+        $contentType = $response->getHeaders()['content-type'][0];
+        $content = $response->getContent();
+        $content = $response->toArray();
+
+        return $content;
+    }
+
+    public function getHistory($start, $end)
+    {
+        //		'https://dinahosting.com/special/api.php?AUTH_USER=ametxerakundea&AUTH_PWD=Amorebieta2006&responseType=Json&account=946300650&start=1&end=100&command=Sms_History_GetSent'
+        $params = array('responseType' => 'Json',
+            'account' => $this->account,
+            'start' => $start,
+            'end' => $end,
+            'command' => 'Sms_History_GetSent',
+        );
+
+        $this->send($params);
     }
 }

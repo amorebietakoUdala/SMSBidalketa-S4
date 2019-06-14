@@ -1,8 +1,9 @@
-rest_controller:
-    resource: ../../src/Controller/Api
-    type: annotation
-    prefix: /api
+rest:
+     type: rest
+     prefix:   /api
+     resource: App\Controller\Api\RestApiController
 
 controllers:
     resource: ../../src/Controller/
     type: annotation
+
