@@ -26,6 +26,7 @@ Encore
 	.addEntry('label_edit_view', './assets/js/label/edit_view.js')
 	.addEntry('label_new_view', './assets/js/label/new_view.js')
 	.addEntry('sendByLabels_view', './assets/js/sender/sendByLabels_view.js')
+	.addEntry('history_list_view','./assets/js/history/list_view.js')
     //.addEntry('page2', './assets/js/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.

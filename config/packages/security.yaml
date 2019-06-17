@@ -42,7 +42,7 @@ security:
                 csrf_token_generator: security.csrf.token_manager
                 always_use_default_target_path: true
                 login_path: fos_user_security_login
-                default_target_path: contact_list
+                default_target_path: home
             logout_on_user_change: true
             logout:     true
             anonymous:  true

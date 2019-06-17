@@ -79,7 +79,8 @@ class SenderController extends AbstractController
             }
             $audit->setContacts(new ArrayCollection($contacts));
             $audit->setTimestamp(new \DateTime());
-            $audit->setStatus($response->{'message'});
+            $audit->setResponseCode($response->{'responseCode'});
+            $audit->setMessage($response->{'message'});
             $audit->setResponse(json_encode($response));
             $audit->setUser($user);
             $em->persist($audit);

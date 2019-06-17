@@ -34,9 +34,15 @@ class Audit
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string")
+     * @ORM\Column(name="responseCode", type="string")
      */
-    private $status;
+    private $responseCode;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="message", type="string")
+     */
+    private $message;
     /**
      * @var string
      *
@@ -70,11 +76,6 @@ class Audit
     public function getTimestamp(): \DateTime
     {
         return $this->timestamp;
-    }
-
-    public function getStatus(): string
-    {
-        return $this->status;
     }
 
     public function getResponse(): string
@@ -112,13 +113,6 @@ class Audit
         return $this;
     }
 
-    public function setStatus($status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     public function setResponse($response): self
     {
         $this->response = $response;
@@ -134,6 +128,30 @@ class Audit
     public function setUser(User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    public function setMessage($message)
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    public function getResponseCode()
+    {
+        return $this->responseCode;
+    }
+
+    public function setResponseCode($responseCode)
+    {
+        $this->responseCode = $responseCode;
 
         return $this;
     }

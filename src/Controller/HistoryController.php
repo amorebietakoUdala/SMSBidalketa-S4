@@ -18,14 +18,10 @@ class HistoryController extends AbstractController
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $history = $smsapi->getHistory();
-
-        dump($history);
-        die;
+        $histories = $em->getRepository(\App\Entity\History::class)->findBy([]);
 
         return $this->render('history/list.html.twig', [
-            'controller_name' => 'HistoryController',
-            'history' => $history,
+            'histories' => $histories,
         ]);
     }
 }

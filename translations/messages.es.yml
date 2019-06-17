@@ -48,6 +48,15 @@ message: "Mensaje"
 
 send.date: "Fecha envío programada"
 
+history.id: "Id"
+history.senderAcoount: "Cuenta"
+history.date: "Fecha"
+history.rctpNameNumber: "Destinatario"
+history.text: "Texto"
+history.ip: "IP"
+history.status: "Estado"
+history.esUnicode: "Unicode"
+
 "Duplicate contact": "Contacto duplicado"
 "Duplicate label": "Etiqueta duplicada"
 "Contact saved": "Contacto guardado"

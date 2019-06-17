@@ -17,6 +17,7 @@ framework:
         log: true
 
     templating:
-        engines: ['twig','php']
+#        engines: ['twig','php']
+        engines: ['twig']
     router:
         strict_requirements: ~
