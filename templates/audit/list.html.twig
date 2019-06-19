@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'messages.appTitle' | trans }}{% endblock %}
+
+{% block message %}
+    {% for msg in app.session.flashBag.get('success') %}
+	<div class="alert alert-success margin-top-13">
+	    {{ msg | trans}}
+	</div>
+    {% endfor %}
+    {% for msg in app.session.flashBag.get('error') %}
+	<div class="alert alert-danger margin-top-13">
+	    {{ msg | trans}}
+	</div>
+    {% endfor %}
+{% endblock %}
+
+{% block body %}
+    <main class="container-fluid">
+	<div class="container-fluid border rounded border-secondary p-2">
+		{{ include('audit/_form.html.twig') }}
+	</div>
+		
+	<div class="container-fluid mt-1">
+		{% if audits is defined and audits|length > 0 %}
+			<table id="taula" class="table bootstrap-table mt-3">
+				<thead>
+					<tr class="row">
+						<th data-sortable="true">{{"audit.id" | trans | capitalize}}</th>
+						<th data-sortable="true">{{"audit.timestamp" | trans | capitalize}}</th>
+						<th data-sortable="true">{{"audit.contactsCount" | trans | capitalize}}</th>
+						<th data-sortable="true">{{"audit.responseCode" | trans | capitalize}}</th>
+						<th data-sortable="true">{{"audit.message" | trans | capitalize}}</th>
+{#						<th data-sortable="true">{{"audit.response" | trans | capitalize}}</th>
+#}						<th data-sortable="true">{{"audit.user" | trans | capitalize}}</th>
+						<th data-sortable="true">{{"options" | trans | capitalize}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for audit in audits %}
+					<tr>
+						<td>{{audit.id}}</td>
+						<td>{{audit.timestamp | date('Y-m-d H:i:s') }}</td>
+						<td>{{audit.contacts | length }}</td>
+						<td>{{audit.responseCode}}</td>
+						<td>{{audit.message}}</td>
+{#						<td>{{audit.response}}</td>
+#}						<td>{{audit.user}}</td>
+						<td>
+							<a id="alert{{ loop.index }}" href="#" class="js-fireAlert" data-audit="{{ path( "get_audit_contacts", { "id" : audit.id } ) }}"><i class="fa fa-file-text-o" title="{{ 'contacts.details' | trans | capitalize }}"></i></a>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<div class='border border-secondary rounded-sm text-secondary bg-light text-center p-2'>{{"messages.results0" | trans }}</div>
+		{% endif %}
+	</div>
+    </main>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+	{{ encore_entry_link_tags('audit_list_view') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{  parent() }}
+	{{ encore_entry_script_tags('audit_list_view') }}
+{% endblock javascripts %}

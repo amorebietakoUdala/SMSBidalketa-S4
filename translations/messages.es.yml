@@ -31,6 +31,8 @@ navitem.home: "Inicio"
 navitem.contact_list: "Listado"
 navitem.contact_import: "Importar"
 navitem.history: "Histórico"
+navitem.audit: "Auditoria"
+navitem.administration: "Administración"
 
 
 label.id: "Id"
@@ -50,12 +52,28 @@ send.date: "Fecha envío programada"
 
 history.id: "Id"
 history.senderAcoount: "Cuenta"
-history.date: "Fecha"
+history.fromDate: "Desde"
+history.toDate: "Hasta"
 history.rctpNameNumber: "Destinatario"
 history.text: "Texto"
 history.ip: "IP"
 history.status: "Estado"
 history.esUnicode: "Unicode"
+
+audit.id: "Id"
+audit.timestamp: "Fecha"
+audit.contactsCount: "Nº contactos"
+audit.responseCode: "Repuesta"
+audit.user: "Usuario"
+audit.fromDate: "Desde"
+audit.toDate: "Hasta"
+audit.contacts: "Contactos"
+audit.message: "Message"
+audit.response: "Respuesta"
+
+contacts: "Contactos"
+
+contacts.details: "Detalle de contactos"
 
 "Duplicate contact": "Contacto duplicado"
 "Duplicate label": "Etiqueta duplicada"

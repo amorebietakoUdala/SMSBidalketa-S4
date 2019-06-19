@@ -2,12 +2,13 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Audit;
+use App\Entity\Contact;
 use App\Entity\Label;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
-use App\Entity\Contact;
 use Symfony\Component\HttpFoundation\Response;
 
 class RestApiController extends AbstractFOSRestController
@@ -44,5 +45,19 @@ class RestApiController extends AbstractFOSRestController
         $em->flush();
 
         return View::create([], Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @QueryParam(name="id", description="Id of the Audit to get Contacts from")
+     */
+    public function getAuditContactsAction(ParamFetcherInterface $paramFetcher): View
+    {
+        $id = $paramFetcher->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $repo = $this->getDoctrine()->getRepository(Audit::class);
+        /* @var $audit Audit */
+        $audit = $repo->find($id);
+
+        return View::create($audit->getContacts(), Response::HTTP_OK);
     }
 }

@@ -58,10 +58,6 @@ main {
     flex: row nowrap;
 }
 
-.fa-calendar {
-    font-size: 1.5rem;
-}
-
 .flex-align-items-center {
     align-items: center;
 }
@@ -133,6 +129,11 @@ main {
 
 .invalid-feedback{
 	font-size: 0.7rem;
+}
+
+.select2-container .select2-selection--single {
+	min-height: 32px;
+	border: 1px solid #ced4da;
 }
 
 @media (max-width: 767px) {

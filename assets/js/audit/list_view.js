@@ -1,4 +1,4 @@
-import '../../css/history/list_view.scss';
+import '../../css/audit/list_view.scss';
 
 import $ from 'jquery';
 import 'bootstrap-table';
@@ -12,32 +12,34 @@ import 'bootstrap-datepicker/js/locales/bootstrap-datepicker.es';
 import 'bootstrap-datepicker/js/locales/bootstrap-datepicker.eu';
 import 'eonasdan-bootstrap-datetimepicker';
 import 'pc-bootstrap4-datetimepicker';
+import 'select2';
 
 // import Swal from 'sweetalert2';
 
-//function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
-//	import('sweetalert2').then((Swal) => {
-//		Swal.default.fire({
-//		  title: title,
-//		  html: html,
-//		  type: 'warning',
-//		  showCancelButton: true,
-//		  cancelButtonText: cancelButtonText,
-//		  confirmButtonColor: '#3085d6',
-//		  cancelButtonColor: '#d33',
-//		  confirmButtonText: confirmationButtonText,
-//		}).then((result) => {
-//		if (result.value) {
-//			console.log(url);
-//			document.location.href=url;
-//		}
-//		});
-//	});
-//}
+function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
+	import('sweetalert2').then((Swal) => {
+		Swal.default.fire({
+		  title: title,
+		  html: html,
+		  type: 'warning',
+		  showCancelButton: true,
+		  cancelButtonText: cancelButtonText,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: confirmationButtonText,
+		}).then((result) => {
+		if (result.value) {
+			console.log(url);
+			document.location.href=url;
+		}
+		});
+	});
+}
 
 $(document).ready(function(){
-	console.log("Label list view!!!!");
-
+	console.log("Audit list view!!!!");
+    $('#audit_search_contacts').select2();
+	$('#audit_search_user').select2();
 	$('#taula').bootstrapTable({
 		cache : false,
 		showExport: true,
@@ -78,5 +80,11 @@ $(document).ready(function(){
 //		var cancel = e.currentTarget.dataset.cancel;
 //		fireAlert(confirmation,message,confirm,cancel,url);
 //	});
+	$('#taula').on('click','.js-fireAlert',function(e){
+		e.preventDefault();
+		console.log('Contacts Clicked!!!');
+	});
+    
+
 
 });

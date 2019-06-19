@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="audit")
+ * @ORM\Entity(repositoryClass="App\Repository\AuditRepository")
  */
 class Audit
 {
@@ -68,7 +69,7 @@ class Audit
     /**
      * @return ArrayCollection|Contact[]
      */
-    public function getContacts(): ArrayCollection
+    public function getContacts()
     {
         return $this->contacts;
     }

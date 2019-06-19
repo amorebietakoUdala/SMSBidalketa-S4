@@ -17,33 +17,37 @@
 
 {% block body %}
     <main class="container-fluid">
-	<div class="container-fluid">
+	<div class="container-fluid border rounded border-secondary p-2">
+		{{ include('history/_form.html.twig') }}
+	</div>
+		
+	<div class="container-fluid mt-1">
 		{% if histories is defined and histories|length > 0 %}
 			<table id="taula" class="table bootstrap-table mt-3">
 				<thead>
 					<tr class="row">
 						<th data-sortable="true">{{"history.id" | trans | capitalize}}</th>
-						<th data-sortable="true">{{"history.senderAcoount" | trans | capitalize}}</th>
-						<th data-sortable="true">{{"history.date" | trans | capitalize}}</th>
+{#						<th data-sortable="true">{{"history.senderAcoount" | trans | capitalize}}</th>
+#}						<th data-sortable="true">{{"history.date" | trans | capitalize}}</th>
 						<th data-sortable="true">{{"history.rctpNameNumber" | trans | capitalize}}</th>
 						<th data-sortable="true">{{"history.text" | trans | capitalize}}</th>
-						<th data-sortable="true">{{"history.ip" | trans }}</th>
-						<th data-sortable="true">{{"history.status" | trans | capitalize}}</th>
-						<th data-sortable="true">{{"history.esUnicode" | trans | capitalize}}</th>
-					</tr>
+{#						<th data-sortable="true">{{"history.ip" | trans }}</th>
+#}						<th data-sortable="true">{{"history.status" | trans | capitalize}}</th>
+{#						<th data-sortable="true">{{"history.esUnicode" | trans | capitalize}}</th>
+#}					</tr>
 				</thead>
 				<tbody>
 					{% for history in histories %}
 					<tr>
 						<td>{{history.id}}</td>
-						<td>{{history.senderAccount}}</td>
-						<td>{{history.date | date('Y-m-d H:i:s') }}</td>
+{#						<td>{{history.senderAccount}}</td>
+#}						<td>{{history.date | date('Y-m-d H:i:s') }}</td>
 						<td>{{history.rctpNameNumber}}</td>
 						<td>{{history.text}}</td>
-						<td>{{history.ip}}</td>
-						<td>{{history.status}}</td>
-						<td>{{history.esUnicode}}</td>
-					</tr>
+{#						<td>{{history.ip}}</td>
+#}						<td>{{history.status}}</td>
+{#						<td>{{history.esUnicode}}</td>
+#}					</tr>
 					{% endfor %}
 				</tbody>
 			</table>
