@@ -7,7 +7,7 @@
 	<div class="col-lg-2 col-md-2 col-sm-6">
 		{{ form_row(form.labels, { 'attr': { 'id': '', 'class' : 'form-control-sm'} }) }}
 	</div>
-	<button id="js-btn-search" type="Submit" class="btn btn-primary ml-1" data-url='{{ path ('sendby_labels_search') }}'>{{ "btn.search" | trans | capitalize }}</button>
+	<button id="js-btn-search" type="Submit" class="btn btn-primary ml-1" data-url='{{ path ('sending_search') }}'>{{ "btn.searchRecipients" | trans | capitalize }}</button>
 </div>
 <div class="form-row align-items-center">
 	<div class="col-lg-4 col-md-4 col-sm-6">
@@ -23,9 +23,9 @@
 		data-message="{{ "send.confirmation" | trans }}"
 		data-confirm = "{{ "messages.si" | trans | capitalize }}"
 		data-cancel = "{{ "messages.no" | trans | capitalize }}"
-		data-error ="{{ "error" | trans | capitalize }}"
+		data-error ="{{ "message.error" | trans | capitalize }}"
 		data-no_message ="{{ "No message entered" | trans | capitalize }}"
-		data-url='{{ path ('sendby_labels_send') }}'>{{ "btn.send" | trans | capitalize }}</button>
+		data-url='{{ path ('sending_send') }}'>{{ "btn.send" | trans | capitalize }}</button>
 </div>
 
 	{{ form_widget(form.selected) }}

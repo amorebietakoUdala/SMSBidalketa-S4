@@ -59,7 +59,7 @@ $(document).ready(function(){
 			});
 		});
 	});
-	$('.js-delete').on('click',function(e){
+	$('#taula').on('click','.js-delete',function(e){
 		e.preventDefault();
 		var url = e.currentTarget.dataset.url;
 		var confirmation = e.currentTarget.dataset.confirmation;

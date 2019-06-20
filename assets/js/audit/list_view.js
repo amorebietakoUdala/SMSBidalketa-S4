@@ -36,6 +36,16 @@ function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
 	});
 }
 
+function createContactListHtml (contacts) {
+	var html = '<ul class="list-group">';
+	var elements = '';
+	var i;
+	for (i=0; i < contacts.length; i++) {
+		elements += '<li class="list-group-item">'+contacts[i]['telephone']+'</li>';
+	}
+	return html+elements+'</ul>';
+}
+
 $(document).ready(function(){
 	console.log("Audit list view!!!!");
     $('#audit_search_contacts').select2();
@@ -83,8 +93,45 @@ $(document).ready(function(){
 	$('#taula').on('click','.js-fireAlert',function(e){
 		e.preventDefault();
 		console.log('Contacts Clicked!!!');
+		console.log($(e.currentTarget));
+		var url = e.currentTarget.dataset.url;
+		var title = e.currentTarget.dataset.title;
+		console.log(url);
+		$.ajax({
+			url: url,
+			type: 'GET',
+			dataType: 'json',
+			success: function (json) {
+				var html = createContactListHtml(json);
+				console.log(html);
+				import('sweetalert2').then((Swal) => {
+					Swal.default.fire({
+						title: title,
+						html: html,
+//						type: 'success',
+//						confirmButtonColor: '#3085d6',
+//						confirmButtonText: 'Ok',
+					});
+				});
+			}
+		});
+		
+//		import('sweetalert2').then((Swal) => {
+//			Swal.default.fire({
+//			  title: title,
+//			  html: html,
+//			  type: 'warning',
+//			  showCancelButton: true,
+//			  cancelButtonText: cancelButtonText,
+//			  confirmButtonColor: '#3085d6',
+//			  cancelButtonColor: '#d33',
+//			  confirmButtonText: confirmationButtonText,
+//			}).then((result) => {
+//			if (result.value) {
+//				console.log(url);
+//				document.location.href=url;
+//			}
+//			});
+		});
 	});
-    
 
-
-});

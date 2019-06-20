@@ -26,8 +26,9 @@ class HistorySearchType extends AbstractType
             ->add('status', \Symfony\Component\Form\Extension\Core\Type\ChoiceType::class, [
                 'label' => 'history.status',
                 'choices' => [
-                    '' => null,
-                    'SENT' => 'SENT',
+                    'choice.blank' => null,
+                    'choice.sent' => 'SENT',
+                    'choice.failed' => 'FAILED',
                 ],
             ])
         ;

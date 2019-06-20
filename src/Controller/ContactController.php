@@ -3,15 +3,16 @@
 namespace App\Controller;
 
 use App\DTO\ContactDTO;
+use App\Entity\Contact;
+use App\Entity\Label;
+use App\Form\ContactImportType;
 use App\Form\ContactType;
+use DateTime;
+use Exception;
+use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Contact;
-use App\Form\ContactImportType;
-use Psr\Log\LoggerInterface;
-use League\Csv\Reader;
-use App\Entity\Label;
 
 /**
  * @Route("/{_locale}")
@@ -21,22 +22,16 @@ class ContactController extends AbstractController
     /**
      * @Route("/contacts/import", name="contact_import")
      */
-    public function importAction(Request $request, LoggerInterface $logger)
+    public function importAction(Request $request)
     {
-        $logger->debug('-->importAction: Start');
-        //	$user = $this->get('security.token_storage')->getToken()->getUser();
-        $form = $this->createForm(ContactImportType::class, null, [
-//	    'editatzen' => false,
-//	    'role' => $user->getRoles(),
-//    	    'locale' => $request->getLocale(),
-        ]);
+        $form = $this->createForm(ContactImportType::class, null);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $already_existing_contacts = [];
+            $repeated_contacts = [];
+            $contacts_without_repeated = [];
             try {
-                $em = $this->getDoctrine()->getManager();
-                $already_existings_contacts = [];
-                $repeated_contacts = [];
-                $contacts_without_repeated = [];
                 $file = $form['file']->getData();
                 $records = $this->__readRecordsFromFile($file);
                 $repo = $em->getRepository(Contact::class);
@@ -44,7 +39,6 @@ class ContactController extends AbstractController
                     $contactDTO = new ContactDTO();
                     $contactDTO->extractFromArray($record);
                     $contact = $repo->findOneBy(['telephone' => $contactDTO->getTelephone()]);
-                    // TODO review this logic to control duplicates and already existing contacts
                     if (null === $contact) {
                         /* Telephone not found */
                         $contact = new Contact();
@@ -63,14 +57,13 @@ class ContactController extends AbstractController
                 $em->flush();
                 $this->addFlash('success', 'File successfully processed');
                 $message = '';
-                $logger->debug('<--importAction: POST End');
                 if (count($already_existing_contacts) > 0) {
                     $this->addFlash('warning', 'There are already existing contacts. the label will be applyied but the contact information has not be updated.');
                 }
                 if (count($repeated_contacts) > 0) {
                     $this->addFlash('warning', 'There are repeated contacts.');
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->addFlash('error', 'there was an error procesing file %message%');
                 $message = $e->getMessage();
             }
@@ -84,7 +77,6 @@ class ContactController extends AbstractController
                 'contacts_without_repeated' => $contacts_without_repeated,
         ]);
         }
-        $logger->debug('<--importAction: GET End OK');
 
         return $this->render('contact/upload.html.twig', [
             'form' => $form->createView(),
@@ -95,7 +87,7 @@ class ContactController extends AbstractController
     /**
      * @Route("/contacts", name="contact_list")
      */
-    public function listAction(Request $request)
+    public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
         $contacts = $em->getRepository(Contact::class)->findAll();
@@ -110,17 +102,15 @@ class ContactController extends AbstractController
      */
     public function newAction(Request $request)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(ContactType::class, new ContactDTO(), [
-            'roles' => $user->getRoles(),
-            'locale' => $request->getLocale(),
-        ]);
+        $form = $this->createForm(ContactType::class, new ContactDTO());
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /* @var $data ContactDTO */
             $data = $form->getData();
-            $exists = $em->getRepository(\App\Entity\Contact::class)->findOneBy(['telephone' => $data->getTelephone()]);
+            $exists = $em->getRepository(Contact::class)->findOneBy([
+                'telephone' => $data->getTelephone(),
+            ]);
             if ($exists) {
                 $this->addFlash('error', 'Duplicate contact');
 
@@ -134,17 +124,13 @@ class ContactController extends AbstractController
             $data->fill($contact);
             $em->persist($contact);
             $em->flush();
-            $this->addFlash(
-                'success',
-                'Contact saved'
-            );
+            $this->addFlash('success', 'Contact saved');
 
             return $this->redirectToRoute('contact_list');
         }
 
         return $this->render('contact/new.html.twig', [
             'form' => $form->createView(),
-            'roles' => $user->getRoles(),
         ]);
     }
 
@@ -153,13 +139,10 @@ class ContactController extends AbstractController
      */
     public function editAction(Request $request, Contact $contact)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
         $contactDTO = new ContactDTO($contact);
 
         $form = $this->createForm(ContactType::class, $contactDTO, [
-//            'roles' => $user->getRoles(),
-//            'locale' => $request->getLocale(),
         ]);
 
         $form->handleRequest($request);
@@ -186,15 +169,11 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact/{contact}", name="contact_show")
      */
-    public function showAction(Request $request, Contact $contact)
+    public function showAction(Contact $contact)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-        $em = $this->getDoctrine()->getManager();
         $contactDTO = new ContactDTO($contact);
 
         $form = $this->createForm(ContactType::class, $contactDTO, [
-//            'roles' => $user->getRoles(),
-//            'locale' => $request->getLocale(),
         ]);
 
         return $this->render('contact/edit.html.twig', [
@@ -207,7 +186,7 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact/{contact}/delete", name="contact_delete")
      */
-    public function deleteAction(Request $request, contact $contact)
+    public function deleteAction(Contact $contact)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($contact);
@@ -216,20 +195,6 @@ class ContactController extends AbstractController
 
         return $this->redirectToRoute('contact_list');
     }
-
-//    /**
-//     * @Route("/contact/{contact}/remove/{label}", name="contact_label_remove")
-//     */
-//    public function labelRemoveAction(Request $request, Contact $contact, Label $label)
-//    {
-//        $em = $this->getDoctrine()->getManager();
-//        $contact->removeLabel($label);
-//        $em->persist($contact);
-//        $em->flush();
-//        $this->addFlash('success', 'Label removed');
-//
-//        return $this->redirectToRoute('contact_list');
-//    }
 
     /**
      * Return the labels array without duplicates.
@@ -255,9 +220,9 @@ class ContactController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $labels->clear();
         foreach ($uniques as $unique) {
-            $label = $em->getRepository(\App\Entity\Label::class)->findOneBy(['name' => $unique]);
+            $label = $em->getRepository(Label::class)->findOneBy(['name' => $unique]);
             if (null === $label) {
-                $label = new \App\Entity\Label();
+                $label = new Label();
                 $label->setName($unique);
                 $labels->add($label);
             } else {
@@ -280,7 +245,7 @@ class ContactController extends AbstractController
 
     private function __moveProcessedFile($file)
     {
-        $date = new \DateTime();
+        $date = new DateTime();
         $dateStr = $date->format('Ymdhis');
         $filename = preg_replace('/\\.[^.\\s]{3,4}$/', '', $file->getClientOriginalName());
         $directory = $this->getParameter('uploads_directory');

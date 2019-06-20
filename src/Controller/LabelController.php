@@ -16,7 +16,7 @@ class LabelController extends AbstractController
     /**
      * @Route("/labels", name="label_list")
      */
-    public function listAction(Request $request)
+    public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -32,45 +32,37 @@ class LabelController extends AbstractController
      */
     public function newAction(Request $request)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(LabelType::class, new Label(), [
-//            'roles' => $user->getRoles(),
-//            'locale' => $request->getLocale(),
-        ]);
+        $form = $this->createForm(LabelType::class, new Label());
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /* @var $data Label */
             $data = $form->getData();
-            $exists = $em->getRepository(Label::class)->findOneBy(['name' => $data->getName()]);
+            $exists = $em->getRepository(Label::class)->findOneBy([
+                'name' => $data->getName(),
+            ]);
             if ($exists) {
                 $this->addFlash('error', 'Duplicate label');
+            } else {
+                $em->persist($data);
+                $em->flush();
+                $this->addFlash('success', 'label saved');
 
-                return $this->render('/label/new.html.twig', [
-                    'form' => $form->createView(),
-                ]);
+                return $this->redirectToRoute('label_list');
             }
-            $em->persist($data);
-            $em->flush();
-            $this->addFlash('success', 'label saved');
         }
 
         return $this->render('label/new.html.twig', [
             'form' => $form->createView(),
-            'roles' => $user->getRoles(),
         ]);
     }
 
     /**
      * @Route("/label/{label}", name="label_show")
      */
-    public function showAction(Request $request, Label $label)
+    public function showAction(Label $label)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(LabelType::class, $label, [
-//            'roles' => $user->getRoles(),
-//            'locale' => $request->getLocale(),
         ]);
 
         return $this->render('label/edit.html.twig', [
@@ -85,12 +77,8 @@ class LabelController extends AbstractController
      */
     public function editAction(Request $request, Label $label)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(LabelType::class, $label, [
-//            'roles' => $user->getRoles(),
-//            'locale' => $request->getLocale(),
-        ]);
+        $form = $this->createForm(LabelType::class, $label);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -112,7 +100,7 @@ class LabelController extends AbstractController
     /**
      * @Route("/label/{label}/delete", name="label_delete")
      */
-    public function deleteAction(Request $request, Label $label)
+    public function deleteAction(Label $label)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($label);

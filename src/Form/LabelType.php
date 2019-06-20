@@ -23,6 +23,7 @@ class LabelType extends AbstractType
         $builder
             ->add('id', HiddenType::class)
             ->add('name', null, [
+                'label' => 'label.name',
                 'constraints' => new NotBlank(),
                 'attr' => ['class' => 'js-autocomplete'],
             ])

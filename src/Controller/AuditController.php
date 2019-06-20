@@ -21,23 +21,17 @@ class AuditController extends AbstractController
      */
     public function listAction(Request $request, SmsApi $smsapi, AuthorizationCheckerInterface $authChecker)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
-
-        $form = $this->createForm(AuditSearchType::class, new AuditSearchDTO(), [
-//            'roles' => $user->getRoles(),
-//            'locale' => $request->getLocale(),
-        ]);
-
+        $form = $this->createForm(AuditSearchType::class, new AuditSearchDTO());
+        $criteria = [];
+        if (!$authChecker->isGranted('ROLE_ADMIN')) {
+            $criteria['user'] = $this->get('security.token_storage')->getToken()->getUser();
+        }
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /* @var $data AuditSearchDTO */
             $data = $form->getData();
             $criteria = $data->toArray();
-
-            if (!$authChecker->isGranted('ROLE_ADMIN')) {
-                $criteria['user'] = $user;
-            }
             $audits = $em->getRepository(Audit::class)->findByTimestamp($criteria);
 
             return $this->render('audit/list.html.twig', [
@@ -45,8 +39,7 @@ class AuditController extends AbstractController
                 'form' => $form->createView(),
             ]);
         }
-
-        $audits = $em->getRepository(Audit::class)->findBy([]);
+        $audits = $em->getRepository(Audit::class)->findBy($criteria);
 
         return $this->render('audit/list.html.twig', [
             'audits' => $audits,

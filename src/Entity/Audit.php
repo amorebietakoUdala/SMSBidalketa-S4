@@ -156,4 +156,17 @@ class Audit
 
         return $this;
     }
+
+    public static function createAudit(array $contacts, $responseCode, $message, $fullResponse, $user): Audit
+    {
+        $audit = new self();
+        $audit->setContacts(new ArrayCollection($contacts));
+        $audit->setTimestamp(new DateTime());
+        $audit->setResponseCode($responseCode);
+        $audit->setMessage($message);
+        $audit->setResponse(json_encode($fullResponse));
+        $audit->setUser($user);
+
+        return $audit;
+    }
 }

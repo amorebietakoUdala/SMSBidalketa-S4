@@ -1,4 +1,4 @@
-import '../../css/sender/sendByLabels_view.scss';
+import '../../css/sending/sending_view.scss';
 
 import $ from 'jquery';
 import 'bootstrap-table';
@@ -9,12 +9,12 @@ import 'bootstrap-table/dist/locale/bootstrap-table-es-ES';
 import 'bootstrap-table/dist/locale/bootstrap-table-eu-EU';
 import 'tableexport.jquery.plugin/tableExport';
 import 'jquery-ui';
-import 'select2';
 import 'bootstrap-datepicker';
 import 'bootstrap-datepicker/js/locales/bootstrap-datepicker.es';
 import 'bootstrap-datepicker/js/locales/bootstrap-datepicker.eu';
 import 'eonasdan-bootstrap-datetimepicker';
 import 'pc-bootstrap4-datetimepicker';
+import '../components/select2';
 
 // import Swal from 'sweetalert2';
 
@@ -33,7 +33,7 @@ function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
 			if (result.value) {
 				var form = $('#form');
 				var selections = $('#taula').bootstrapTable('getSelections');
-				$('#send_by_label_selected').val(JSON.stringify(selections));
+				$('#sending_selected').val(JSON.stringify(selections));
 				$(form).attr('action',url);
 				form.submit();
 		}	
@@ -43,7 +43,7 @@ function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
 
 $(document).ready(function(){
 	console.log("SendByLabels view!!!!");
-    $('#send_by_label_labels').select2();
+    $('#sending_labels').select2();
 	$('#taula').bootstrapTable({
 		cache : false,
 		showExport: true,
@@ -75,7 +75,7 @@ $(document).ready(function(){
 	$('#js-btn-send').on('click',function(e){
 		e.preventDefault();
 		console.log('send clicked!!!');
-		var message = $('#send_by_label_message').val();
+		var message = $('#sending_message').val();
 		console.log(message.length);
 		if ( message.length === 0 ) {
 			var no_message = e.currentTarget.dataset.no_message;

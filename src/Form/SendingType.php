@@ -8,46 +8,35 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SendByLabelType extends AbstractType
+class SendingType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-//        $data = $options['data'];
-//        $roles = $options['data']['roles'];
-//        $locale = $options['data']['locale'];
         $builder
             ->add('labels', EntityType::class, [
                 'class' => Label::class,
                 'multiple' => 'multiple',
-                'label' => 'labels',
+                'label' => 'contact.labels',
                 'choice_label' => 'name',
-//                'placeholder' => 'Choose an option',
             ])
             ->add('selected', \Symfony\Component\Form\Extension\Core\Type\HiddenType::class)
             ->add('message', \Symfony\Component\Form\Extension\Core\Type\TextareaType::class, [
                     'attr' => ['maxlength' => 335],
-                    'label' => 'message',
+                    'label' => 'sending.message',
             ])
             ->add('date', \Symfony\Component\Form\Extension\Core\Type\DateTimeType::class, [
                     'widget' => 'single_text',
-                    'label' => 'send.date',
-//                    'placeholder' => [
-//                        'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
-//                        'hour' => 'Hour', 'minute' => 'Minute', 'second' => 'Second',
+                    'label' => 'sending.date',
 //                    ],
                     'html5' => true,
             ])
-//            ->add('save', SubmitType::class, [
-//            ])
-//            ->add('back', ButtonType::class, [
-//            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => \App\DTO\SendByLabelDTO::class,
+            'data_class' => \App\DTO\SendingDTO::class,
             'roles' => null,
             'locale' => null,
         ]);

@@ -24,7 +24,7 @@
 {% block body %}
     <main class="container-fluid">
 	<div class="mt-2 border-light">
-	{{ include('sendby/_labels_form.html.twig',{
+	{{ include('sending/_form.html.twig',{
 
 			    }) }}
 	</div>
@@ -67,10 +67,10 @@
 
 {% block stylesheets %}
     {{ parent() }}
-	{{ encore_entry_link_tags('sendByLabels_view') }}
+	{{ encore_entry_link_tags('sending_view') }}
 {% endblock %}
 
 {% block javascripts %}
     {{  parent() }}
-	{{ encore_entry_script_tags('sendByLabels_view') }}
+	{{ encore_entry_script_tags('sending_view') }}
 {% endblock javascripts %}

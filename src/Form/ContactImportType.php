@@ -40,6 +40,7 @@ class ContactImportType extends AbstractType
                 'entry_type' => LabelType::class,
                 'allow_delete' => true,
                 'allow_add' => true,
+                'label' => 'contact.labels',
             ])
             ->add('send', SubmitType::class, [
             'label' => 'btn.send',

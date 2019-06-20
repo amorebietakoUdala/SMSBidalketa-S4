@@ -7,21 +7,9 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
 	<li class='nav-item'>
-	  <a class="nav-link" href="{{ path('sendby_labels_search') }}">{{"navitem.sendby_labels" | trans | capitalize}}</a>
+	  <a class="nav-link" href="{{ path('sending_search') }}">{{"navitem.sendings" | trans | capitalize}}</a>
 	</li>
 
-{#	<li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarSendMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ 'navitem.send' | trans | capitalize }}
-        </a>
-        <div id="js-menu-sendmessage" class="dropdown-menu" aria-labelledby="navbarSendMessage">
-			<a class="dropdown-item" href="{{ path('sendby_labels_search') }}">{{"navitem.sendby_labels" | trans | capitalize}}</a>
-
-			<a class="dropdown-item" href="{{ path('contact_import') }}">{{"navitem.contact_import" | trans | capitalize}}</a>
-
-        </div>
-      </li>
-#}
 	<li class='nav-item'>
 	  <a class='nav-link' href="{{ path ('label_list') }}">{{ 'navitem.labels' | trans | capitalize }}</a>
 	</li>
@@ -50,23 +38,7 @@
           <a class="dropdown-item" href="{{ path('receipt_new') }}">{{"navitem.exams" | trans | capitalize}}</a>
         </div>
       </li>	
-#}    {% if is_granted('ROLE_ADMIN') %}
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarAdministration" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ 'navitem.administration' | trans | capitalize }}
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarAdministration">
-{#
-	  <a class='dropdown-item' href="{{ path('admin_receipt_upload') }}">{{"navitem.uploadReceipts" | trans | capitalize}}</a>
-	  <a class="dropdown-item" href="{{ path('concept_list') }}">{{"navitem.concepts" | trans | capitalize}}</a>
-	  <a class="dropdown-item" href="{{ path('category_list') }}">{{"navitem.categories" | trans | capitalize}}</a>
-          <a class="dropdown-item" href="{{ path('receipt_home') }}">{{"navitem.receipts" | trans | capitalize}}</a>
-	  <a class="dropdown-item" href="{{ path('activity_list') }}">{{"navitem.activities" | trans | capitalize}}</a>
-          <a class="dropdown-item" href="{{ path('mipago_list_payments') }}">{{"navitem.payments" | trans | capitalize}}</a>
 #}
-        </div>
-      </li>
-    {% endif %}	
     </ul>
   </div>
 </nav>

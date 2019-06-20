@@ -53,7 +53,6 @@ class RestApiController extends AbstractFOSRestController
     public function getAuditContactsAction(ParamFetcherInterface $paramFetcher): View
     {
         $id = $paramFetcher->get('id');
-        $em = $this->getDoctrine()->getManager();
         $repo = $this->getDoctrine()->getRepository(Audit::class);
         /* @var $audit Audit */
         $audit = $repo->find($id);

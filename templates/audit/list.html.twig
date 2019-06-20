@@ -33,7 +33,7 @@
 						<th data-sortable="true">{{"audit.message" | trans | capitalize}}</th>
 {#						<th data-sortable="true">{{"audit.response" | trans | capitalize}}</th>
 #}						<th data-sortable="true">{{"audit.user" | trans | capitalize}}</th>
-						<th data-sortable="true">{{"options" | trans | capitalize}}</th>
+						<th data-sortable="true">{{"table.options" | trans | capitalize}}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -47,7 +47,11 @@
 {#						<td>{{audit.response}}</td>
 #}						<td>{{audit.user}}</td>
 						<td>
-							<a id="alert{{ loop.index }}" href="#" class="js-fireAlert" data-audit="{{ path( "get_audit_contacts", { "id" : audit.id } ) }}"><i class="fa fa-file-text-o" title="{{ 'contacts.details' | trans | capitalize }}"></i></a>
+							<a id="alert{{ loop.index }}" href="#" class="js-fireAlert" 
+								data-title="{{ 'audit.contacts' | trans | capitalize }}" 
+								data-url="{{ path( "get_audit_contacts", { "id" : audit.id } ) }}">
+								<i class="fa fa-file-text-o" title="{{ 'contacts.details' | trans | capitalize }}"></i>
+							</a>
 						</td>
 					</tr>
 					{% endfor %}

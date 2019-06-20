@@ -4,11 +4,10 @@ namespace App\Controller;
 
 use AmorebietakoUdala\SMSServiceBundle\Controller\SmsApi;
 use App\DTO\ContactDTO;
-use App\DTO\SendByLabelDTO;
+use App\DTO\SendingDTO;
 use App\Entity\Audit;
 use App\Entity\Contact;
-use App\Form\SendByLabelType;
-use Doctrine\Common\Collections\ArrayCollection;
+use App\Form\SendingType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,23 +15,21 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/{_locale}")
  */
-class SenderController extends AbstractController
+class SendingController extends AbstractController
 {
     /**
-     * @Route("/sendby/labels/send", name="sendby_labels_send")
+     * @Route("/sending/send", name="sending_send")
      */
-    public function sendByLabelsSendAction(Request $request, SmsApi $smsapi)
+    public function sendingSendAction(Request $request, SmsApi $smsapi)
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
-        $sendByLabelDTO = new SendByLabelDTO();
-
-        $form = $this->createForm(SendByLabelType::class, $sendByLabelDTO, [
-        ]);
+        $sendingDTO = new SendingDTO();
+        $form = $this->createForm(SendingType::class, $sendingDTO);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            /* @var $data SendByLabelDTO */
+            /* @var $data SendingDTO */
             $data = $form->getData();
             $selected = json_decode($data->getSelected());
             $telephones = [];
@@ -47,7 +44,7 @@ class SenderController extends AbstractController
             if (0 === count($telephones)) {
                 $this->addFlash('error', 'No receivers found');
 
-                return $this->render('sendby/list.html.twig', [
+                return $this->render('sending/list.html.twig', [
                     'form' => $form->createView(),
                     'contacts' => [],
                     'messages_sent' => null,
@@ -62,7 +59,7 @@ class SenderController extends AbstractController
                 $this->addFlash('error', 'Not enough credit. Needed credtis %credits_needed% remaining %credits_remaining%'
                 );
 
-                return $this->render('sendby/list.html.twig', [
+                return $this->render('sending/list.html.twig', [
                     'form' => $form->createView(),
                     'contacts' => [],
                     'credits_needed' => count($telephones),
@@ -72,22 +69,16 @@ class SenderController extends AbstractController
 
             $response = $smsapi->sendMessage($telephones, $data->getMessage(), $data->getDate());
             $this->addFlash('success', '%messages_sent% messages sended successfully');
-            $audit = new Audit();
             $contacts = [];
             foreach ($ids as $id) {
                 $contacts[] = $em->getRepository(Contact::class)->find($id);
             }
-            $audit->setContacts(new ArrayCollection($contacts));
-            $audit->setTimestamp(new \DateTime());
-            $audit->setResponseCode($response->{'responseCode'});
-            $audit->setMessage($response->{'message'});
-            $audit->setResponse(json_encode($response));
-            $audit->setUser($user);
+            $audit = Audit::createAudit($contacts, $response->{'responseCode'}, $response->{'message'}, $response, $user);
             $em->persist($audit);
             $em->flush();
-            $form = $this->createForm(SendByLabelType::class, new sendByLabelDTO(), []);
+            $form = $this->createForm(SendingType::class, new SendingDTO(), []);
 
-            return $this->render('sendby/list.html.twig', [
+            return $this->render('sending/list.html.twig', [
                 'form' => $form->createView(),
                 'contacts' => [],
                 'messages_sent' => count($telephones),
@@ -96,22 +87,16 @@ class SenderController extends AbstractController
             ]);
         }
 
-        return $this->redirectToRoute('sendby_labels_search');
+        return $this->redirectToRoute('sending_search');
     }
 
     /**
-     * @Route("/sendby/labels", name="sendby_labels_search")
+     * @Route("/sending", name="sending_search")
      */
-    public function sendByLabelsAction(Request $request)
+    public function sendSearchAction(Request $request)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
-        $sendByLabelDTO = new SendByLabelDTO();
-
-        $form = $this->createForm(SendByLabelType::class, $sendByLabelDTO, [
-//            'roles' => $user->getRoles(),
-//            'locale' => $request->getLocale(),
-        ]);
+        $form = $this->createForm(SendingType::class, new SendingDTO());
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -123,16 +108,14 @@ class SenderController extends AbstractController
                 $contacts = $em->getRepository(Contact::class)->findAll();
             }
 
-            return $this->render('sendby/list.html.twig', [
+            return $this->render('sending/list.html.twig', [
                 'form' => $form->createView(),
                 'contacts' => $contacts,
             ]);
         }
 
-        return $this->render('sendby/list.html.twig', [
+        return $this->render('sending/list.html.twig', [
             'form' => $form->createView(),
-            'readonly' => false,
-            'new' => false,
         ]);
     }
 }

@@ -1,59 +1,67 @@
-messages.appTitle: "SMSBidalketa"
-search.title: "Busqueda"
-
-options: "Opciones"
-
-messages.confirmacion: "Confirmación"
-messages.results0: "No se han encontrado resultados"
-messages.si: "Sí"
-messages.no: "No"
+########################################################
+# General
+########################################################
 
 link.logout: "Salir"
 
-confirmation.pay: "Pagar"
-confirmation.cancel: "Cancelar"
+messages.appTitle: "SMSBidalketa"
+
+########################################################
+# Tablas
+########################################################
+
+table.options: "Opciones"
+
+
+
+########################################################
+# Botones
+########################################################
 
 btn.new: "Nuevo"
 btn.save: "Guardar"
 btn.send: "Enviar"
-btn.buy: "Comprar"
 btn.back: "Volver"
 btn.addLabel: "Añadir etiqueta"
 btn.search: "Buscar"
+btn.searchRecipients: "Buscar destinatarios"
 
-navitem.send: "Enviar"
-navitem.sendby_labels: "Envios"
+########################################################
+# Menu
+########################################################
+
+navitem.sendings: "Envíos"
 navitem.contacts: "Contactos"
 navitem.import: "Importar"
-navitem.new: "Nuevo"
 navitem.labels: "Etiquetas"
-navitem.home: "Inicio"
 navitem.contact_list: "Listado"
 navitem.contact_import: "Importar"
 navitem.history: "Histórico"
-navitem.audit: "Auditoria"
-navitem.administration: "Administración"
+navitem.audit: "Auditoría"
 
+########################################################
+# Entidades
+########################################################
 
 label.id: "Id"
 label.name: "Nombre"
 
 contact.id: "Id"
 contact.username: "Username"
+contact.name: "Nombre"
+contact.surname1: "Primer apellido"
+contact.surname2: "Segundo apellido"
 contact.fullname: "Nombre completo"
 contact.telephone: "Teléfono"
 contact.company: "Compañía"
 contact.department: "Departamento"
-labels: "Etiquetas"
-Name: "Nombre"
-message: "Mensaje"
-
-send.date: "Fecha envío programada"
+contact.labels: "Etiquetas"
 
 history.id: "Id"
 history.senderAcoount: "Cuenta"
 history.fromDate: "Desde"
 history.toDate: "Hasta"
+history.date: "Fecha"
 history.rctpNameNumber: "Destinatario"
 history.text: "Texto"
 history.ip: "IP"
@@ -71,9 +79,23 @@ audit.contacts: "Contactos"
 audit.message: "Message"
 audit.response: "Respuesta"
 
-contacts: "Contactos"
+########################################################
+# Paginas
+########################################################
 
+contacts: "Contactos"
 contacts.details: "Detalle de contactos"
+
+sending.message: "Mensaje"
+sending.date: "Fecha envío programada"
+
+choice.blank: ""
+choice.sent: "Enviado"
+choice.failed: "Error en el envío"
+
+########################################################
+# Mensajes
+########################################################
 
 "Duplicate contact": "Contacto duplicado"
 "Duplicate label": "Etiqueta duplicada"
@@ -90,10 +112,14 @@ contacts.details: "Detalle de contactos"
 "Not enough credit. Needed credtis %credits_needed% remaining %credits_remaining%": "No dispone de créditos suficientes. Dispone de %credits_remaining% créditos y necesita %credits_needed%."
 "%messages_sent% messages sended successfully": "%messages_sent% mensajes enviados correctamente"
 "No message entered": "No se ha introducido el mensaje"
-"error": "Error"
+"message.error": "Error"
 
-# "¿Esta seguro de que desea eliminar esta etiqueta?<br/>Esto afectará a %contactsCount% contactos": "¿Esta seguro de que desea eliminar esta etiqueta?<br/>Esto afectará a %contactsCount% contactos"
 "contact.delete.confirmation": "¿Esta seguro de que desea eliminar este contacto?"
 "label.delete.confirmation": "¿Esta seguro de que desea eliminar esta etiqueta?<br/>Esto afectará a %contactsCount% contactos"
 "send.confirmation": "Se van a enviar %message_count% mensajes, ¿Esta seguro de que desea enviar los mensajes?<br/>"
 "contact.label.remove.confirmation": "¿Está seguro de que desea eliminar esa etiqueta del contacto?"
+
+messages.confirmacion: "Confirmación"
+messages.results0: "No se han encontrado resultados"
+messages.si: "Sí"
+messages.no: "No"

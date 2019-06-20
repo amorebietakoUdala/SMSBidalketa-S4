@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use AmorebietakoUdala\SMSServiceBundle\Controller\SmsApi;
 use App\DTO\HistorySearchDTO;
+use App\Entity\History;
+use App\Form\HistorySearchType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/{_locale}")
@@ -14,23 +18,18 @@ class HistoryController extends AbstractController
     /**
      * @Route("/history", name="history_list")
      */
-    public function listAction(\Symfony\Component\HttpFoundation\Request $request, \AmorebietakoUdala\SMSServiceBundle\Controller\SmsApi $smsapi)
+    public function listAction(Request $request, SmsApi $smsapi)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $form = $this->createForm(\App\Form\HistorySearchType::class, new \App\DTO\HistorySearchDTO(), [
-//            'roles' => $user->getRoles(),
-//            'locale' => $request->getLocale(),
-        ]);
+        $form = $this->createForm(HistorySearchType::class, new HistorySearchDTO());
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /* @var $data HistorySearchDTO */
             $data = $form->getData();
             $criteria = $data->toArray();
-
-            $histories = $em->getRepository(\App\Entity\History::class)->findByDates($criteria);
+            $histories = $em->getRepository(History::class)->findByDates($criteria);
 
             return $this->render('history/list.html.twig', [
                 'histories' => $histories,

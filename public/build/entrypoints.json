@@ -3,8 +3,8 @@
     "label_list_view": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~c38daa2e.js",
-        "/build/vendors~audit_list_view~contact_list_view~history_list_view~label_list_view~sendByLabels_view.js",
+        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~78179d7d.js",
+        "/build/vendors~audit_list_view~contact_list_view~history_list_view~label_list_view~sending_view.js",
         "/build/label_list_view.js"
       ],
       "css": [
@@ -14,7 +14,7 @@
     "contact_new_view": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~c38daa2e.js",
+        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~78179d7d.js",
         "/build/vendors~contact_edit_view~contact_import_view~contact_new_view.js",
         "/build/contact_new_view.js"
       ],
@@ -25,8 +25,8 @@
     "contact_list_view": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~c38daa2e.js",
-        "/build/vendors~audit_list_view~contact_list_view~history_list_view~label_list_view~sendByLabels_view.js",
+        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~78179d7d.js",
+        "/build/vendors~audit_list_view~contact_list_view~history_list_view~label_list_view~sending_view.js",
         "/build/0.js",
         "/build/contact_list_view.js"
       ],
@@ -37,7 +37,7 @@
     "contact_edit_view": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~c38daa2e.js",
+        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~78179d7d.js",
         "/build/vendors~contact_edit_view~contact_import_view~contact_new_view.js",
         "/build/contact_edit_view.js"
       ],
@@ -48,7 +48,7 @@
     "contact_import_view": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~c38daa2e.js",
+        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~78179d7d.js",
         "/build/vendors~contact_edit_view~contact_import_view~contact_new_view.js",
         "/build/contact_import_view.js"
       ],
@@ -59,7 +59,7 @@
     "app": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~c38daa2e.js",
+        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~78179d7d.js",
         "/build/vendors~app.js",
         "/build/app.js"
       ],
@@ -70,7 +70,7 @@
     "label_edit_view": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~c38daa2e.js",
+        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~78179d7d.js",
         "/build/label_edit_view.js"
       ],
       "css": [
@@ -80,33 +80,33 @@
     "label_new_view": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~c38daa2e.js",
+        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~78179d7d.js",
         "/build/label_new_view.js"
       ],
       "css": [
         "/build/label_new_view.css"
       ]
     },
-    "sendByLabels_view": {
+    "sending_view": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~c38daa2e.js",
-        "/build/vendors~audit_list_view~contact_list_view~history_list_view~label_list_view~sendByLabels_view.js",
-        "/build/vendors~audit_list_view~history_list_view~sendByLabels_view.js",
-        "/build/vendors~audit_list_view~sendByLabels_view.js",
-        "/build/vendors~sendByLabels_view.js",
-        "/build/sendByLabels_view.js"
+        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~78179d7d.js",
+        "/build/vendors~audit_list_view~contact_list_view~history_list_view~label_list_view~sending_view.js",
+        "/build/vendors~audit_list_view~history_list_view~sending_view.js",
+        "/build/vendors~audit_list_view~sending_view.js",
+        "/build/vendors~sending_view.js",
+        "/build/sending_view.js"
       ],
       "css": [
-        "/build/sendByLabels_view.css"
+        "/build/sending_view.css"
       ]
     },
     "history_list_view": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~c38daa2e.js",
-        "/build/vendors~audit_list_view~contact_list_view~history_list_view~label_list_view~sendByLabels_view.js",
-        "/build/vendors~audit_list_view~history_list_view~sendByLabels_view.js",
+        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~78179d7d.js",
+        "/build/vendors~audit_list_view~contact_list_view~history_list_view~label_list_view~sending_view.js",
+        "/build/vendors~audit_list_view~history_list_view~sending_view.js",
         "/build/history_list_view.js"
       ],
       "css": [
@@ -116,10 +116,10 @@
     "audit_list_view": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~c38daa2e.js",
-        "/build/vendors~audit_list_view~contact_list_view~history_list_view~label_list_view~sendByLabels_view.js",
-        "/build/vendors~audit_list_view~history_list_view~sendByLabels_view.js",
-        "/build/vendors~audit_list_view~sendByLabels_view.js",
+        "/build/vendors~app~audit_list_view~contact_edit_view~contact_import_view~contact_list_view~contact_new_view~78179d7d.js",
+        "/build/vendors~audit_list_view~contact_list_view~history_list_view~label_list_view~sending_view.js",
+        "/build/vendors~audit_list_view~history_list_view~sending_view.js",
+        "/build/vendors~audit_list_view~sending_view.js",
         "/build/audit_list_view.js"
       ],
       "css": [

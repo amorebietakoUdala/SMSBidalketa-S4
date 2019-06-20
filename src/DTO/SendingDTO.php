@@ -5,7 +5,7 @@ namespace App\DTO;
 use App\Entity\Contact;
 use Doctrine\Common\Collections\ArrayCollection;
 
-class SendByLabelDTO
+class SendingDTO
 {
     private $message;
     private $labels;

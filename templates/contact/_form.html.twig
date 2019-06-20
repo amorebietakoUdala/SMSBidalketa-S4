@@ -25,7 +25,7 @@
 			{{ form_row(form.telephone, { 'attr': { 'id': '', 'class' : 'form-control-sm' } }) }}
 		</div>
 	</div>
-	<h4 class="">{{ "Labels" | trans | capitalize }}</h4>
+	<h4 class="">{{ "contact.labels" | trans | capitalize }}</h4>
 	<div class ="form-row js-labels-wrapper col-lg-2 col-md-2 col-sm-6 align-items-center" 
 		 data-prototype="{{ form_widget(form.labels.vars.prototype)|e('html_attr') }}"
 		 data-index="{{ form.labels|length }}"
