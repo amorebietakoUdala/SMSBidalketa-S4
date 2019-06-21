@@ -3,8 +3,8 @@ import '../../css/label/list_view.scss';
 import $ from 'jquery';
 import 'bootstrap-table';
 import 'bootstrap-table/dist/extensions/export/bootstrap-table-export'
-import 'bootstrap-table/dist/locale/bootstrap-table-es-ES';
 import 'bootstrap-table/dist/locale/bootstrap-table-eu-EU';
+import 'bootstrap-table/dist/locale/bootstrap-table-es-ES';
 import 'tableexport.jquery.plugin/tableExport';
 import 'jquery-ui';
 // import Swal from 'sweetalert2';
@@ -31,7 +31,6 @@ function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
 
 $(document).ready(function(){
 	console.log("Label list view!!!!");
-
 	$('#taula').bootstrapTable({
 		cache : false,
 		showExport: true,
@@ -49,7 +48,6 @@ $(document).ready(function(){
 		pageSize: 10,
 		pageList: [10,25,50,100],
 		sortable: true,
-		locale: $('html').attr('lang'),
 	});
 	var $table = $('#taula');
 	$(function () {

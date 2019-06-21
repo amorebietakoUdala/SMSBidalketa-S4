@@ -2,6 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Contact;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,24 +20,14 @@ class AuditSearchType extends AbstractType
             ->add('toDate', null, [
                 'label' => 'audit.toDate',
             ])
-            ->add('contacts', \Symfony\Bridge\Doctrine\Form\Type\EntityType::class, [
-                'class' => \App\Entity\Contact::class,
+            ->add('contacts', EntityType::class, [
+                'class' => Contact::class,
                 'multiple' => 'multiple',
                 'label' => 'contacts',
                 'choice_label' => 'telephone',
-//                'placeholder' => 'Choose an option',
             ])
-//            ->add('responseCode', null, [
-//                'label' => 'audit.responseCode',
-//            ])
-//            ->add('message', null, [
-//                'label' => 'audit.message',
-//            ])
-//            ->add('response', null, [
-//                'label' => 'audit.response',
-//            ])
-            ->add('user', \Symfony\Bridge\Doctrine\Form\Type\EntityType::class, [
-                'class' => \App\Entity\User::class,
+            ->add('user', EntityType::class, [
+                'class' => User::class,
                 'multiple' => false,
                 'label' => 'audit.user',
                 'choice_label' => 'username',

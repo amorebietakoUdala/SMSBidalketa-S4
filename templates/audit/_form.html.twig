@@ -18,16 +18,7 @@
 				{{ form_row(form.user, { 'attr': { 'id': '', 'class' : 'form-control-sm' } }) }}
 			</div>
 		{% endif %}
-{#		<div class="col-lg-2 col-md-2 col-sm-6">
-			{{ form_row(form.responseCode, { 'attr': { 'id': '', 'class' : 'form-control-sm' } }) }}
-		</div>
-		<div class="col-lg-2 col-md-2 col-sm-6">
-			{{ form_row(form.message, { 'attr': { 'id': '', 'class' : 'form-control-sm' } }) }}
-		</div>
-		<div class="col-lg-2 col-md-2 col-sm-6">
-			{{ form_row(form.response, { 'attr': { 'id': '', 'class' : 'form-control-sm' } }) }}
-		</div>
-#}		<button type="Submit" class="btn btn-primary ml-1">{{ "btn.search" | trans | capitalize }}</button>
+}		<button type="Submit" class="btn btn-primary ml-1">{{ "btn.search" | trans | capitalize }}</button>
 		{% set url = path('audit_list') %}
 		<button type="Button" class="btn btn-primary ml-1 js-back" data-url="{{ url }}">{{ "btn.back" | trans | capitalize }}</button>
 	</div>

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,7 +24,7 @@ class HistorySearchType extends AbstractType
             ->add('text', null, [
                 'label' => 'history.text',
             ])
-            ->add('status', \Symfony\Component\Form\Extension\Core\Type\ChoiceType::class, [
+            ->add('status', ChoiceType::class, [
                 'label' => 'history.status',
                 'choices' => [
                     'choice.blank' => null,

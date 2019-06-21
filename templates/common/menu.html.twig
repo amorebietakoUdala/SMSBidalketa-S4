@@ -6,39 +6,28 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-	<li class='nav-item'>
-	  <a class="nav-link" href="{{ path('sending_search') }}">{{"navitem.sendings" | trans | capitalize}}</a>
-	</li>
+		<li class='nav-item'>
+		  <a class="nav-link" href="{{ path('sending_search') }}">{{"navitem.sendings" | trans | capitalize}}</a>
+		</li>
 
-	<li class='nav-item'>
-	  <a class='nav-link' href="{{ path ('label_list') }}">{{ 'navitem.labels' | trans | capitalize }}</a>
-	</li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarContacts" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ 'navitem.contacts' | trans | capitalize }}
-        </a>
-        <div id="js-menu-contacts" class="dropdown-menu" aria-labelledby="navbarContacts">
-			<a class="dropdown-item" href="{{ path('contact_list') }}">{{"navitem.contact_list" | trans | capitalize}}</a>
-			<a class="dropdown-item" href="{{ path('contact_import') }}">{{"navitem.contact_import" | trans | capitalize}}</a>
-        </div>
-      </li>
-	<li class='nav-item'>
-	  <a class='nav-link' href="{{ path ('audit_list') }}">{{ 'navitem.audit' | trans | capitalize }}</a>
-	</li>
-	<li class='nav-item'>
-	  <a class='nav-link' href="{{ path ('history_list') }}">{{ 'navitem.history' | trans | capitalize }}</a>
-	</li>
-
-{#      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarPaymentTypes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ 'navitem.paymentTypes' | trans | capitalize }}
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarPaymentTypes">
-          <a class="dropdown-item" href="{{ path('receipt_home') }}">{{"navitem.receipts" | trans | capitalize}}</a>
-          <a class="dropdown-item" href="{{ path('receipt_new') }}">{{"navitem.exams" | trans | capitalize}}</a>
-        </div>
-      </li>	
-#}
+		<li class='nav-item'>
+		  <a class='nav-link' href="{{ path ('label_list') }}">{{ 'navitem.labels' | trans | capitalize }}</a>
+		</li>
+		<li class="nav-item dropdown">
+		  <a class="nav-link dropdown-toggle" href="#" id="navbarContacts" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			{{ 'navitem.contacts' | trans | capitalize }}
+		  </a>
+		  <div id="js-menu-contacts" class="dropdown-menu" aria-labelledby="navbarContacts">
+			  <a class="dropdown-item" href="{{ path('contact_list') }}">{{"navitem.contact_list" | trans | capitalize}}</a>
+			  <a class="dropdown-item" href="{{ path('contact_import') }}">{{"navitem.contact_import" | trans | capitalize}}</a>
+		  </div>
+		</li>
+		<li class='nav-item'>
+		  <a class='nav-link' href="{{ path ('audit_list') }}">{{ 'navitem.audit' | trans | capitalize }}</a>
+		</li>
+		<li class='nav-item'>
+		  <a class='nav-link' href="{{ path ('history_list') }}">{{ 'navitem.history' | trans | capitalize }}</a>
+		</li>
     </ul>
   </div>
 </nav>

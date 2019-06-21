@@ -42,7 +42,6 @@ function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
 }
 
 $(document).ready(function(){
-	console.log("SendByLabels view!!!!");
     $('#sending_labels').select2();
 	$('#taula').bootstrapTable({
 		cache : false,
@@ -51,15 +50,11 @@ $(document).ready(function(){
 		exportDataType: 'all',
 		exportOptions: {
 			fileName: "destinatarios",
-//			ignoreColumn: ['options']
 		},
-//		showColumns: false,
 		pagination: false,
 		search: true,
 		striped: true,
 		sortStable: true,
-//		pageSize: 10,
-//		pageList: [10,25,50,100],
 		sortable: true,
 		locale: $('html').attr('lang'),
 		multipleSelectRow: true,
@@ -74,9 +69,7 @@ $(document).ready(function(){
 	});
 	$('#js-btn-send').on('click',function(e){
 		e.preventDefault();
-		console.log('send clicked!!!');
 		var message = $('#sending_message').val();
-		console.log(message.length);
 		if ( message.length === 0 ) {
 			var no_message = e.currentTarget.dataset.no_message;
 			var error = e.currentTarget.dataset.error;
@@ -90,6 +83,16 @@ $(document).ready(function(){
 			return;
 		}
 		var selections = $('#taula').bootstrapTable('getSelections');
+		if ( selections.length === 0 ) {
+			import('sweetalert2').then((Swal) => {
+				Swal.default.fire(
+					error,
+					'No se han seleccionado destinatarios',
+					'error'
+				  )
+			});
+			return;
+		}
 		var url = e.currentTarget.dataset.url;
 		var confirmation = e.currentTarget.dataset.confirmation;
 		var message = e.currentTarget.dataset.message.replace('%message_count%',selections.length);
@@ -99,7 +102,6 @@ $(document).ready(function(){
 	});
 	$('#js-btn-search').on('click',function(e){
 		e.preventDefault();
-		console.log('search clicked!!!');
 		var form = $('#form');
 		$(form).attr('action',e.currentTarget.dataset.url);
 		form.submit();

@@ -1,2 +1,123 @@
+########################################################
+# General
+########################################################
+
+link.logout: "Irten"
+
 messages.appTitle: "SMSBidalketa"
 
+########################################################
+# Tablas
+########################################################
+
+table.options: "Aukerak"
+
+
+
+########################################################
+# Botones
+########################################################
+
+btn.new: "Berria"
+btn.save: "Gorde"
+btn.send: "Bidali"
+btn.back: "Itzuli"
+btn.addLabel: "Etiketa gehitu"
+btn.search: "Bilatu"
+btn.searchRecipients: "Hartzaileak bilatu"
+
+########################################################
+# Menu
+########################################################
+
+navitem.sendings: "Bidalketak"
+navitem.contacts: "Kontaktuak"
+navitem.import: "Inportatu"
+navitem.labels: "Etiketak"
+navitem.contact_list: "Zerrenda"
+navitem.contact_import: "Inportatu"
+navitem.history: "Historikoa"
+navitem.audit: "Auditoria"
+
+########################################################
+# Entidades
+########################################################
+
+label.id: "Id"
+label.name: "Izena"
+
+contact.id: "Id"
+contact.name: "Izena"
+contact.surname1: "Lehen abizena"
+contact.surname2: "Bigarren abizena"
+contact.fullname: "Izen osoa"
+contact.telephone: "Telefonoa"
+contact.labels: "Etiketak"
+
+history.id: "Id"
+history.senderAcoount: "Kontua"
+history.fromDate: "Noiztik"
+history.toDate: "Nora"
+history.date: "Data"
+history.rctpNameNumber: "Hartzailea"
+history.text: "Testua"
+history.ip: "IP"
+history.status: "Egoera"
+history.esUnicode: "Unicode"
+
+audit.id: "Id"
+audit.timestamp: "Data"
+audit.contactsCount: "Hartzaile kopurua"
+audit.responseCode: "Erantzun kodea"
+audit.user: "Erabiltzailea"
+audit.fromDate: "Noiztik"
+audit.toDate: "Nora"
+audit.contacts: "Kontaktuak"
+audit.message: "Mezua"
+audit.response: "Erantzuna"
+
+########################################################
+# Paginas
+########################################################
+
+contacts: "Kontaktuak"
+contacts.details: "Kontuen xehetasunak"
+
+sending.message: "Mezua"
+sending.date: "Bidaltzeko programatutako data"
+
+choice.blank: ""
+choice.sent: "Bidalia"
+choice.failed: "Akatsa bidalketan"
+
+########################################################
+# Mensajes
+########################################################
+
+"Duplicate contact": "Kontaktu bikoiztua"
+"Duplicate label": "Etiketa bikoiztua"
+"Contact saved": "Kontaktua gorde egin da"
+"Contact deleted": "Kontaktua ezabatu da"
+"label saved": "Etiketa gorde egin da"
+"File successfully processed": "Fitxategia ondo prozesatu da"
+"There are already existing contacts. the label will be applyied but the contact information has not be updated.": "Jadanik existitzen kontaktuak ageri dira. Etiquetak ezarri zaizkie, baina kontaktuaren informazioa ez da eguneratu."
+"There are repeated contacts.": "Hay contactos repetidos. Sólo se procesará el primero de ellos."
+"Number of repeated contacts": "Errepikatutako kontaktu kopurua"
+"Number of already existing contacts": "Jadanik existitzen diren kontaktu kopurua"
+"Number of unrepeated contacts": "Kontaktu bakarren kopurua"
+"Choose file": "Fitxategia hautatu"
+"Not enough credit. Needed credtis %credits_needed% remaining %credits_remaining%": "Ez dago kreditu nahikorik. %credits_remaining% geratzen dira eta %credits_needed% behar dira."
+"%messages_sent% messages sended successfully": "%messages_sent% mensajes enviados correctamente"
+"No message entered": "Ez da mezu sartu"
+"No receivers found": "Ez da hartzailerik hautatu"
+"message.error": "Error"
+
+"contact.delete.confirmation": "Kontaktua ezabatzera zoaz. Ziur al zaude?"
+"label.delete.confirmation": "Ziur al zaude etiketa hau ezabatu nahi duzula?<br/>Etiqueta hau %contactsCount% kontaktan ezarrita dago"
+"send.confirmation": "%message_count% mezu bidaliko dira, Ziur al zaude?<br/>"
+"contact.label.remove.confirmation": "Kontaktu honen etiketa ezabatuko da. Ziur al zaude?"
+
+messages.confirmacion: "Konfirmazioa"
+messages.results0: "Ez da emaitzarik aurkitu"
+messages.si: "Bai"
+messages.no: "Ez"

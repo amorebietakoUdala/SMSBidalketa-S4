@@ -26,13 +26,6 @@ class Contact
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=50, nullable=true, unique=false)
-     */
-    private $username;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="telephone", type="string", length=13, unique=true, nullable=false)
      * @Assert\Regex("/^(71|72|73|74)\d{7}+$|^6\d{8}+$/")
      */
@@ -60,20 +53,6 @@ class Contact
     private $surname2;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="company", type="string", length=255, nullable=true)
-     */
-    private $company;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="department", type="string", length=255)
-     */
-    private $department;
-
-    /**
      * Labels for the contacts.
      *
      * @ORM\ManyToMany(targetEntity="Label", inversedBy="contacts", cascade={"persist"})
@@ -96,30 +75,6 @@ class Contact
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set username.
-     *
-     * @param string $username
-     *
-     * @return Contact
-     */
-    public function setUsername($username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get username.
-     *
-     * @return string
-     */
-    public function getUsername(): ?string
-    {
-        return $this->username;
     }
 
     /**
@@ -147,7 +102,7 @@ class Contact
     }
 
     /**
-     * Set nombre.
+     * Set name.
      *
      * @param string $name
      *
@@ -219,54 +174,6 @@ class Contact
     }
 
     /**
-     * Set company.
-     *
-     * @param string $company
-     *
-     * @return string
-     */
-    public function setCompany($company): self
-    {
-        $this->company = $company;
-
-        return $this;
-    }
-
-    /**
-     * Get company.
-     *
-     * @return string
-     */
-    public function getCompany(): ?string
-    {
-        return $this->company;
-    }
-
-    /**
-     * Set department.
-     *
-     * @param string $department
-     *
-     * @return Contact
-     */
-    public function setDepartment($department): self
-    {
-        $this->department = $department;
-
-        return $this;
-    }
-
-    /**
-     * Get department.
-     *
-     * @return string
-     */
-    public function getDepartment(): ?string
-    {
-        return $this->department;
-    }
-
-    /**
      * Set labels.
      *
      * @param array $labels
@@ -334,12 +241,9 @@ class Contact
     {
         return [
             'id' => $this->id,
-            'username' => $this->username,
             'name' => $this->name,
             'surname1' => $this->surname1,
             'surname2' => $this->surname2,
-            'company' => $this->company,
-            'department' => $this->department,
             'labels' => $this->labels->toArray(),
         ];
     }

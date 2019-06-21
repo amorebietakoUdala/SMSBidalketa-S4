@@ -32,14 +32,9 @@ class SendingController extends AbstractController
             /* @var $data SendingDTO */
             $data = $form->getData();
             $selected = json_decode($data->getSelected());
-            $telephones = [];
-            $ids = [];
-            foreach ($selected as $jsonContact) {
-                $contactDTO = new ContactDTO();
-                $contactDTO->extractFromJson($jsonContact);
-                $telephones[] = $contactDTO->getTelephone();
-                $ids[] = $contactDTO->getId();
-            }
+            $idsAndTelephones = $this->__extractIdsAndTelephones($selected);
+            $telephones = $idsAndTelephones['telephones'];
+            $ids = $idsAndTelephones['ids'];
 
             if (0 === count($telephones)) {
                 $this->addFlash('error', 'No receivers found');
@@ -47,9 +42,6 @@ class SendingController extends AbstractController
                 return $this->render('sending/list.html.twig', [
                     'form' => $form->createView(),
                     'contacts' => [],
-                    'messages_sent' => null,
-                    'credits_needed' => null,
-                    'credits_remaining' => null,
                 ]);
             }
 
@@ -82,8 +74,6 @@ class SendingController extends AbstractController
                 'form' => $form->createView(),
                 'contacts' => [],
                 'messages_sent' => count($telephones),
-                'credits_needed' => count($telephones),
-                'credits_remaining' => $credit,
             ]);
         }
 
@@ -117,5 +107,22 @@ class SendingController extends AbstractController
         return $this->render('sending/list.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    private function __extractIdsAndTelephones($selected)
+    {
+        $result = [];
+        $telephones = [];
+        $ids = [];
+        foreach ($selected as $jsonContact) {
+            $contactDTO = new ContactDTO();
+            $contactDTO->extractFromJson($jsonContact);
+            $telephones[] = $contactDTO->getTelephone();
+            $ids[] = $contactDTO->getId();
+        }
+        $result['ids'] = $ids;
+        $result['telephones'] = $telephones;
+
+        return $result;
     }
 }

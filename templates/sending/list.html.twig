@@ -5,17 +5,25 @@
 {% block message %}
     {% for msg in app.flashes('success') %}
 	<div class="alert alert-success margin-top-13">
-	    {{ msg | trans({'%messages_sent%' : messages_sent, 
-						}
-						,"messages", app.request.locale) }}
+		{% if messages_sent is defined %}
+			{{ msg | trans({'%messages_sent%' : messages_sent, 
+							}
+							,"messages", app.request.locale) }}
+		{% else %}
+			{{ msg | trans }}
+		{% endif %}
 	</div>
     {% endfor %}
     {% for msg in app.flashes('error') %}
 	<div class="alert alert-danger margin-top-13">
-	    {{ msg | trans({'%credits_needed%' : credits_needed, 
-						'%credits_remaining%' : credits_remaining,
-						}
-						,"messages", app.request.locale) }}
+		{% if credits_needed is defined  and credits_remaining is defined %}
+			{{ msg | trans({'%credits_needed%' : credits_needed, 
+							'%credits_remaining%' : credits_remaining,
+							}
+							,"messages", app.request.locale) }}
+		{% else %}
+			{{ msg | trans }}
+		{% endif %}
 	</div>
     {% endfor %}
 {% endblock %}
@@ -36,11 +44,8 @@
 		    <tr class="row">
 			<th data-checkbox="true" ></th>
 			<th data-field="id" data-sortable="true">{{"contact.id" | trans | capitalize}}</th>
-			<th data-field="username" data-sortable="true">{{"contact.username" | trans | capitalize}}</th>
 			<th data-field="fullname" data-sortable="true">{{"contact.fullname" | trans | capitalize}}</th>
 			<th data-field="telephone" data-sortable="true">{{"contact.telephone" | trans | capitalize}}</th>
-			<th data-field="company" data-sortable="true">{{"contact.company" | trans | capitalize}}</th>
-			<th data-field="department" data-sortable="true">{{"contact.department" | trans | capitalize}}</th>
 		    </tr>
 		</thead>
 		<tbody>
@@ -48,11 +53,8 @@
 			<tr>
 				<td></td>
 				<td>{{contact.id}}</td>
-				<td>{{contact.username}}</td>
 				<td>{{contact.fullname}}</td>
 			    <td>{{contact.telephone}}</td>
-				<td>{{contact.company}}</td>
-				<td>{{contact.department}}</td>
 			</tr>
 			{% endfor %}
 		</tbody>

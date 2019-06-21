@@ -22,11 +22,8 @@
 		<thead>
 		    <tr class="row">
 			<th data-sortable="true">{{"contact.id" | trans | capitalize}}</th>
-			<th data-sortable="true">{{"contact.username" | trans | capitalize}}</th>
 			<th data-sortable="true">{{"contact.fullname" | trans | capitalize}}</th>
 			<th data-sortable="true">{{"contact.telephone" | trans | capitalize}}</th>
-			<th data-sortable="true">{{"contact.company" | trans | capitalize}}</th>
-			<th data-sortable="true">{{"contact.department" | trans | capitalize}}</th>
 			<th data-sortable="true">{{"contact.labels" | trans | capitalize}}</th>
 			<th data-sortable="true" data-field="options">{{"table.options" | trans | capitalize}}</th>
 		    </tr>
@@ -36,11 +33,8 @@
 			{% for contact in contacts %}
 			<tr>
 			    <td>{{contact.id}}</td>
-				<td>{{contact.username}}</td>
 				<td>{{contact.fullname}}</td>
 			    <td>{{contact.telephone}}</td>
-				<td>{{contact.company}}</td>
-				<td>{{contact.department}}</td>
 				<td>
 					{% if contact.labels|length > 0  %}
 						<ul class="list-group" id="menu">

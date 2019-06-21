@@ -112,6 +112,7 @@ choice.failed: "Error en el envío"
 "Not enough credit. Needed credtis %credits_needed% remaining %credits_remaining%": "No dispone de créditos suficientes. Dispone de %credits_remaining% créditos y necesita %credits_needed%."
 "%messages_sent% messages sended successfully": "%messages_sent% mensajes enviados correctamente"
 "No message entered": "No se ha introducido el mensaje"
+"No receivers found": "No ha seleccionado ningún destinatario"
 "message.error": "Error"
 
 "contact.delete.confirmation": "¿Esta seguro de que desea eliminar este contacto?"

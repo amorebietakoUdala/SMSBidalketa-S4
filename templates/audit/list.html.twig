@@ -31,8 +31,7 @@
 						<th data-sortable="true">{{"audit.contactsCount" | trans | capitalize}}</th>
 						<th data-sortable="true">{{"audit.responseCode" | trans | capitalize}}</th>
 						<th data-sortable="true">{{"audit.message" | trans | capitalize}}</th>
-{#						<th data-sortable="true">{{"audit.response" | trans | capitalize}}</th>
-#}						<th data-sortable="true">{{"audit.user" | trans | capitalize}}</th>
+						<th data-sortable="true">{{"audit.user" | trans | capitalize}}</th>
 						<th data-sortable="true">{{"table.options" | trans | capitalize}}</th>
 					</tr>
 				</thead>
@@ -44,8 +43,7 @@
 						<td>{{audit.contacts | length }}</td>
 						<td>{{audit.responseCode}}</td>
 						<td>{{audit.message}}</td>
-{#						<td>{{audit.response}}</td>
-#}						<td>{{audit.user}}</td>
+						<td>{{audit.user}}</td>
 						<td>
 							<a id="alert{{ loop.index }}" href="#" class="js-fireAlert" 
 								data-title="{{ 'audit.contacts' | trans | capitalize }}" 

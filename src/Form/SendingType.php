@@ -2,9 +2,13 @@
 
 namespace App\Form;
 
+use App\DTO\SendingDTO;
 use App\Entity\Label;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,12 +23,12 @@ class SendingType extends AbstractType
                 'label' => 'contact.labels',
                 'choice_label' => 'name',
             ])
-            ->add('selected', \Symfony\Component\Form\Extension\Core\Type\HiddenType::class)
-            ->add('message', \Symfony\Component\Form\Extension\Core\Type\TextareaType::class, [
+            ->add('selected', HiddenType::class)
+            ->add('message', TextareaType::class, [
                     'attr' => ['maxlength' => 335],
                     'label' => 'sending.message',
             ])
-            ->add('date', \Symfony\Component\Form\Extension\Core\Type\DateTimeType::class, [
+            ->add('date', DateTimeType::class, [
                     'widget' => 'single_text',
                     'label' => 'sending.date',
 //                    ],
@@ -36,9 +40,7 @@ class SendingType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => \App\DTO\SendingDTO::class,
-            'roles' => null,
-            'locale' => null,
+            'data_class' => SendingDTO::class,
         ]);
     }
 }
