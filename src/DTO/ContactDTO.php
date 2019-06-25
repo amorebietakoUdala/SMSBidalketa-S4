@@ -114,10 +114,10 @@ class ContactDTO
 
     public function extractFromArray(array $contactArray)
     {
-        $this->setTelephone($contactArray[0]);
-        $this->setName($contactArray[1]);
-        $this->setSurname1($contactArray[2]);
-        $this->setSurname2($contactArray[3]);
+        $this->setTelephone(mb_convert_encoding($contactArray[0], 'UTF-8'));
+        $this->setName(mb_convert_encoding($contactArray[1], 'UTF-8'));
+        $this->setSurname1(mb_convert_encoding($contactArray[2], 'UTF-8'));
+        $this->setSurname2(mb_convert_encoding($contactArray[3], 'UTF-8'));
     }
 
     public function extract(Contact $contact)

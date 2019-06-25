@@ -111,6 +111,7 @@ choice.failed: "Akatsa bidalketan"
 "No message entered": "Ez da mezu sartu"
 "No receivers found": "Ez da hartzailerik hautatu"
 "message.error": "Error"
+"The csv file has an incorrect number of columns or invalid separator. File csv must have 'telephone;name;surname1;surname2' without headers.": "Fitxategiak ez du behar den egitura edo eremu banatzaile okerra. Fitxategiak hurrengo egitura eduki behar du goibururik gabe\n telefonoa;izena;lehen-abizena;bigarren-abizena"
 
 "contact.delete.confirmation": "Kontaktua ezabatzera zoaz. Ziur al zaude?"
 "label.delete.confirmation": "Ziur al zaude etiketa hau ezabatu nahi duzula?<br/>Etiqueta hau %contactsCount% kontaktan ezarrita dago"

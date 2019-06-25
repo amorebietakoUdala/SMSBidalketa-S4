@@ -33,7 +33,19 @@ class ContactController extends AbstractController
             $contacts_without_repeated = [];
             try {
                 $file = $form['file']->getData();
-                $records = $this->__readRecordsFromFile($file);
+                $separator = $this->__detectSeparator($file);
+                if (null === $separator) {
+                    $this->addFlash('error', 'The csv file has an incorrect number of columns or invalid separator. File csv must have \'telephone;name;surname1;surname2\' without headers.');
+
+                    return $this->render('contact/upload.html.twig', [
+                                    'form' => $form->createView(),
+                                    'message' => null,
+                                    'already_existing_contacts' => null,
+                                    'repeated_contacts' => null,
+                                    'contacts_without_repeated' => null,
+                            ]);
+                }
+                $records = $this->__readRecordsFromFile($file, $separator);
                 $repo = $em->getRepository(Contact::class);
                 foreach ($records as $record) {
                     $contactDTO = new ContactDTO();
@@ -233,10 +245,10 @@ class ContactController extends AbstractController
         return $labels;
     }
 
-    private function __readRecordsFromFile($file)
+    private function __readRecordsFromFile($file, $separator = ';')
     {
         $reader = Reader::createFromPath($file, 'r');
-        $reader->setDelimiter(';');
+        $reader->setDelimiter($separator);
 //                $reader->setHeaderOffset(0);
         $records = $reader->getRecords();
 
@@ -271,5 +283,18 @@ class ContactController extends AbstractController
             }
             $em->persist($contact);
         }
+    }
+
+    private function __detectSeparator($file)
+    {
+        $separators = [';', ',', "\t"];
+        $line = fgets(fopen($file, 'r'));
+        foreach ($separators as $separator) {
+            if (3 === substr_count($line, $separator)) {
+                return $separator;
+            }
+        }
+
+        return null;
     }
 }
