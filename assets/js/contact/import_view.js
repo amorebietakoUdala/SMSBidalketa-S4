@@ -3,8 +3,12 @@ import '../../css/contact/import_view.scss';
 import $ from 'jquery';
 import 'devbridge-autocomplete';
 
+const routes = require('../../../public/js/fos_js_routes.json');
+import Routing from '../../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
+
+
 $(document).ready(function(){
-	console.log('Contacts import!!!');
+	Routing.setRoutingData(routes);
 	$('.js-file').on('change', function(e){
 		e.preventDefault();
 		var fullPath = $('#contact_import_file')[0].value;
@@ -34,7 +38,7 @@ $(document).ready(function(){
 		$(this).before(newForm);
 		$('.js-autocomplete').autocomplete({
 			minChars: 2,
-			serviceUrl: '/smsbidalketa/api/labels',
+			serviceUrl: "/smsbidalketa" + Routing.generate('get_labels'),
 			paramName: "name",
 			transformResult: function(response) {
 				var json_data = JSON.parse(response);

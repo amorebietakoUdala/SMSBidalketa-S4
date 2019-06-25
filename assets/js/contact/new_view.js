@@ -3,7 +3,11 @@ import '../../css/contact/new_view.scss';
 import $ from 'jquery';
 import 'devbridge-autocomplete';
 
+const routes = require('../../../public/js/fos_js_routes.json');
+import Routing from '../../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
+
 $(document).ready(function(){
+	Routing.setRoutingData(routes);
 	var wrapper = $('.js-labels-wrapper');
 	wrapper.on('click','.js-label-remove', function (e) {
 		e.preventDefault();
@@ -21,7 +25,7 @@ $(document).ready(function(){
 		$(this).before(newForm);
 		$('.js-autocomplete').autocomplete({
 			minChars: 2,
-			serviceUrl: '/smsbidalketa/api/labels',
+			serviceUrl: "/smsbidalketa" + Routing.generate('get_labels'),
 			paramName: "name",
 			transformResult: function(response) {
 				var json_data = JSON.parse(response);
