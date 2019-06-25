@@ -21,7 +21,7 @@ $(document).ready(function(){
 		$(this).before(newForm);
 		$('.js-autocomplete').autocomplete({
 			minChars: 2,
-			serviceUrl: '/api/labels',
+			serviceUrl: '/smsbidalketa/api/labels',
 			paramName: "name",
 			transformResult: function(response) {
 				var json_data = JSON.parse(response);

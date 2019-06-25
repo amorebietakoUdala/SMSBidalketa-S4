@@ -2,121 +2,121 @@
   "entrypoints": {
     "label_edit_view": {
       "js": [
-        "/build/runtime.8dca9030.js",
-        "/build/0.2375624d.js",
-        "/build/label_edit_view.9532c092.js"
+        "/smsbidalketa/build/runtime.23ae3a87.js",
+        "/smsbidalketa/build/0.2375624d.js",
+        "/smsbidalketa/build/label_edit_view.9532c092.js"
       ],
       "css": [
-        "/build/label_edit_view.713d09b6.css"
+        "/smsbidalketa/build/label_edit_view.713d09b6.css"
       ]
     },
     "app": {
       "js": [
-        "/build/runtime.8dca9030.js",
-        "/build/0.2375624d.js",
-        "/build/4.32a88445.js",
-        "/build/app.a877c0d1.js"
+        "/smsbidalketa/build/runtime.23ae3a87.js",
+        "/smsbidalketa/build/0.2375624d.js",
+        "/smsbidalketa/build/4.32a88445.js",
+        "/smsbidalketa/build/app.a877c0d1.js"
       ],
       "css": [
-        "/build/app.d2a8e31c.css"
+        "/smsbidalketa/build/app.4ee6a749.css"
       ]
     },
     "contact_list_view": {
       "js": [
-        "/build/runtime.8dca9030.js",
-        "/build/0.2375624d.js",
-        "/build/2.81890b05.js",
-        "/build/contact_list_view.6500d21b.js"
+        "/smsbidalketa/build/runtime.23ae3a87.js",
+        "/smsbidalketa/build/0.2375624d.js",
+        "/smsbidalketa/build/2.81890b05.js",
+        "/smsbidalketa/build/contact_list_view.6500d21b.js"
       ],
       "css": [
-        "/build/contact_list_view.1ec51328.css"
+        "/smsbidalketa/build/contact_list_view.1ec51328.css"
       ]
     },
     "contact_edit_view": {
       "js": [
-        "/build/runtime.8dca9030.js",
-        "/build/0.2375624d.js",
-        "/build/3.e5166edd.js",
-        "/build/contact_edit_view.59c43a4c.js"
+        "/smsbidalketa/build/runtime.23ae3a87.js",
+        "/smsbidalketa/build/0.2375624d.js",
+        "/smsbidalketa/build/3.e5166edd.js",
+        "/smsbidalketa/build/contact_edit_view.59604ab6.js"
       ],
       "css": [
-        "/build/contact_edit_view.f10cc485.css"
+        "/smsbidalketa/build/contact_edit_view.f10cc485.css"
       ]
     },
     "contact_import_view": {
       "js": [
-        "/build/runtime.8dca9030.js",
-        "/build/0.2375624d.js",
-        "/build/3.e5166edd.js",
-        "/build/contact_import_view.b3ed30d5.js"
+        "/smsbidalketa/build/runtime.23ae3a87.js",
+        "/smsbidalketa/build/0.2375624d.js",
+        "/smsbidalketa/build/3.e5166edd.js",
+        "/smsbidalketa/build/contact_import_view.62716dab.js"
       ],
       "css": [
-        "/build/contact_import_view.510a9105.css"
+        "/smsbidalketa/build/contact_import_view.510a9105.css"
       ]
     },
     "label_list_view": {
       "js": [
-        "/build/runtime.8dca9030.js",
-        "/build/0.2375624d.js",
-        "/build/2.81890b05.js",
-        "/build/label_list_view.4e354231.js"
+        "/smsbidalketa/build/runtime.23ae3a87.js",
+        "/smsbidalketa/build/0.2375624d.js",
+        "/smsbidalketa/build/2.81890b05.js",
+        "/smsbidalketa/build/label_list_view.4e354231.js"
       ],
       "css": [
-        "/build/label_list_view.effb6edc.css"
+        "/smsbidalketa/build/label_list_view.effb6edc.css"
       ]
     },
     "contact_new_view": {
       "js": [
-        "/build/runtime.8dca9030.js",
-        "/build/0.2375624d.js",
-        "/build/3.e5166edd.js",
-        "/build/contact_new_view.94c978af.js"
+        "/smsbidalketa/build/runtime.23ae3a87.js",
+        "/smsbidalketa/build/0.2375624d.js",
+        "/smsbidalketa/build/3.e5166edd.js",
+        "/smsbidalketa/build/contact_new_view.7d87064d.js"
       ],
       "css": [
-        "/build/contact_new_view.be4fd355.css"
+        "/smsbidalketa/build/contact_new_view.be4fd355.css"
       ]
     },
     "label_new_view": {
       "js": [
-        "/build/runtime.8dca9030.js",
-        "/build/0.2375624d.js",
-        "/build/label_new_view.e7583c35.js"
+        "/smsbidalketa/build/runtime.23ae3a87.js",
+        "/smsbidalketa/build/0.2375624d.js",
+        "/smsbidalketa/build/label_new_view.e7583c35.js"
       ],
       "css": [
-        "/build/label_new_view.43d93af5.css"
+        "/smsbidalketa/build/label_new_view.43d93af5.css"
       ]
     },
     "sending_view": {
       "js": [
-        "/build/runtime.8dca9030.js",
-        "/build/0.2375624d.js",
-        "/build/2.81890b05.js",
-        "/build/sending_view.a67777ff.js"
+        "/smsbidalketa/build/runtime.23ae3a87.js",
+        "/smsbidalketa/build/0.2375624d.js",
+        "/smsbidalketa/build/2.81890b05.js",
+        "/smsbidalketa/build/sending_view.a67777ff.js"
       ],
       "css": [
-        "/build/sending_view.55b401ba.css"
+        "/smsbidalketa/build/sending_view.55b401ba.css"
       ]
     },
     "history_list_view": {
       "js": [
-        "/build/runtime.8dca9030.js",
-        "/build/0.2375624d.js",
-        "/build/2.81890b05.js",
-        "/build/history_list_view.d4ecd077.js"
+        "/smsbidalketa/build/runtime.23ae3a87.js",
+        "/smsbidalketa/build/0.2375624d.js",
+        "/smsbidalketa/build/2.81890b05.js",
+        "/smsbidalketa/build/history_list_view.d4ecd077.js"
       ],
       "css": [
-        "/build/history_list_view.30652952.css"
+        "/smsbidalketa/build/history_list_view.30652952.css"
       ]
     },
     "audit_list_view": {
       "js": [
-        "/build/runtime.8dca9030.js",
-        "/build/0.2375624d.js",
-        "/build/2.81890b05.js",
-        "/build/audit_list_view.488fec16.js"
+        "/smsbidalketa/build/runtime.23ae3a87.js",
+        "/smsbidalketa/build/0.2375624d.js",
+        "/smsbidalketa/build/2.81890b05.js",
+        "/smsbidalketa/build/audit_list_view.488fec16.js"
       ],
       "css": [
-        "/build/audit_list_view.67dadae7.css"
+        "/smsbidalketa/build/audit_list_view.67dadae7.css"
       ]
     }
   }

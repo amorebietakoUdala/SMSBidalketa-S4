@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "fr3d/ldap-bundle": "^4.0",
+        "friendsofsymfony/jsrouting-bundle": "^2.3",
         "friendsofsymfony/rest-bundle": "^2.5",
         "friendsofsymfony/user-bundle": "2.1",
         "jms/serializer-bundle": "^3.3",
