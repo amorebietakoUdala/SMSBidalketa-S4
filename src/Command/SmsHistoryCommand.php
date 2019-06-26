@@ -68,18 +68,23 @@ class SmsHistoryCommand extends Command
 
         $lastHistory = $this->em->getRepository(History::class)->findOneBy([], ['id' => 'desc'], 1);
         if (null === $lastHistory) {
-            $lastHistory = 0;
+            $lastHistory = null;
         }
         try {
             $api_histories = $this->smsApi->getHistory();
             $firstResult = $api_histories->{'data'}[0];
-            if ($firstResult->{'id'} === $lastHistory->getId()) {
+            if (null === $lastHistory) {
+                $lastId = 0;
+            } else {
+                $lastId = $lastHistory->getId();
+            }
+            if ($firstResult->{'id'} === $lastId) {
                 $output->writeln('<info>No new history records</info>');
 
                 return 0;
             }
             foreach ($api_histories->{'data'} as $record) {
-                if ($record->{'id'} > $lastHistory->getId()) {
+                if ($record->{'id'} > $lastId) {
                     $history = new History($record);
                     $histories[] = $history;
                     $this->em->persist($history);
