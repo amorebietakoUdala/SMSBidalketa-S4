@@ -50,12 +50,6 @@ class SmsHistoryCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln([
-            'Get SMS history from provider',
-            '============',
-            '',
-        ]);
-
         $this->getHistory($output);
     }
 
@@ -71,7 +65,7 @@ class SmsHistoryCommand extends Command
             $lastHistory = null;
         }
         try {
-            $api_histories = $this->smsApi->getHistory();
+            $api_histories = $this->smsApi->getHistory($start, $end);
             $firstResult = $api_histories->{'data'}[0];
             if (null === $lastHistory) {
                 $lastId = 0;
@@ -79,8 +73,6 @@ class SmsHistoryCommand extends Command
                 $lastId = $lastHistory->getId();
             }
             if ($firstResult->{'id'} === $lastId) {
-                $output->writeln('<info>No new history records</info>');
-
                 return 0;
             }
             foreach ($api_histories->{'data'} as $record) {
