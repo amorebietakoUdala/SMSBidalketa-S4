@@ -68,6 +68,7 @@ $(document).ready(function(){
     $('.js-datetimepicker').datetimepicker({
 		format: 'YYYY-MM-DD HH:mm',
 		sideBySide: true,
+		locale: $('html').attr('lang'),
 	});
 //	$('.js-delete').on('click',function(e){
 //		e.preventDefault();
