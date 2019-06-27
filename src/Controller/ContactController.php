@@ -248,6 +248,7 @@ class ContactController extends AbstractController
     private function __readRecordsFromFile($file, $separator = ';')
     {
         $reader = Reader::createFromPath($file, 'r');
+        $reader->addStreamFilter('convert.iconv.ISO-8859-15/UTF-8');
         $reader->setDelimiter($separator);
 //                $reader->setHeaderOffset(0);
         $records = $reader->getRecords();
