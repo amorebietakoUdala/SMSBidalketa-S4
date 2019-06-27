@@ -56,7 +56,7 @@ $(document).ready(function(){
 		striped: true,
 		sortStable: true,
 		sortable: true,
-		locale: $('html').attr('lang'),
+		locale: $('html').attr('lang')+'-'+$('html').attr('lang').toUpperCase(),
 		multipleSelectRow: true,
 	});
 	var $table = $('#taula');

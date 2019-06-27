@@ -29,12 +29,12 @@
   "build/vendors~audit_list_view~history_list_view~sending_view.js": "/smsbidalketa/build/vendors~audit_list_view~history_list_view~sending_view.js",
   "build/vendors~audit_list_view~sending_view.js": "/smsbidalketa/build/vendors~audit_list_view~sending_view.js",
   "build/vendors~contact_edit_view~contact_import_view~contact_new_view.js": "/smsbidalketa/build/vendors~contact_edit_view~contact_import_view~contact_new_view.js",
-  "build/vendors~sending_view.js": "/smsbidalketa/build/vendors~sending_view.js",
   "build/fonts/fontawesome-webfont.eot": "/smsbidalketa/build/fonts/fontawesome-webfont.674f50d2.eot",
   "build/fonts/fontawesome-webfont.woff2": "/smsbidalketa/build/fonts/fontawesome-webfont.af7ae505.woff2",
   "build/fonts/fontawesome-webfont.ttf": "/smsbidalketa/build/fonts/fontawesome-webfont.b06871f2.ttf",
   "build/fonts/fontawesome-webfont.woff": "/smsbidalketa/build/fonts/fontawesome-webfont.fee66e71.woff",
   "build/images/default-avatar.png": "/smsbidalketa/build/images/default-avatar.4c55c05b.png",
   "build/images/fontawesome-webfont.svg": "/smsbidalketa/build/images/fontawesome-webfont.912ec66d.svg",
-  "build/images/logo.jpg": "/smsbidalketa/build/images/logo.9565ffe4.jpg"
+  "build/images/logo.jpg": "/smsbidalketa/build/images/logo.9565ffe4.jpg",
+  "build/vendors~sending_view.js": "/smsbidalketa/build/vendors~sending_view.js"
 }

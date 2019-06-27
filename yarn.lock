@@ -1143,9 +1143,10 @@ bootstrap-sass@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/bootstrap-sass/-/bootstrap-sass-3.4.1.tgz#6843c73b1c258a0ac5cb2cc6f6f5285b664a8e9a"
 
-bootstrap-table@^1.14.2:
+bootstrap-table@1.14.2:
   version "1.14.2"
   resolved "https://registry.yarnpkg.com/bootstrap-table/-/bootstrap-table-1.14.2.tgz#d8f5673de5b35bbdf368488375f5a6f9395b7cdc"
+  integrity sha512-TlB8YnAGg7SNixmwjre3zftOOostSfCF3zGpDUGD7xNsqVI2RwTAM5m9CPjgJe7fKVkid+EcfjEwKafr0kFnbQ==
 
 bootstrap@^3.3:
   version "3.4.1"
