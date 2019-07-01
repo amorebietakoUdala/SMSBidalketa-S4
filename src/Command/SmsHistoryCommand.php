@@ -11,7 +11,6 @@ namespace App\Command;
 use AmorebietakoUdala\SMSServiceBundle\Controller\SmsApi;
 use App\Entity\History;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -86,7 +85,7 @@ class SmsHistoryCommand extends Command
             if ($found) {
                 $this->em->flush();
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $output->writeln('<error>ERROR: '.$e->getMessage().'</error>');
         }
 
