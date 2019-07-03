@@ -131,7 +131,7 @@ class ContactController extends AbstractController
                 ]);
             }
             $labels = $data->getLabels();
-            $labels = $this->__removeLabelDuplicates($labels);
+            $this->__removeCollectionDuplicates($labels, $this->__removeLabelDuplicates($labels));
             $contact = new Contact();
             $data->fill($contact);
             $em->persist($contact);
