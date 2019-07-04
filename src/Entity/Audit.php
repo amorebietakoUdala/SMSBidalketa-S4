@@ -22,7 +22,7 @@ class Audit
     /**
      * @var string
      *
-     * @ORM\Column(name="telephones", type="string", length=10000)
+     * @ORM\Column(name="telephones", type="text")
      */
     private $telephones;
     /**
