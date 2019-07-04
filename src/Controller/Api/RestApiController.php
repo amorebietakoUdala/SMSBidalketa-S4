@@ -48,15 +48,17 @@ class RestApiController extends AbstractFOSRestController
     }
 
     /**
-     * @QueryParam(name="id", description="Id of the Audit to get Contacts from")
+     * @QueryParam(name="id", description="Id of the Audit to get Telephones from")
      */
-    public function getAuditContactsAction(ParamFetcherInterface $paramFetcher): View
+    public function getAuditTelephonesAction(ParamFetcherInterface $paramFetcher): View
     {
         $id = $paramFetcher->get('id');
         $repo = $this->getDoctrine()->getRepository(Audit::class);
         /* @var $audit Audit */
         $audit = $repo->find($id);
+        $telephones = $audit->getTelephones();
+        sort($telephones, SORT_STRING);
 
-        return View::create($audit->getContacts(), Response::HTTP_OK);
+        return View::create($telephones, Response::HTTP_OK);
     }
 }

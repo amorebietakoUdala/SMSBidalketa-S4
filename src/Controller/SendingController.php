@@ -34,6 +34,9 @@ class SendingController extends AbstractController
             $selected = json_decode($data->getSelected());
             $idsAndTelephones = $this->__extractIdsAndTelephones($selected);
             $telephones = $idsAndTelephones['telephones'];
+            if (!empty($data->getTelephone())) {
+                $telephones[] = $data->getTelephone();
+            }
             $ids = $idsAndTelephones['ids'];
 
             if (0 === count($telephones)) {
@@ -44,7 +47,6 @@ class SendingController extends AbstractController
                     'contacts' => [],
                 ]);
             }
-
             $credit = $smsapi->getCredit();
 
             if ($credit < count($telephones)) {
@@ -61,11 +63,7 @@ class SendingController extends AbstractController
 
             $response = $smsapi->sendMessage($telephones, $data->getMessage(), $data->getDate());
             $this->addFlash('success', '%messages_sent% messages sended successfully');
-            $contacts = [];
-            foreach ($ids as $id) {
-                $contacts[] = $em->getRepository(Contact::class)->find($id);
-            }
-            $audit = Audit::createAudit($contacts, $response->{'responseCode'}, $response->{'message'}, $response, $user);
+            $audit = Audit::createAudit($telephones, $response->{'responseCode'}, $response->{'message'}, $response, $user, $data->getTelephone());
             $em->persist($audit);
             $em->flush();
             $form = $this->createForm(SendingType::class, new SendingDTO(), []);

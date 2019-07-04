@@ -28,7 +28,7 @@
 					<tr class="row">
 						<th data-sortable="true">{{"audit.id" | trans | capitalize}}</th>
 						<th data-sortable="true">{{"audit.timestamp" | trans | capitalize}}</th>
-						<th data-sortable="true">{{"audit.contactsCount" | trans | capitalize}}</th>
+						<th data-sortable="true">{{"audit.telephonesCount" | trans | capitalize}}</th>
 						<th data-sortable="true">{{"audit.responseCode" | trans | capitalize}}</th>
 						<th data-sortable="true">{{"audit.message" | trans | capitalize}}</th>
 						<th data-sortable="true">{{"audit.user" | trans | capitalize}}</th>
@@ -40,14 +40,13 @@
 					<tr>
 						<td>{{audit.id}}</td>
 						<td>{{audit.timestamp | date('Y-m-d H:i:s') }}</td>
-						<td>{{audit.contacts | length }}</td>
+						<td>{{audit.telephones | length }}</td>
 						<td>{{audit.responseCode}}</td>
 						<td>{{audit.message}}</td>
 						<td>{{audit.user}}</td>
 						<td>
 							<a id="alert{{ loop.index }}" href="#" class="js-fireAlert" 
-								data-title="{{ 'audit.contacts' | trans | capitalize }}" 
-								data-url="{{ path( "get_audit_contacts", { "id" : audit.id } ) }}">
+								data-url="{{ path( "get_audit_telephones", { "id" : audit.id } ) }}">
 								<i class="fa fa-file-text-o" title="{{ 'contacts.details' | trans | capitalize }}"></i>
 							</a>
 						</td>

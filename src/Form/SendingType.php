@@ -9,14 +9,19 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class SendingType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('telephone', TextType::class, [
+                'constraints' => new Regex('/^(71|72|73|74)\d{7}+$|^6\d{8}+$/'),
+            ])
             ->add('labels', EntityType::class, [
                 'class' => Label::class,
                 'multiple' => 'multiple',

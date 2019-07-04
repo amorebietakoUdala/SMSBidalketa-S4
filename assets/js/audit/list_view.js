@@ -36,19 +36,18 @@ function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
 	});
 }
 
-function createContactListHtml (contacts) {
+function createContactListHtml (telephones) {
 	var html = '<ul class="list-group">';
 	var elements = '';
 	var i;
-	for (i=0; i < contacts.length; i++) {
-		elements += '<li class="list-group-item">'+contacts[i]['telephone']+'</li>';
+	for (i=0; i < telephones.length; i++) {
+		elements += '<li class="list-group-item">'+telephones[i]+'</li>';
 	}
 	return html+elements+'</ul>';
 }
 
 $(document).ready(function(){
 	console.log("Audit list view!!!!");
-    $('#audit_search_contacts').select2();
 	$('#audit_search_user').select2();
 	$('#taula').bootstrapTable({
 		cache : false,

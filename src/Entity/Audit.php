@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,11 +20,11 @@ class Audit
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Contact", cascade={"persist"})
-     * @ORM\OrderBy({"name" = "ASC"})
-     *      )
+     * @var string
+     *
+     * @ORM\Column(name="telephones", type="string", length=10000)
      */
-    private $contacts;
+    private $telephones;
     /**
      * @var DateTime
      *
@@ -56,22 +55,9 @@ class Audit
      */
     private $user;
 
-    public function __construct()
-    {
-        $this->contacts = new ArrayCollection();
-    }
-
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return ArrayCollection|Contact[]
-     */
-    public function getContacts()
-    {
-        return $this->contacts;
     }
 
     public function getTimestamp(): \DateTime
@@ -82,29 +68,6 @@ class Audit
     public function getResponse(): string
     {
         return $this->response;
-    }
-
-    public function setContacts($contacts)
-    {
-        $this->contacts = $contacts;
-
-        return $this;
-    }
-
-    public function addContact(Contact $contact)
-    {
-        if ($this->contacts->contains($contact)) {
-            return;
-        }
-        $this->contacts[] = $contact;
-    }
-
-    public function removeContact(Contact $contact)
-    {
-        if (!$this->contacts->contains($contact)) {
-            return;
-        }
-        $this->contacts->removeElement($contact);
     }
 
     public function setTimestamp(DateTime $timestamp): self
@@ -157,10 +120,22 @@ class Audit
         return $this;
     }
 
-    public static function createAudit(array $contacts, $responseCode, $message, $fullResponse, $user): Audit
+    public function getTelephones()
+    {
+        return json_decode($this->telephones);
+    }
+
+    public function setTelephones($telephones)
+    {
+        $this->telephones = $telephones;
+
+        return $this;
+    }
+
+    public static function createAudit(array $telephones, $responseCode, $message, $fullResponse, $user, $singleTelephone): Audit
     {
         $audit = new self();
-        $audit->setContacts(new ArrayCollection($contacts));
+        $audit->setTelephones(json_encode($telephones));
         $audit->setTimestamp(new DateTime());
         $audit->setResponseCode($responseCode);
         $audit->setMessage($message);

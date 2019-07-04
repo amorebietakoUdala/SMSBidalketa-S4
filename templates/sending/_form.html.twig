@@ -5,6 +5,12 @@
 }) }}
 <div class="form-row align-items-center">
 	<div class="col-lg-2 col-md-2 col-sm-6">
+		<div class="form-group">
+			{{ form_label(form.telephone,'sending.individualTelephone') }}
+			{{ form_widget(form.telephone, { 'attr': { 'id': '', 'class' : 'form-control-sm'} }) }}
+		</div>
+	</div>
+	<div class="col-lg-2 col-md-2 col-sm-6">
 		{{ form_row(form.labels, { 'attr': { 'id': '', 'class' : 'form-control-sm'} }) }}
 	</div>
 	<button id="js-btn-search" type="Submit" class="btn btn-primary ml-1" data-url='{{ path ('sending_search') }}'>{{ "btn.searchRecipients" | trans | capitalize }}</button>

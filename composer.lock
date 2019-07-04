@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "amorebietakoudala/smsservice-bundle",
-            "version": "1.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amorebietakoUdala/SMSServiceBundle.git",
-                "reference": "d24c68dbb511275ee4218cff71dfb1b671d4f9c8"
+                "reference": "84d1396acc81c46a16da86d66b668d91ae5fdc51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amorebietakoUdala/SMSServiceBundle/zipball/d24c68dbb511275ee4218cff71dfb1b671d4f9c8",
-                "reference": "d24c68dbb511275ee4218cff71dfb1b671d4f9c8",
+                "url": "https://api.github.com/repos/amorebietakoUdala/SMSServiceBundle/zipball/84d1396acc81c46a16da86d66b668d91ae5fdc51",
+                "reference": "84d1396acc81c46a16da86d66b668d91ae5fdc51",
                 "shasum": ""
             },
             "require": {
@@ -39,11 +39,11 @@
                     "email": "informatika@amorebieta.eus"
                 }
             ],
-            "description": "A bundle to make send SMS send messages through dynaSMS API",
+            "description": "A bundle to make send SMS send messages through dinaSMS API",
             "keywords": [
                 "Send SMS Dinahosting DinaSMS"
             ],
-            "time": "2019-06-25T11:14:43+00:00"
+            "time": "2019-07-04T07:03:35+00:00"
         },
         {
             "name": "doctrine/annotations",

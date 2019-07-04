@@ -39,6 +39,7 @@ class AuditController extends AbstractController
                 'form' => $form->createView(),
             ]);
         }
+
         $audits = $em->getRepository(Audit::class)->findBy($criteria);
 
         return $this->render('audit/list.html.twig', [

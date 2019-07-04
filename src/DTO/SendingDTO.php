@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class SendingDTO
 {
+    private $telephone;
     private $message;
     private $labels;
     private $selected;
@@ -19,6 +20,18 @@ class SendingDTO
         } else {
             $this->labels = new ArrayCollection();
         }
+    }
+
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+
+        return $this;
     }
 
     public function getMessage()

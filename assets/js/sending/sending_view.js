@@ -82,8 +82,21 @@ $(document).ready(function(){
 			});
 			return;
 		}
+		var telephone = $('#sending_telephone').val();
+		var regExp = /^(71|72|73|74)\d{7}$|^6\d{8}$/gm;
+		if (telephone.length > 0 && !regExp.test(telephone)) {
+			import('sweetalert2').then((Swal) => {
+				Swal.default.fire(
+					error,
+					'El teléfono introducido no es válido',
+					'error'
+				  )
+			});
+			$('#sending_telephone').focus();
+			return;
+		}
 		var selections = $('#taula').bootstrapTable('getSelections');
-		if ( selections.length === 0 ) {
+		if ( selections.length === 0 && telephone.length === 0) {
 			import('sweetalert2').then((Swal) => {
 				Swal.default.fire(
 					error,
@@ -95,7 +108,11 @@ $(document).ready(function(){
 		}
 		var url = e.currentTarget.dataset.url;
 		var confirmation = e.currentTarget.dataset.confirmation;
-		var message = e.currentTarget.dataset.message.replace('%message_count%',selections.length);
+		if ( telephone.length === 0 ) {
+			var message = e.currentTarget.dataset.message.replace('%message_count%',selections.length);
+		} else {
+			var message = e.currentTarget.dataset.message.replace('%message_count%',selections.length + 1);
+		}
 		var confirm = e.currentTarget.dataset.confirm;
 		var cancel = e.currentTarget.dataset.cancel;
 		fireAlert(confirmation,message,confirm,cancel,url);

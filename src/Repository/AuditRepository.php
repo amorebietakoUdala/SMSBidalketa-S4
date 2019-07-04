@@ -15,8 +15,7 @@ class AuditRepository extends ServiceEntityRepository
     public function findByTimestamp(array $criteria = null)
     {
         $criteria = $this->__remove_blank_filters($criteria);
-        $qb = $this->createQueryBuilder('a')
-            ->innerJoin('a.contacts', 'c');
+        $qb = $this->createQueryBuilder('a');
         if (array_key_exists('fromDate', $criteria) && null !== $criteria['fromDate']) {
             $qb->andWhere('a.timestamp >= :fromDate');
             $qb->setParameter('fromDate', \DateTime::createFromFormat('Y-m-d H:i', $criteria['fromDate']));
@@ -31,14 +30,9 @@ class AuditRepository extends ServiceEntityRepository
         $criteriaEqual = $this->__filterCriteria($criteria, $criteriaEqualFields);
         $qb = $this->__addEqualCriteria($qb, $criteriaEqual);
 
-        $criteriaLikeFields = [];
+        $criteriaLikeFields = ['telephones'];
         $criteriaLike = $this->__filterCriteria($criteria, $criteriaLikeFields);
         $qb = $this->__addLikeCriteria($qb, $criteriaLike);
-
-        $criteriaInFields = ['contacts'];
-        $criteriaIn = $this->__filterCriteria($criteria, $criteriaInFields);
-        $qb = $this->__addContactsCriteria($qb, $criteriaIn);
-
         $result = $qb->getQuery()->getResult();
 
         return $result;
@@ -62,18 +56,6 @@ class AuditRepository extends ServiceEntityRepository
             foreach ($criteriaLike as $field => $value) {
                 $qb->andWhere('a.'.$field.' LIKE :'.$field)
                         ->setParameter($field, '%'.$value.'%');
-            }
-        }
-
-        return $qb;
-    }
-
-    private function __addContactsCriteria($qb, array $criteriaIn)
-    {
-        if (count($criteriaIn['contacts']) > 0) {
-            foreach ($criteriaIn as $field => $value) {
-                $qb->andWhere('c IN (:'.$field.')')
-                        ->setParameter($field, $value);
             }
         }
 

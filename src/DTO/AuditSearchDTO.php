@@ -2,13 +2,12 @@
 
 namespace App\DTO;
 
-use App\Entity\Contact;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class AuditSearchDTO
 {
-    private $contacts;
+    private $telephones;
     private $fromDate;
     private $toDate;
     private $responseCode;
@@ -21,12 +20,9 @@ class AuditSearchDTO
         $this->contacts = new ArrayCollection();
     }
 
-    /**
-     * @return ArrayCollection|Contact[]
-     */
-    public function getContacts()
+    public function getTelephones()
     {
-        return $this->contacts;
+        return $this->telephones;
     }
 
     public function getResponse(): ?string
@@ -34,27 +30,11 @@ class AuditSearchDTO
         return $this->response;
     }
 
-    public function setContacts($contacts)
+    public function setTelephones($telephones)
     {
-        $this->contacts = $contacts;
+        $this->telephones = $telephones;
 
         return $this;
-    }
-
-    public function addContact(Contact $contact)
-    {
-        if ($this->contacts->contains($contact)) {
-            return;
-        }
-        $this->contacts[] = $contact;
-    }
-
-    public function removeContact(Contact $contact)
-    {
-        if (!$this->contacts->contains($contact)) {
-            return;
-        }
-        $this->contacts->removeElement($contact);
     }
 
     public function setResponse($response): self
@@ -126,7 +106,7 @@ class AuditSearchDTO
 
     public function toArray()
     {
-        $auditArray['contacts'] = $this->contacts;
+        $auditArray['telephones'] = $this->telephones;
         $auditArray['fromDate'] = $this->fromDate;
         $auditArray['toDate'] = $this->toDate;
         $auditArray['responseCode'] = $this->responseCode;
