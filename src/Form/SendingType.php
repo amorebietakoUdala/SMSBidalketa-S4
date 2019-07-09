@@ -30,7 +30,7 @@ class SendingType extends AbstractType
             ])
             ->add('selected', HiddenType::class)
             ->add('message', TextareaType::class, [
-                    'attr' => ['maxlength' => 335],
+                    'attr' => ['maxlength' => 200],
                     'label' => 'sending.message',
             ])
             ->add('date', DateTimeType::class, [
