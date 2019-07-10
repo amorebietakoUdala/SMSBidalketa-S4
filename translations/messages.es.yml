@@ -122,6 +122,8 @@ choice.failed: "Error en el envío"
 "send.confirmation": "Se van a enviar %message_count% mensajes, ¿Esta seguro de que desea enviar los mensajes?<br/>"
 "contact.label.remove.confirmation": "¿Está seguro de que desea eliminar esa etiqueta del contacto?"
 "El teléfono introducido no es válido": "El teléfono introducido no es válido"
+"There was an error processing the request: %error_message%": "Se ha producido un error al enviar el mensaje: %error_message%"
+"Remaining characters": "Caracteres restantes"
 
 messages.confirmacion: "Confirmación"
 messages.results0: "No se han encontrado resultados"

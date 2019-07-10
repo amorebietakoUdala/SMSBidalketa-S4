@@ -67,6 +67,19 @@ $(document).ready(function(){
 			});
 		});
 	});
+	var remaining_characters_text = $('#sending_message_help').text();
+	var remaining_characters = 160;
+	var text_length = 0;
+	$('#sending_message_help').text($('#sending_message_help').text() + ": " + remaining_characters);
+	$('#sending_message').on('keyup', function () {
+		text_length = $('#sending_message').val().length;
+		console.log(text_length);
+		remaining_characters = 160 - text_length;
+		console.log('remaining_characters: ' + (remaining_characters) );
+		$('#sending_message_help').text(remaining_characters_text + ": " + remaining_characters);
+	});
+	
+	
 	$('#js-btn-send').on('click',function(e){
 		e.preventDefault();
 		var message = $('#sending_message').val();

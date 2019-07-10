@@ -22,7 +22,13 @@
 							}
 							,"messages", app.request.locale) }}
 		{% else %}
-			{{ msg | trans }}
+			{% if error_message is defined %}
+				{{ msg | trans({'%error_message%' : error_message
+								},
+								"messages", app.request.locale) }}
+			{% else %}
+				{{ msg | trans }}
+			{% endif %}}
 		{% endif %}
 	</div>
     {% endfor %}

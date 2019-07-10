@@ -80,7 +80,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/",
+			"AmorebietakoUdala\\SMSServiceBundle\\": "lib/SMSServiceBundle/"
         }
     },
     "autoload-dev": {
@@ -116,5 +117,11 @@
             "allow-contrib": false,
             "require": "4.3.1"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url":  "lib/"
+        }
+    ]
 }

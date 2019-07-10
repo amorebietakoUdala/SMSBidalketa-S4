@@ -60,19 +60,28 @@ class SendingController extends AbstractController
                     'credits_remaining' => $credit,
                 ]);
             }
+            try {
+                $response = $smsapi->sendMessage($telephones, $data->getMessage(), $data->getDate());
+                $this->addFlash('success', '%messages_sent% messages sended successfully');
+                $audit = Audit::createAudit($telephones, $response->{'responseCode'}, $response->{'message'}, $response, $user, $data->getTelephone());
+                $em->persist($audit);
+                $em->flush();
+                $form = $this->createForm(SendingType::class, new SendingDTO(), []);
 
-            $response = $smsapi->sendMessage($telephones, $data->getMessage(), $data->getDate());
-            $this->addFlash('success', '%messages_sent% messages sended successfully');
-            $audit = Audit::createAudit($telephones, $response->{'responseCode'}, $response->{'message'}, $response, $user, $data->getTelephone());
-            $em->persist($audit);
-            $em->flush();
-            $form = $this->createForm(SendingType::class, new SendingDTO(), []);
-
-            return $this->render('sending/list.html.twig', [
+                return $this->render('sending/list.html.twig', [
                 'form' => $form->createView(),
                 'contacts' => [],
                 'messages_sent' => count($telephones),
             ]);
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'There was an error processing the request: %error_message%');
+
+                return $this->render('sending/list.html.twig', [
+                    'form' => $form->createView(),
+                    'contacts' => [],
+                    'error_message' => $e->getMessage(),
+                ]);
+            }
         }
 
         return $this->redirectToRoute('sending_search');
