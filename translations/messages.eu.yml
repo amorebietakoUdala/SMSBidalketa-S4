@@ -121,7 +121,7 @@ choice.failed: "Akatsa bidalketan"
 "El teléfono introducido no es válido": "Sartutako telefonoa es da zuzena"
 "There was an error processing the request: %error_message%": "Akats bat gertatu da mezua bidaltzerakoan: %error_message%"
 "Remaining characters": "Geratzen den letra kopurua"
-"Message has invalid characters": "Mezuak karaktere ezegokiak dauzka. Onartutako karaktereak honako hauek dira: @£$¥èéùìòÇØøÅåΔ_ΦΓΛΩΠΨΣΘΞ^{}\\[~]|ÆæßÉ!\"#¤%&'()+,-./:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà0123456789"
+"Message has invalid characters": "Mezuak karaktere ezegokiak dauzka. Onartutako karaktereak honako hauek dira: @£$¥èéùìòÇØøÅåΔ_ΦΓΛΩΠΨΣΘΞ^{}\\[~]|ÆæßÉ!\"#¤%'()+,-./:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà0123456789"
 
 messages.confirmacion: "Konfirmazioa"
 messages.results0: "Ez da emaitzarik aurkitu"
