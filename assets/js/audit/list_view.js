@@ -14,27 +14,10 @@ import 'eonasdan-bootstrap-datetimepicker';
 import 'pc-bootstrap4-datetimepicker';
 import 'select2';
 
-// import Swal from 'sweetalert2';
-
-function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
-	import('sweetalert2').then((Swal) => {
-		Swal.default.fire({
-		  title: title,
-		  html: html,
-		  type: 'warning',
-		  showCancelButton: true,
-		  cancelButtonText: cancelButtonText,
-		  confirmButtonColor: '#3085d6',
-		  cancelButtonColor: '#d33',
-		  confirmButtonText: confirmationButtonText,
-		}).then((result) => {
-		if (result.value) {
-			console.log(url);
-			document.location.href=url;
-		}
-		});
-	});
-}
+// There's a problem with dynamic import's in webpack and IE 11
+// https://github.com/babel/babel/issues/10140
+// Until it's fixed, this import is necesary.
+import Swal from 'sweetalert2';
 
 function createContactListHtml (telephones) {
 	var html = '<ul class="list-group">';
@@ -47,7 +30,6 @@ function createContactListHtml (telephones) {
 }
 
 $(document).ready(function(){
-	console.log("Audit list view!!!!");
 	$('#audit_search_user').select2();
 	$('#taula').bootstrapTable({
 		cache : false,
@@ -81,57 +63,25 @@ $(document).ready(function(){
 		sideBySide: true,
 		locale: $('html').attr('lang'),
 	});
-//	$('.js-delete').on('click',function(e){
-//		e.preventDefault();
-//		var url = e.currentTarget.dataset.url;
-//		var confirmation = e.currentTarget.dataset.confirmation;
-//		var message = e.currentTarget.dataset.message;
-//		var confirm = e.currentTarget.dataset.confirm;
-//		var cancel = e.currentTarget.dataset.cancel;
-//		fireAlert(confirmation,message,confirm,cancel,url);
-//	});
 	$('#taula').on('click','.js-fireAlert',function(e){
 		e.preventDefault();
-		console.log('Contacts Clicked!!!');
-		console.log($(e.currentTarget));
 		var url = e.currentTarget.dataset.url;
 		var title = e.currentTarget.dataset.title;
-		console.log(url);
 		$.ajax({
 			url: url,
 			type: 'GET',
 			dataType: 'json',
 			success: function (json) {
 				var html = createContactListHtml(json);
-				console.log(html);
 				import('sweetalert2').then((Swal) => {
 					Swal.default.fire({
 						title: title,
-						html: html,
-//						type: 'success',
-//						confirmButtonColor: '#3085d6',
-//						confirmButtonText: 'Ok',
+						html: html
 					});
 				});
 			}
 		});
 		
-//		import('sweetalert2').then((Swal) => {
-//			Swal.default.fire({
-//			  title: title,
-//			  html: html,
-//			  type: 'warning',
-//			  showCancelButton: true,
-//			  cancelButtonText: cancelButtonText,
-//			  confirmButtonColor: '#3085d6',
-//			  cancelButtonColor: '#d33',
-//			  confirmButtonText: confirmationButtonText,
-//			}).then((result) => {
-//			if (result.value) {
-//				console.log(url);
-//				document.location.href=url;
-//			}
-//			});
 		});
 	});
 

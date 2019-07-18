@@ -31,7 +31,7 @@ class AuditController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /* @var $data AuditSearchDTO */
             $data = $form->getData();
-            $criteria = $data->toArray();
+            $criteria = array_replace($data->toArray(), $criteria);
             $audits = $em->getRepository(Audit::class)->findByTimestamp($criteria);
 
             return $this->render('audit/list.html.twig', [

@@ -16,7 +16,10 @@ import 'eonasdan-bootstrap-datetimepicker';
 import 'pc-bootstrap4-datetimepicker';
 import '../components/select2';
 
-// import Swal from 'sweetalert2';
+// There's a problem with dynamic import's in webpack and IE 11
+// https://github.com/babel/babel/issues/10140
+// Until it's fixed, this import is necesary.
+import Swal from 'sweetalert2';
 
 function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
 	import('sweetalert2').then((Swal) => {
@@ -73,9 +76,7 @@ $(document).ready(function(){
 	$('#sending_message_help').text($('#sending_message_help').text() + ": " + remaining_characters);
 	$('#sending_message').on('keyup', function () {
 		text_length = $('#sending_message').val().length;
-		console.log(text_length);
 		remaining_characters = 160 - text_length;
-		console.log('remaining_characters: ' + (remaining_characters) );
 		$('#sending_message_help').text(remaining_characters_text + ": " + remaining_characters);
 	});
 	

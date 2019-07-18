@@ -7,7 +7,11 @@ import 'bootstrap-table/dist/locale/bootstrap-table-es-ES';
 import 'bootstrap-table/dist/locale/bootstrap-table-eu-EU';
 import 'tableexport.jquery.plugin/tableExport';
 import 'jquery-ui';
- import Swal from 'sweetalert2';
+
+// There's a problem with dynamic import's in webpack and IE 11
+// https://github.com/babel/babel/issues/10140
+// Until it's fixed, this import is necesary.
+import Swal from 'sweetalert2';
 
 function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
 	import('sweetalert2').then((Swal) => {
@@ -29,7 +33,6 @@ function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
 }
 
 $(document).ready(function(){
-	console.log("Contact list view!!!!");
 	$('#taula').bootstrapTable({
 		cache : false,
 		showExport: true,

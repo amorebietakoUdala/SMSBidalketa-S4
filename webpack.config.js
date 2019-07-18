@@ -54,7 +54,10 @@ Encore
     // enables @babel/preset-env polyfills
     .configureBabel(() => {}, {
         useBuiltIns: 'usage',
-        corejs: 3
+        corejs: 3,
+		includeNodeModules: [
+//			"es.promise", "es.array.iterator"
+		]
     })
 
     // enables Sass/SCSS support
