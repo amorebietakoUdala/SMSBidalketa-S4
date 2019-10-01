@@ -84,7 +84,7 @@ $(document).ready(function(){
 	$('#js-btn-send').on('click',function(e){
 		e.preventDefault();
 		var message = $('#sending_message').val();
-		if ( message.length === 0 ) {
+		if ( message.trim().length === 0 ) {
 			var no_message = e.currentTarget.dataset.no_message;
 			var error = e.currentTarget.dataset.error;
 			import('sweetalert2').then((Swal) => {
