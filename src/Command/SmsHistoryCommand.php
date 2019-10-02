@@ -56,7 +56,7 @@ class SmsHistoryCommand extends Command
     {
         $histories = [];
         $start = 0;
-        $end = 200;
+        $end = 5000;
         $found = false;
 
         $lastHistory = $this->em->getRepository(History::class)->findOneBy([], ['id' => 'desc'], 1);
