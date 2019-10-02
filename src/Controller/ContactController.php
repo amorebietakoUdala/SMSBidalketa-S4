@@ -57,7 +57,6 @@ class ContactController extends AbstractController
                         $contact = new Contact();
                         $contactDTO->fill($contact);
                         if (!preg_match("/^(71|72|73|74)\d{7}+$|^6\d{8}+$/", $contactDTO->getTelephone())) {
-                            dump($contact);
                             $invalid_contacts[] = $contact;
                             continue;
                         }
