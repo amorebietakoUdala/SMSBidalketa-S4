@@ -9,7 +9,6 @@
     "node-sass": "^4.12.0",
     "postcss-loader": "3.0.0",
     "sass-loader": "^7.1.0",
-    "webpack": "^4.32.2",
     "webpack-dev-server": "^3.4.1",
     "webpack-notifier": "1.6.0"
   },
