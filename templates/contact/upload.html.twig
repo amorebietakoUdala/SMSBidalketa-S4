@@ -31,6 +31,17 @@
 			{% if contacts_without_repeated is defined and (contacts_without_repeated | length) > 0 %}
 					<li class="list-group-item">{{ "Number of unrepeated contacts" | trans }}: {{ contacts_without_repeated | length }}</li>
 			{% endif %}
+			{% if invalid_contacts is defined and (invalid_contacts| length) > 0 %}
+				<div class="alert alert-warning">
+					{{ "These contacts has not been loaded" | trans }}<br/>
+					{{ "Invalid contacts" | trans }}: {{ invalid_contacts | length }}
+					<ul class="list-group mt-1">
+						{% for invalid in invalid_contacts %}
+							<li class="list-group-item list-group-item-warning col-lg-3">{{ invalid.telephone }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
 		</ul>
 	{% endif %}
 {% endblock %}

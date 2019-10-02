@@ -30,6 +30,7 @@ class ContactController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $already_existing_contacts = [];
             $repeated_contacts = [];
+            $invalid_contacts = [];
             $contacts_without_repeated = [];
             try {
                 $file = $form['file']->getData();
@@ -51,10 +52,15 @@ class ContactController extends AbstractController
                     $contactDTO = new ContactDTO();
                     $contactDTO->extractFromArray($record);
                     $contact = $repo->findOneBy(['telephone' => $contactDTO->getTelephone()]);
-                    if (null === $contact) {
+                    if (null == $contact) {
                         /* Telephone not found */
                         $contact = new Contact();
                         $contactDTO->fill($contact);
+                        if (!preg_match("/^(71|72|73|74)\d{7}+$|^6\d{8}+$/", $contactDTO->getTelephone())) {
+                            dump($contact);
+                            $invalid_contacts[] = $contact;
+                            continue;
+                        }
                     } else {
                         $already_existing_contacts[] = $contact;
                     }
@@ -87,6 +93,7 @@ class ContactController extends AbstractController
                 'already_existing_contacts' => $already_existing_contacts,
                 'repeated_contacts' => $repeated_contacts,
                 'contacts_without_repeated' => $contacts_without_repeated,
+                'invalid_contacts' => $invalid_contacts,
         ]);
         }
 

@@ -4,6 +4,9 @@
 }) }}
     <div class="form-row align-items-center mb-1"> 
 		<div class="col-lg-2 col-md-2 col-sm-6">
+			{{ form_row(form.telephone, { 'attr': { 'id': '', 'class' : 'form-control-sm' } }) }}
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-6">
 			{{ form_row(form.name, { 'attr': { 'id': '', 'class' : 'form-control-sm' } }) }}
 		</div>
 		<div class="col-lg-2 col-md-2 col-sm-6">
@@ -11,9 +14,6 @@
 		</div>
 		<div class="col-lg-2 col-md-2 col-sm-6">
 			{{ form_row(form.surname2, { 'attr': { 'id': '', 'class' : 'form-control-sm' } }) }}
-		</div>
-		<div class="col-lg-2 col-md-2 col-sm-6">
-			{{ form_row(form.telephone, { 'attr': { 'id': '', 'class' : 'form-control-sm' } }) }}
 		</div>
 	</div>
 	<h4 class="">{{ "contact.labels" | trans | capitalize }}</h4>

@@ -27,21 +27,22 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="telephone", type="string", length=13, unique=true, nullable=false)
-     * @Assert\Regex("/^(71|72|73|74)\d{7}+$|^6\d{8}+$/")
+     * @Assert\NotBlank()
+     * @Assert\Regex(pattern="/^(71|72|73|74)\d{7}+$|^6\d{8}+$/",match="true",message="It's not a valid mobile phone")
      */
     private $telephone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="surname1", type="string", length=255)
+     * @ORM\Column(name="surname1", type="string", length=255, nullable=true)
      */
     private $surname1;
 

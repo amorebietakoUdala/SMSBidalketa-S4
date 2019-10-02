@@ -15,17 +15,18 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('telephone', null, [
-                'constraints' => [new NotBlank(),
-                                   new Regex('/^(71|72|73|74)\d{7}+$|^6\d{8}+$/'),
-                    ],
+                'constraints' => [
+                    new NotBlank(),
+                    new Regex('/^(71|72|73|74)\d{7}+$|^6\d{8}+$/'),
+                ],
                 'label' => 'contact.telephone',
             ])
             ->add('name', null, [
-                'constraints' => new NotBlank(),
+                'constraints' => [],
                 'label' => 'contact.name',
             ])
             ->add('surname1', null, [
-                'constraints' => new NotBlank(),
+                'constraints' => [],
                 'label' => 'contact.surname1',
             ])
             ->add('surname2', null, [
