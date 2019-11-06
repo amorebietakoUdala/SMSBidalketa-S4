@@ -11,6 +11,7 @@ use App\Form\SendingType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Psr\Log\LoggerInterface;
 
 /**
  * @Route("/{_locale}")
@@ -20,7 +21,7 @@ class SendingController extends AbstractController
     /**
      * @Route("/sending/send", name="sending_send")
      */
-    public function sendingSendAction(Request $request, SmsApi $smsapi)
+    public function sendingSendAction(Request $request, SmsApi $smsapi, LoggerInterface $logger)
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -37,7 +38,6 @@ class SendingController extends AbstractController
             if (!empty($data->getTelephone())) {
                 $telephones[] = $data->getTelephone();
             }
-            $ids = $idsAndTelephones['ids'];
 
             if (0 === count($telephones)) {
                 $this->addFlash('error', 'No receivers found');
@@ -47,8 +47,16 @@ class SendingController extends AbstractController
                     'contacts' => [],
                 ]);
             }
-            $credit = $smsapi->getCredit();
+            try {
+                $credit = $smsapi->getCredit();
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'An error has ocurred: '.$e->getMessage());
 
+                return $this->render('sending/list.html.twig', [
+                    'form' => $form->createView(),
+                    'contacts' => [],
+                ]);
+            }
             if ($credit < count($telephones)) {
                 $this->addFlash('error', 'Not enough credit. Needed credtis %credits_needed% remaining %credits_remaining%'
                 );
@@ -71,11 +79,21 @@ class SendingController extends AbstractController
             }
 
             try {
-                $response = $smsapi->sendMessage($telephones, $data->getMessage(), $data->getDate());
-                $this->addFlash('success', '%messages_sent% messages sended successfully');
-                $audit = Audit::createAudit($telephones, $response->{'responseCode'}, $response->{'message'}, $response, $user, $data->getTelephone());
+                $audit = Audit::createAudit($telephones, '', '', '', $user, $data->getTelephone());
                 $em->persist($audit);
                 $em->flush();
+                $response = $smsapi->sendMessage($telephones, $data->getMessage(), $data->getDate());
+                $logger->info('API Response: '.$response);
+                if (null !== $response) {
+                    $audit->setMessage($response->{'message'});
+                    $audit->setResponseCode($response->{'responseCode'});
+                    $audit->setResponse($response);
+                    $em->persist($audit);
+                    $em->flush();
+                    $this->addFlash('success', '%messages_sent% messages sended successfully');
+                } else {
+                    $this->addFlash('warning', 'The API has not responded');
+                }
                 $form = $this->createForm(SendingType::class, new SendingDTO(), []);
 
                 return $this->render('sending/list.html.twig', [

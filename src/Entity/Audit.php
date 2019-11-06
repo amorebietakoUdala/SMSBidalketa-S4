@@ -132,7 +132,7 @@ class Audit
         return $this;
     }
 
-    public static function createAudit(array $telephones, $responseCode, $message, $fullResponse, $user, $singleTelephone): Audit
+    public static function createAudit(array $telephones, $responseCode, $message, $fullResponse, $user): Audit
     {
         $audit = new self();
         $audit->setTelephones(json_encode($telephones));

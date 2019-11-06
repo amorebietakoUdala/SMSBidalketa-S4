@@ -14,6 +14,11 @@
 		{% endif %}
 	</div>
     {% endfor %}
+    {% for msg in app.flashes('warning') %}
+	<div class="alert alert-warning margin-top-13">
+		{{ msg | trans }}
+	</div>
+    {% endfor %}
     {% for msg in app.flashes('error') %}
 	<div class="alert alert-danger margin-top-13">
 		{% if credits_needed is defined  and credits_remaining is defined %}
@@ -33,7 +38,6 @@
 	</div>
     {% endfor %}
 {% endblock %}
-
 
 {% block body %}
     <main class="container-fluid">

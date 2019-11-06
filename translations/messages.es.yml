@@ -118,6 +118,7 @@ choice.failed: "Error en el envío"
 "No receivers found": "No ha seleccionado ningún destinatario"
 "message.error": "Error"
 "The csv file has an incorrect number of columns or invalid separator. File csv must have 'telephone;name;surname1;surname2' without headers.": "El fichero csv tiene un número incorrecto de columnas o un separador inválido. El file csv tiene que tener la siguiente estructura sin cabeceras\n teléfono;nombre;apellido1;apellido2"
+"The API has not responded": "El API no ha respondido. No reintente reenviar el mensaje. Contacte con informática para ver si el mensaje se ha enviado correctamente."
 
 "contact.delete.confirmation": "¿Esta seguro de que desea eliminar este contacto?"
 "label.delete.confirmation": "¿Esta seguro de que desea eliminar esta etiqueta?<br/>Esto afectará a %contactsCount% contactos"
