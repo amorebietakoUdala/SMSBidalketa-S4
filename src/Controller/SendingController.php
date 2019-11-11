@@ -83,16 +83,17 @@ class SendingController extends AbstractController
                 $em->persist($audit);
                 $em->flush();
                 $response = $smsapi->sendMessage($telephones, $data->getMessage(), $data->getDate());
-                $logger->info('API Response: '.$response);
                 if (null !== $response) {
                     $audit->setMessage($response->{'message'});
                     $audit->setResponseCode($response->{'responseCode'});
-                    $audit->setResponse($response);
+                    $audit->setResponse(json_encode($response));
+                    $logger->info('API Response: '.json_encode($response));
                     $em->persist($audit);
                     $em->flush();
                     $this->addFlash('success', '%messages_sent% messages sended successfully');
                 } else {
                     $this->addFlash('warning', 'The API has not responded');
+                    $logger->info('API Response: The API has not responded');
                 }
                 $form = $this->createForm(SendingType::class, new SendingDTO(), []);
 
