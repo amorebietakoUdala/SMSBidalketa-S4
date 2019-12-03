@@ -8,8 +8,8 @@
 
 namespace App\Command;
 
-use AmorebietakoUdala\SMSServiceBundle\Controller\SmsApi;
 use App\Entity\History;
+use AmorebietakoUdala\SMSServiceBundle\Providers\SmsDinaHostingApi;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,14 +20,14 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author ibilbao
  */
-class SmsHistoryCommand extends Command
+class DinahostingSmsHistoryCommand extends Command
 {
     protected static $defaultName = 'app:sms-history';
 
     private $em;
     private $smsApi;
 
-    public function __construct(EntityManagerInterface $em, SmsApi $smsApi)
+    public function __construct(EntityManagerInterface $em, SmsDinaHostingApi $smsApi)
     {
         $this->em = $em;
         $this->smsApi = $smsApi;

@@ -1,7 +1,14 @@
-## YAML Template.
----
 sms_service:
-    username: '%env(SMS_USERNAME)%'
-    password: '%env(SMS_PASSWORD)%'
-    account: '%env(SMS_ACCOUNT)%'
+    provider: '%env(SMS_PROVIDER)%' # Acumbamail o Dinahosting
     test: '%env(bool:SMS_TEST)%'
+    providers:
+        dinahosting: 
+            username: '%env(SMS_USERNAME)%'
+            password: '%env(SMS_PASSWORD)%'
+            account: '%env(SMS_ACCOUNT)%'
+        acumbamail:
+            authToken: '%env(SMS_ACUMBAMAIL_AUTHTOKEN)%'
+            version: 1
+            timeout: 10.0
+            sender: 'Amorebieta-Etxanoko Udala'
+            countryCode: '34'

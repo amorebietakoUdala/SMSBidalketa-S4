@@ -46,7 +46,7 @@ class Audit
     /**
      * @var string
      *
-     * @ORM\Column(name="response", type="string", length=1000)
+     * @ORM\Column(name="response", type="text")
      */
     private $response;
 

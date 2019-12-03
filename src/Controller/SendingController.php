@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
-use AmorebietakoUdala\SMSServiceBundle\Controller\SmsApi;
 use App\DTO\ContactDTO;
 use App\DTO\SendingDTO;
 use App\Entity\Audit;
 use App\Entity\Contact;
 use App\Form\SendingType;
+use AmorebietakoUdala\SMSServiceBundle\Services\SmsServiceApi;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,7 +21,7 @@ class SendingController extends AbstractController
     /**
      * @Route("/sending/send", name="sending_send")
      */
-    public function sendingSendAction(Request $request, SmsApi $smsapi, LoggerInterface $logger)
+    public function sendingSendAction(Request $request, SmsServiceApi $smsapi, LoggerInterface $logger)
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -47,6 +47,15 @@ class SendingController extends AbstractController
                     'contacts' => [],
                 ]);
             }
+
+            if ($this->__checkEmptyTelephones($telephones)) {
+                $this->addFlash('error', 'There are empty telephones');
+
+                return $this->render('sending/list.html.twig', [
+                    'form' => $form->createView(),
+                    'contacts' => [],
+                ]);
+            }
             try {
                 $credit = $smsapi->getCredit();
             } catch (\Exception $e) {
@@ -58,8 +67,7 @@ class SendingController extends AbstractController
                 ]);
             }
             if ($credit < count($telephones)) {
-                $this->addFlash('error', 'Not enough credit. Needed credtis %credits_needed% remaining %credits_remaining%'
-                );
+                $this->addFlash('error', 'Not enough credit. Needed credtis %credits_needed% remaining %credits_remaining%');
 
                 return $this->render('sending/list.html.twig', [
                     'form' => $form->createView(),
@@ -84,8 +92,8 @@ class SendingController extends AbstractController
                 $em->flush();
                 $response = $smsapi->sendMessage($telephones, $data->getMessage(), $data->getDate());
                 if (null !== $response) {
-                    $audit->setMessage($response->{'message'});
-                    $audit->setResponseCode($response->{'responseCode'});
+                    $audit->setMessage($response['message']);
+                    $audit->setResponseCode($response['responseCode']);
                     $audit->setResponse(json_encode($response));
                     $logger->info('API Response: '.json_encode($response));
                     $em->persist($audit);
@@ -296,5 +304,17 @@ class SendingController extends AbstractController
         }
 
         return $out;
+    }
+
+    private function __checkEmptyTelephones(array $telephones)
+    {
+        $emptys = false;
+        foreach ($telephones as $telephone) {
+            if (empty($telephone)) {
+                $emptys = true;
+            }
+        }
+
+        return $emptys;
     }
 }

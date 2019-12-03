@@ -114,6 +114,15 @@
     "friendsofsymfony/user-bundle": {
         "version": "v2.1.0"
     },
+    "guzzlehttp/guzzle": {
+        "version": "6.4.1"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.6.1"
+    },
     "hoa/compiler": {
         "version": "3.17.08.08"
     },
@@ -206,8 +215,14 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/log": {
         "version": "1.1.0"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
