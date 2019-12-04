@@ -14,9 +14,25 @@ class History
 {
     /**
      * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(name="id", type="integer")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="provider", type="string", length=20, nullable=true)
+     */
+    private $provider;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="providerId", type="bigint", length=50, nullable=true)
+     */
+    private $providerId;
+
     /**
      * @var DateTime
      *
@@ -60,10 +76,14 @@ class History
      */
     private $esUnicode;
 
-    public function __construct($history = null)
+    public function __construct($history = null, $provider = null)
     {
         if ($history) {
-            $this->extractFromJson($history);
+            if (is_array($history)) {
+                $this->__extractFromArray($history, $provider);
+            } else {
+                $this->__extractFromJson($history, $provider);
+            }
         }
     }
 
@@ -163,16 +183,85 @@ class History
         return $this;
     }
 
-    private function extractFromJson($json)
+    public function getProvider()
     {
-        $this->setId($json->{'id'});
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', $json->{'date'});
-        $this->setDate($date);
-        $this->setSenderAccount($json->{'from'});
-        $this->setRctpNameNumber($json->{'rctp_name_number'});
-        $this->setText($json->{'text'});
-        $this->setIp($json->{'ip'});
-        $this->setStatus($json->{'status'});
-        $this->setEsUnicode($json->{'es_unicode'});
+        return $this->provider;
+    }
+
+    public function getProviderId()
+    {
+        return $this->providerId;
+    }
+
+    public function setProvider($provider)
+    {
+        $this->provider = $provider;
+
+        return $this;
+    }
+
+    public function setProviderId($providerId)
+    {
+        $this->providerId = $providerId;
+
+        return $this;
+    }
+
+    private function __extractFromJson($json, $provider)
+    {
+        if ('Dinahosting' === $provider) {
+            $this->setProviderId($json->{'id'});
+            $date = \DateTime::createFromFormat('Y-m-d H:i:s', $json->{'date'});
+            $this->setDate($date);
+            $this->setSenderAccount($json->{'from'});
+            $this->setRctpNameNumber($json->{'rctp_name_number'});
+            $this->setText($json->{'text'});
+            $this->setIp($json->{'ip'});
+            $this->setStatus($json->{'status'});
+            $this->setEsUnicode($json->{'es_unicode'});
+        }
+        if ('Acumbamail' === $provider) {
+            $this->setProviderId($json->{'sms_id'});
+            $date = \DateTime::createFromFormat('Y-m-d H:i:s', $json->{'sent_at'});
+            $this->setDate($date);
+            $this->setSenderAccount($json->{'sender'});
+            $this->setRctpNameNumber($json->{'phone'});
+            $this->setText($json->{'sms_content'});
+            if ('DELIVERED' === $json->{'status'}) {
+                $this->setStatus('SENT');
+            } else {
+                $this->setStatus($json->{'status'});
+            }
+        }
+        $this->setProvider($provider);
+    }
+
+    private function __extractFromArray($array, $provider)
+    {
+        if ('Dinahosting' === $provider) {
+            $this->setProviderId($array['id']);
+            $date = \DateTime::createFromFormat('Y-m-d H:i:s', $array['date']);
+            $this->setDate($date);
+            $this->setSenderAccount($array['from']);
+            $this->setRctpNameNumber($array['rctp_name_number']);
+            $this->setText($array['text']);
+            $this->setIp($array['ip']);
+            $this->setStatus($array['status']);
+            $this->setEsUnicode($array['es_unicode']);
+        }
+        if ('Acumbamail' === $provider) {
+            $this->setProviderId($array['sms_id']);
+            $date = \DateTime::createFromFormat('Y-m-d H:i:s', $array['sent_at']);
+            $this->setDate($date);
+            $this->setSenderAccount($array['sender']);
+            $this->setRctpNameNumber($array['phone']);
+            $this->setText($array['sms_content']);
+            if ('DELIVERED' === $array['status']) {
+                $this->setStatus('SENT');
+            } else {
+                $this->setStatus($array['status']);
+            }
+        }
+        $this->setProvider($provider);
     }
 }

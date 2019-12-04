@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use AmorebietakoUdala\SMSServiceBundle\Controller\SmsApi;
 use App\DTO\HistorySearchDTO;
 use App\Entity\History;
 use App\Form\HistorySearchType;
@@ -18,7 +17,7 @@ class HistoryController extends AbstractController
     /**
      * @Route("/history", name="history_list")
      */
-    public function listAction(Request $request, SmsApi $smsapi)
+    public function listAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
