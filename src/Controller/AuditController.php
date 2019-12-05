@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use AmorebietakoUdala\SMSServiceBundle\Controller\SmsApi;
 use App\DTO\AuditSearchDTO;
 use App\Entity\Audit;
 use App\Form\AuditSearchType;
@@ -19,7 +18,7 @@ class AuditController extends AbstractController
     /**
      * @Route("/audit", name="audit_list")
      */
-    public function listAction(Request $request, SmsApi $smsapi, AuthorizationCheckerInterface $authChecker)
+    public function listAction(Request $request, AuthorizationCheckerInterface $authChecker)
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(AuditSearchType::class, new AuditSearchDTO());
@@ -40,7 +39,7 @@ class AuditController extends AbstractController
             ]);
         }
 
-        $audits = $em->getRepository(Audit::class)->findBy($criteria);
+        $audits = $em->getRepository(Audit::class)->findBy($criteria, ['timestamp' => 'DESC']);
 
         return $this->render('audit/list.html.twig', [
             'audits' => $audits,

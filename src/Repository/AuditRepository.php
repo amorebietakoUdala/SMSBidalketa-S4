@@ -12,7 +12,7 @@ class AuditRepository extends ServiceEntityRepository
         parent::__construct($registry, \App\Entity\Audit::class);
     }
 
-    public function findByTimestamp(array $criteria = null)
+    public function findByTimestamp(array $criteria = null, array $order = null)
     {
         $criteria = $this->__remove_blank_filters($criteria);
         $qb = $this->createQueryBuilder('a');
@@ -33,6 +33,11 @@ class AuditRepository extends ServiceEntityRepository
         $criteriaLikeFields = ['telephones'];
         $criteriaLike = $this->__filterCriteria($criteria, $criteriaLikeFields);
         $qb = $this->__addLikeCriteria($qb, $criteriaLike);
+        if (null === $order) {
+            $qb->orderBy('a.timestamp', 'DESC');
+        } else {
+            $qb->orderBy(array_key_first($order), array_value[array_key_first($order)]);
+        }
         $result = $qb->getQuery()->getResult();
 
         return $result;

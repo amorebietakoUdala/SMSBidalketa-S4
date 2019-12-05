@@ -69,7 +69,7 @@ class AcumbamailSmsHistoryCommand extends Command
             $end_date = new \DateTime($input->getArgument('end_date'));
         }
         $found = false;
-        /** @var App\Entity\History */
+        /* @var $lastHistory History */
         $lastHistory = $this->em->getRepository(History::class)->findOneBy(
             ['provider' => $this->provider], ['providerId' => 'desc'], 1);
         if (null === $lastHistory) {

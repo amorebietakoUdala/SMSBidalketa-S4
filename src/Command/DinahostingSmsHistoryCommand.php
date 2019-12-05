@@ -76,15 +76,8 @@ class DinahostingSmsHistoryCommand extends Command
             if ($firstResult['id'] === $lastId) {
                 return 0;
             }
-            $output->writeln('LastId: '.$lastId);
             foreach ($api_histories['data'] as $record) {
-                $output->writeln('Ids: '.$record['id']);
-            }
-            die;
-            foreach ($api_histories['data'] as $record) {
-                $output->writeln('NOT Added Id: '.$record['id']);
                 if ($record['id'] > $lastId) {
-                    $output->writeln('Added Id: '.$record['id']);
                     $history = new History($record, $this->provider);
                     $histories[] = $history;
                     $this->em->persist($history);

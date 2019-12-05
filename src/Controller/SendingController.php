@@ -86,10 +86,8 @@ class SendingController extends AbstractController
                 ]);
             }
 
+            $audit = Audit::createAudit($telephones, '', '', '', $user, $data->getTelephone());
             try {
-                $audit = Audit::createAudit($telephones, '', '', '', $user, $data->getTelephone());
-                $em->persist($audit);
-                $em->flush();
                 $response = $smsapi->sendMessage($telephones, $data->getMessage(), $data->getDate());
                 if (null !== $response) {
                     $audit->setMessage($response['message']);
@@ -112,6 +110,8 @@ class SendingController extends AbstractController
             ]);
             } catch (\Exception $e) {
                 $this->addFlash('error', 'There was an error processing the request: %error_message%');
+                $em->persist($audit);
+                $em->flush();
 
                 return $this->render('sending/list.html.twig', [
                     'form' => $form->createView(),

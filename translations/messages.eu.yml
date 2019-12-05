@@ -64,6 +64,7 @@ history.text: "Testua"
 history.ip: "IP"
 history.status: "Egoera"
 history.esUnicode: "Unicode"
+history.provider: "Hornitzailea"
 
 audit.id: "Id"
 audit.timestamp: "Data"
@@ -90,6 +91,9 @@ sending.individualTelephone: "Telefono soltea"
 choice.blank: ""
 choice.sent: "Bidalia"
 choice.failed: "Akatsa bidalketan"
+
+choice.acumbamail: "Acubamail"
+choice.dinahosting: "Dinahosting"
 
 ########################################################
 # Mensajes
@@ -125,6 +129,7 @@ choice.failed: "Akatsa bidalketan"
 "There was an error processing the request: %error_message%": "Akats bat gertatu da mezua bidaltzerakoan: %error_message%"
 "Remaining characters": "Geratzen den letra kopurua"
 "Message has invalid characters": "Mezuak karaktere ezegokiak dauzka. Onartutako karaktereak honako hauek dira: @£$¥èéùìòÇØøÅåΔ_ΦΓΛΩΠΨΣΘΞ^{}\\[~]|ÆæßÉ!\"#¤%'()+,-./:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà0123456789"
+"Max results reached: %maxLimit%": "Emaitza kopurua maximora heldu da: %maxLimit%. Bilaketa zehaztu"
 
 messages.confirmacion: "Konfirmazioa"
 messages.results0: "Ez da emaitzarik aurkitu"

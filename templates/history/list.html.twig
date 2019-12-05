@@ -13,6 +13,11 @@
 	    {{ msg | trans}}
 	</div>
     {% endfor %}
+	{% for msg in app.session.flashBag.get('warning') %}
+	<div class="alert alert-warning margin-top-13">
+		{{ msg | trans({'%maxLimit%' : maxLimit},"messages", app.request.locale) }}
+	</div>
+	{% endfor %}
 {% endblock %}
 
 {% block body %}
@@ -29,6 +34,9 @@
 						<th data-sortable="true">{{"history.id" | trans | capitalize}}</th>
 						<th data-sortable="true">{{"history.date" | trans | capitalize}}</th>
 						<th data-sortable="true">{{"history.rctpNameNumber" | trans | capitalize}}</th>
+						{% if is_granted('ROLE_ADMIN') %}
+							<th data-sortable="true">{{"history.provider" | trans | capitalize}}</th>
+						{% endif %}
 						<th data-sortable="true">{{"history.text" | trans | capitalize}}</th>
 						<th data-sortable="true">{{"history.status" | trans | capitalize}}</th>
 					</tr>
@@ -39,6 +47,9 @@
 						<td>{{history.id}}</td>
 						<td>{{history.date | date('Y-m-d H:i:s') }}</td>
 						<td>{{history.rctpNameNumber}}</td>
+						{% if is_granted('ROLE_ADMIN') %}
+						<td>{{history.provider}}&nbsp;({{history.providerId}})</td>
+						{% endif %}
 						<td>{{history.text}}</td>
 						<td>{{history.status}}</td>
 					</tr>

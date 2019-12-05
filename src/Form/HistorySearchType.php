@@ -24,6 +24,14 @@ class HistorySearchType extends AbstractType
             ->add('text', null, [
                 'label' => 'history.text',
             ])
+            ->add('provider', ChoiceType::class, [
+                'label' => 'history.provider',
+                'choices' => [
+                    'choice.blank' => null,
+                    'choice.acumbamail' => 'Acumbamail',
+                    'choice.dinahosting' => 'Dinahosting',
+                ],
+            ])
             ->add('status', ChoiceType::class, [
                 'label' => 'history.status',
                 'choices' => [

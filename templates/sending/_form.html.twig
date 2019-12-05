@@ -21,9 +21,12 @@
 	</div>
 </div>
 <div class="form-row align-items-center">
-	<div class="col-lg-2 col-md-2 col-sm-6">
+
+{# Acumbamail provider doesn't support scheduling so we remove the field #}	
+{#	<div class="col-lg-2 col-md-2 col-sm-6">
 		{{ form_row(form.date, { 'attr': { 'id': '', 'class' : 'js-datetimepicker form-control-sm'} }) }}
 	</div>
+#}	
 	<button id="js-btn-send" type="button" class="btn btn-primary ml-1" 
 		data-confirmation="{{ "messages.confirmacion" | trans | capitalize }}"
 		data-message="{{ "send.confirmation" | trans }}"

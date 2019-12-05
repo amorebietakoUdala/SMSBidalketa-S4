@@ -9,6 +9,8 @@ class HistorySearchDTO
     private $rctpNameNumber;
     private $text;
     private $status;
+    private $provider;
+    private $providerId;
 
     public function getText(): ?string
     {
@@ -70,6 +72,30 @@ class HistorySearchDTO
         return $this;
     }
 
+    public function getProvider()
+    {
+        return $this->provider;
+    }
+
+    public function getProviderId()
+    {
+        return $this->providerId;
+    }
+
+    public function setProvider($provider)
+    {
+        $this->provider = $provider;
+
+        return $this;
+    }
+
+    public function setProviderId($providerId)
+    {
+        $this->providerId = $providerId;
+
+        return $this;
+    }
+
     public function toArray()
     {
         $historyArray['fromDate'] = $this->fromDate;
@@ -77,6 +103,8 @@ class HistorySearchDTO
         $historyArray['rctpNameNumber'] = $this->rctpNameNumber;
         $historyArray['text'] = $this->text;
         $historyArray['status'] = $this->status;
+        $historyArray['provider'] = $this->provider;
+        $historyArray['providerId'] = $this->providerId;
 
         return $historyArray;
     }

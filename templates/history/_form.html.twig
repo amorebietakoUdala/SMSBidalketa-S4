@@ -15,6 +15,11 @@
 		<div class="col-lg-2 col-md-2 col-sm-6">
 			{{ form_row(form.text, { 'attr': { 'id': '', 'class' : 'form-control-sm' } }) }}
 		</div>
+		{% if is_granted('ROLE_ADMIN') %}
+			<div class="col-lg-2 col-md-2 col-sm-6">
+				{{ form_row(form.provider, { 'attr': { 'id': '', 'class' : 'form-control-sm' } }) }}
+			</div>
+		{% endif %}
 		<div class="col-lg-2 col-md-2 col-sm-6">
 			{{ form_row(form.status, { 'attr': { 'id': '', 'class' : 'form-control-sm' } }) }}
 		</div>

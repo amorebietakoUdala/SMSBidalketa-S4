@@ -19,6 +19,7 @@ class HistoryController extends AbstractController
      */
     public function listAction(Request $request)
     {
+        $maxLimit = 3000;
         $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(HistorySearchType::class, new HistorySearchDTO());
@@ -28,11 +29,16 @@ class HistoryController extends AbstractController
             /* @var $data HistorySearchDTO */
             $data = $form->getData();
             $criteria = $data->toArray();
-            $histories = $em->getRepository(History::class)->findByDates($criteria);
+            $histories = $em->getRepository(History::class)->findByDates($criteria, ['date' => 'DESC'], $maxLimit);
+
+            if (count($histories) === $maxLimit) {
+                $this->addFlash('warning', 'Max results reached: %maxLimit%');
+            }
 
             return $this->render('history/list.html.twig', [
                 'histories' => $histories,
                 'form' => $form->createView(),
+                'maxLimit' => $maxLimit,
             ]);
         }
 
