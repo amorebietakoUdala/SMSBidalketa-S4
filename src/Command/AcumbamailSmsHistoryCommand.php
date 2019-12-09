@@ -77,7 +77,13 @@ class AcumbamailSmsHistoryCommand extends Command
         }
         try {
             $api_histories = $this->smsApi->getHistory($start_date, $end_date);
-            $firstResult = $api_histories[0];
+            if (count($api_histories) > 0) {
+                $firstResult = $api_histories[0];
+            } else {
+                $output->writeln('No histories found from: '.$start_date->format('Y-m-d H:i').' to '.$end_date->format('Y-m-d H:i'));
+
+                return 0;
+            }
             if (null === $lastHistory) {
                 $lastId = 0;
             } else {
