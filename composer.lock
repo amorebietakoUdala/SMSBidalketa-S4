@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "604efc03b9ce327a93a9e9e9b5a3d489",
+    "content-hash": "4b6165bc852a3190b79d072ae2739ac2",
     "packages": [
         {
             "name": "amorebietakoudala/smsservice-bundle",
