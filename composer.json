@@ -49,14 +49,11 @@
         "sort-packages": true
     },
     "autoload": {
-        "psr-4": {
-            "App\\": "src/",
-			"AmorebietakoUdala\\SMSServiceBundle\\": "lib/SMSServiceBundle/"
-        }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "App\\": "src/",
+			"AmorebietakoUdala\\SMSServiceBundle\\": "lib/SMSServiceBundle/"
         }
     },
     "replace": {
