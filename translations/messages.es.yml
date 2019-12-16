@@ -38,6 +38,7 @@ navitem.contact_list: "Listado"
 navitem.contact_import: "Importar"
 navitem.history: "Histórico"
 navitem.audit: "Auditoría"
+navitem.credits: "Créditos"
 
 ########################################################
 # Entidades
@@ -133,6 +134,7 @@ choice.dinahosting: "Dinahosting"
 "Remaining characters": "Caracteres restantes"
 "Message has invalid characters": "El mensaje contiene carácteres inválidos. Los carácteres validos son: @£$¥èéùìòÇØøÅåΔ_ΦΓΛΩΠΨΣΘΞ^{}\\[~]|ÆæßÉ!\"#¤%'()+,-./:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà0123456789"
 "Max results reached: %maxLimit%": "Ha llegado al número máximo de resultados %maxLimit%. Refine la búsqueda"
+"Your remaing credits are %credits%" : "El crédito restante es: %credits%"
 
 messages.confirmacion: "Confirmación"
 messages.results0: "No se han encontrado resultados"

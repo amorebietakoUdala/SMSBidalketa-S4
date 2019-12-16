@@ -57,6 +57,7 @@ class SendingController extends AbstractController
                 ]);
             }
             try {
+//                $credit = 1000;
                 $credit = $smsapi->getCredit();
             } catch (\Exception $e) {
                 $this->addFlash('error', 'An error has ocurred: '.$e->getMessage());
@@ -127,7 +128,7 @@ class SendingController extends AbstractController
     /**
      * @Route("/sending", name="sending_search")
      */
-    public function sendSearchAction(Request $request)
+    public function sendSearchAction(Request $request, SmsServiceApi $smsapi)
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(SendingType::class, new SendingDTO());
@@ -150,6 +151,7 @@ class SendingController extends AbstractController
 
         return $this->render('sending/list.html.twig', [
             'form' => $form->createView(),
+            'credits' => $smsapi->getCredit(),
         ]);
     }
 

@@ -41,6 +41,9 @@
 
 {% block body %}
     <main class="container-fluid">
+	<div class="alert alert-info margin-top-13">
+		{{ 'Your remaing credits are %credits%' | trans( {'%credits%': credits }, 'messages' ) }}
+	</div>
 	<div class="mt-2 border-light">
 	{{ include('sending/_form.html.twig',{
 
