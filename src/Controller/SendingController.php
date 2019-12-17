@@ -114,6 +114,7 @@ class SendingController extends AbstractController
             ]);
             } catch (\Exception $e) {
                 $this->addFlash('error', 'There was an error processing the request: %error_message%');
+                $logger->error('There was an error processing the request: '.$e->getMessage());
                 $em->persist($audit);
                 $em->flush();
 
