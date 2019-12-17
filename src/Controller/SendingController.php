@@ -97,13 +97,13 @@ class SendingController extends AbstractController
                     $audit->setResponseCode($response['responseCode']);
                     $audit->setResponse(json_encode($response));
                     $logger->info('API Response: '.json_encode($response));
-                    $em->persist($audit);
-                    $em->flush();
                     $this->addFlash('success', '%messages_sent% messages sended successfully');
                 } else {
                     $this->addFlash('warning', 'The API has not responded');
                     $logger->info('API Response: The API has not responded');
                 }
+                $em->persist($audit);
+                $em->flush();
                 $form = $this->createForm(SendingType::class, new SendingDTO(), []);
 
                 return $this->render('sending/list.html.twig', [
