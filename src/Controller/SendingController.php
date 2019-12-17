@@ -65,6 +65,7 @@ class SendingController extends AbstractController
                 return $this->render('sending/list.html.twig', [
                     'form' => $form->createView(),
                     'contacts' => [],
+                    'credits' => $credit,
                 ]);
             }
             if ($credit < count($telephones)) {
@@ -84,6 +85,7 @@ class SendingController extends AbstractController
                 return $this->render('sending/list.html.twig', [
                     'form' => $form->createView(),
                     'contacts' => [],
+                    'credits' => $credit,
                 ]);
             }
 
@@ -108,6 +110,7 @@ class SendingController extends AbstractController
                 'form' => $form->createView(),
                 'contacts' => [],
                 'messages_sent' => count($telephones),
+                'credits' => $smsapi->getCredit(),
             ]);
             } catch (\Exception $e) {
                 $this->addFlash('error', 'There was an error processing the request: %error_message%');
@@ -118,6 +121,7 @@ class SendingController extends AbstractController
                     'form' => $form->createView(),
                     'contacts' => [],
                     'error_message' => $e->getMessage(),
+                    'credits' => $smsapi->getCredit(),
                 ]);
             }
         }
@@ -146,6 +150,7 @@ class SendingController extends AbstractController
             return $this->render('sending/list.html.twig', [
                 'form' => $form->createView(),
                 'contacts' => $contacts,
+                'credits' => $smsapi->getCredit(),
             ]);
         }
 

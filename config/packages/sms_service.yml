@@ -10,6 +10,6 @@ sms_service:
         acumbamail:
             authToken: '%env(SMS_ACUMBAMAIL_AUTHTOKEN)%'
             version: 1
-            timeout: 10.0
+            timeout: 20.0
             sender: 'AMOREBIETA'
             countryCode: '34'
