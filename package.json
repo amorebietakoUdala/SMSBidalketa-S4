@@ -23,7 +23,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.0",
     "jquery-ui": "^1.12.1",
-    "lodash": "4.17.13",
+    "lodash": "4.17.19",
     "minimist": "^1.2.5",
     "moment": "2.24.0",
     "moment-timezone": "0.4.0",
