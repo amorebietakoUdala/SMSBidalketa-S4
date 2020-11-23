@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/{_locale}")
+ * @Route("/{_locale}", requirements={"_locale"="es|eu|en"})
  */
 class LabelController extends AbstractController
 {

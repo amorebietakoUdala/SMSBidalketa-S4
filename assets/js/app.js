@@ -3,6 +3,8 @@ import 'bootstrap';
 import 'popper.js';
 
 import '../css/app.scss';
+/* Global public directory for assets */
+global.app_base = '/smsbidalketa';
 
 $(document).ready(function(){
     $('#js-locale-es').on('click',function (e) {

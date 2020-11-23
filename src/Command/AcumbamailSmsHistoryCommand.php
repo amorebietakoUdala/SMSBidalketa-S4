@@ -55,6 +55,8 @@ class AcumbamailSmsHistoryCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->getHistory($input, $output);
+
+        return Command::SUCCESS;
     }
 
     private function getHistory(InputInterface $input, OutputInterface $output)

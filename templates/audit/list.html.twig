@@ -46,7 +46,7 @@
 						<td>{{audit.user}}</td>
 						<td>
 							<a id="alert{{ loop.index }}" href="#" class="js-fireAlert" 
-								data-url="{{ path( "get_audit_telephones", { "id" : audit.id } ) }}">
+								data-url="{{ path( "api_get_audit_telephones", { "id" : audit.id } ) }}">
 								<i class="fa fa-file-text-o" title="{{ 'contacts.details' | trans | capitalize }}"></i>
 							</a>
 						</td>

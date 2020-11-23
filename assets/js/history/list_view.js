@@ -13,31 +13,7 @@ import 'bootstrap-datepicker/js/locales/bootstrap-datepicker.eu';
 import 'eonasdan-bootstrap-datetimepicker';
 import 'pc-bootstrap4-datetimepicker';
 
-// import Swal from 'sweetalert2';
-
-//function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
-//	import('sweetalert2').then((Swal) => {
-//		Swal.default.fire({
-//		  title: title,
-//		  html: html,
-//		  type: 'warning',
-//		  showCancelButton: true,
-//		  cancelButtonText: cancelButtonText,
-//		  confirmButtonColor: '#3085d6',
-//		  cancelButtonColor: '#d33',
-//		  confirmButtonText: confirmationButtonText,
-//		}).then((result) => {
-//		if (result.value) {
-//			console.log(url);
-//			document.location.href=url;
-//		}
-//		});
-//	});
-//}
-
 $(document).ready(function(){
-	console.log("Label list view!!!!");
-
 	$('#taula').bootstrapTable({
 		cache : false,
 		showExport: true,
@@ -70,14 +46,4 @@ $(document).ready(function(){
 		sideBySide: true,
 		locale: $('html').attr('lang'),
 	});
-//	$('.js-delete').on('click',function(e){
-//		e.preventDefault();
-//		var url = e.currentTarget.dataset.url;
-//		var confirmation = e.currentTarget.dataset.confirmation;
-//		var message = e.currentTarget.dataset.message;
-//		var confirm = e.currentTarget.dataset.confirm;
-//		var cancel = e.currentTarget.dataset.cancel;
-//		fireAlert(confirmation,message,confirm,cancel,url);
-//	});
-
 });

@@ -2,14 +2,16 @@
 
 namespace App\Repository;
 
+use App\Entity\History;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 class HistoryRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, \App\Entity\History::class);
+        parent::__construct($registry, History::class);
     }
 
     public function findByDates(array $criteria = null, array $order = null, $limit = null)
@@ -17,12 +19,12 @@ class HistoryRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('h');
         if (array_key_exists('fromDate', $criteria) && null !== $criteria['fromDate']) {
             $qb->andWhere('h.date >= :fromDate');
-            $qb->setParameter('fromDate', \DateTime::createFromFormat('Y-m-d H:i', $criteria['fromDate']));
+            $qb->setParameter('fromDate', DateTime::createFromFormat('Y-m-d H:i', $criteria['fromDate']));
             unset($criteria['fromDate']);
         }
         if (array_key_exists('toDate', $criteria) && null !== $criteria['toDate']) {
             $qb->andWhere('h.date <= :toDate');
-            $qb->setParameter('toDate', \DateTime::createFromFormat('Y-m-d H:i', $criteria['toDate']));
+            $qb->setParameter('toDate', DateTime::createFromFormat('Y-m-d H:i', $criteria['toDate']));
             unset($criteria['toDate']);
         }
         if (array_key_exists('rctpNameNumber', $criteria) and null !== $criteria['rctpNameNumber']) {
