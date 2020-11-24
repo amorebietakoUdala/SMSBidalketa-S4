@@ -22,7 +22,6 @@ function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
 		  confirmButtonText: confirmationButtonText,
 		}).then((result) => {
 		if (result.value) {
-			console.log(url);
 			document.location.href=url;
 		}
 		});
@@ -30,7 +29,6 @@ function fireAlert (title,html,confirmationButtonText, cancelButtonText, url) {
 }
 
 $(document).ready(function(){
-	console.log("Label list view!!!!");
 	$('#taula').bootstrapTable({
 		cache : false,
 		showExport: true,

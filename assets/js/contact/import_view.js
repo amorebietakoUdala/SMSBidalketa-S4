@@ -24,12 +24,10 @@ $(document).ready(function(){
 	var wrapper = $('.js-labels-wrapper');
 	wrapper.on('click','.js-label-remove', function (e) {
 		e.preventDefault();
-		console.log("Remove label clicked!!!");
 		$(this).closest('.js-label-item').remove();
 	});
 	wrapper.on('click','.js-label-add', function (e) {
 		e.preventDefault();
-		console.log('Add Label Clicked!!!');
 		var prototype = wrapper.data('prototype');
 		var index = wrapper.data('index');
 		var newForm = prototype;
@@ -38,7 +36,7 @@ $(document).ready(function(){
 		$(this).before(newForm);
 		$('.js-autocomplete').autocomplete({
 			minChars: 2,
-			serviceUrl: "/smsbidalketa" + Routing.generate('get_labels'),
+			serviceUrl: global.app_base + Routing.generate('api_get_labels'),
 			paramName: "name",
 			transformResult: function(response) {
 				var json_data = JSON.parse(response);

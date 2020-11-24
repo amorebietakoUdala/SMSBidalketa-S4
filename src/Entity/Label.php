@@ -4,14 +4,13 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Serializer\Annotation as SFSerializer;
 
 /**
  * Label.
  *
  * @ORM\Table(name="label")
  * @ORM\Entity(repositoryClass="App\Repository\LabelRepository")
- * @Serializer\ExclusionPolicy("all")
  */
 class Label
 {
@@ -21,7 +20,7 @@ class Label
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Serializer\Expose
+     * @SFSerializer\Groups({"show"})
      */
     private $id;
 
@@ -29,7 +28,7 @@ class Label
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
-     * @Serializer\Expose
+     * @SFSerializer\Groups({"show"})
      */
     private $name;
 
@@ -37,6 +36,7 @@ class Label
      * Labels for the contacts.
      *
      * @ORM\ManyToMany(targetEntity="Contact", mappedBy="labels")
+     * @SFSerializer\Groups({"none"})
      */
     private $contacts;
 

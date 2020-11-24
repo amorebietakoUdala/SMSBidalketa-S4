@@ -51,6 +51,8 @@ class DinahostingSmsHistoryCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->getHistory($output);
+
+        return Command::SUCCESS;
     }
 
     private function getHistory(OutputInterface $output)
