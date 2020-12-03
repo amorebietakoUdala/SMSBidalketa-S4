@@ -39,12 +39,12 @@ class ContactController extends AbstractController
                     $this->addFlash('error', 'The csv file has an incorrect number of columns or invalid separator. File csv must have \'telephone;name;surname1;surname2\' without headers.');
 
                     return $this->render('contact/upload.html.twig', [
-                                    'form' => $form->createView(),
-                                    'message' => null,
-                                    'already_existing_contacts' => null,
-                                    'repeated_contacts' => null,
-                                    'contacts_without_repeated' => null,
-                            ]);
+                        'form' => $form->createView(),
+                        'message' => null,
+                        'already_existing_contacts' => null,
+                        'repeated_contacts' => null,
+                        'contacts_without_repeated' => null,
+                    ]);
                 }
                 $records = $this->__readRecordsFromFile($file, $separator);
                 $repo = $em->getRepository(Contact::class);
@@ -75,13 +75,13 @@ class ContactController extends AbstractController
                 $this->addFlash('success', 'File successfully processed');
                 $message = '';
                 if (count($already_existing_contacts) > 0) {
-                    $this->addFlash('warning', 'There are already existing contacts. the label will be applyied but the contact information has not be updated.');
+                    $this->addFlash('warning', 'There are already existing contacts. the label will be applied but the contact information has not be updated.');
                 }
                 if (count($repeated_contacts) > 0) {
                     $this->addFlash('warning', 'There are repeated contacts.');
                 }
             } catch (Exception $e) {
-                $this->addFlash('error', 'there was an error procesing file %message%');
+                $this->addFlash('error', 'there was an error processing file %message%');
                 $message = $e->getMessage();
             }
             $this->__moveProcessedFile($file);
@@ -93,24 +93,34 @@ class ContactController extends AbstractController
                 'repeated_contacts' => $repeated_contacts,
                 'contacts_without_repeated' => $contacts_without_repeated,
                 'invalid_contacts' => $invalid_contacts,
-        ]);
+            ]);
         }
 
         return $this->render('contact/upload.html.twig', [
             'form' => $form->createView(),
             'message' => null,
-    ]);
+        ]);
     }
 
     /**
      * @Route("/contacts", name="contact_list")
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $contacts = $em->getRepository(Contact::class)->findAll();
+        $contacts = [];
+        $form = $this->createForm(\App\Form\ContactSearchType::class, new ContactDTO());
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /* @var ContactDTO $data */
+            $data = $form->getData();
+            $contact = new Contact();
+            $data->fill($contact);
+            $em = $this->getDoctrine()->getManager();
+            $contacts = $em->getRepository(Contact::class)->findByExample($contact);
+        }
 
         return $this->render('contact/list.html.twig', [
+            'form' => $form->createView(),
             'contacts' => $contacts,
         ]);
     }
@@ -160,8 +170,7 @@ class ContactController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $contactDTO = new ContactDTO($contact);
 
-        $form = $this->createForm(ContactType::class, $contactDTO, [
-        ]);
+        $form = $this->createForm(ContactType::class, $contactDTO, []);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -191,8 +200,7 @@ class ContactController extends AbstractController
     {
         $contactDTO = new ContactDTO($contact);
 
-        $form = $this->createForm(ContactType::class, $contactDTO, [
-        ]);
+        $form = $this->createForm(ContactType::class, $contactDTO, []);
 
         return $this->render('contact/edit.html.twig', [
             'form' => $form->createView(),
@@ -256,7 +264,7 @@ class ContactController extends AbstractController
         $reader = Reader::createFromPath($file, 'r');
         $reader->addStreamFilter('convert.iconv.ISO-8859-15/UTF-8');
         $reader->setDelimiter($separator);
-//                $reader->setHeaderOffset(0);
+        //                $reader->setHeaderOffset(0);
         $records = $reader->getRecords();
 
         return $records;
@@ -273,7 +281,7 @@ class ContactController extends AbstractController
             // extension cannot be guessed
             $extension = 'bin';
         }
-        $file->move($directory, $dateStr.'-'.$filename.'.'.$extension);
+        $file->move($directory, $dateStr . '-' . $filename . '.' . $extension);
     }
 
     private function __assignLabelsToContacts($contacts, $labels)

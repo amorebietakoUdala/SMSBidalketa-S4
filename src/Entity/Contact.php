@@ -230,7 +230,7 @@ class Contact
 
     public function getFullName()
     {
-        return $this->name.' '.$this->surname1.' '.$this->surname2;
+        return $this->name . ' ' . $this->surname1 . ' ' . $this->surname2;
     }
 
     public function hasLabel($label)
@@ -243,6 +243,7 @@ class Contact
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'telephone' => $this->telephone,
             'surname1' => $this->surname1,
             'surname2' => $this->surname2,
             'labels' => $this->labels->toArray(),

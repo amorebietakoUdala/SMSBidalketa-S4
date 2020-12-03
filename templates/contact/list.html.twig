@@ -17,6 +17,11 @@
 
 {% block body %}
     <main class="container-fluid">
+	<div class="mt-2">
+	{{ include('contact/_searchForm.html.twig',{
+	    'readonly': false,
+			    }) }}
+	</div>
 	<div class="container-fluid">
 	    <table id="taula" class="table bootstrap-table mt-3">
 		<thead>

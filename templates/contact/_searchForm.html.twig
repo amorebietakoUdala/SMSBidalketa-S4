@@ -1,0 +1,30 @@
+{{ form_start(form, {'attr': {'class': 'container-fluid form-group',
+						 'novalidate': 'novalidate'
+						} 
+}) }}
+<div class="form-row align-items-center mb-1">
+	<div class="col-lg-2 col-md-2 col-sm-6">
+		{{ form_row(form.telephone, { 'attr': { 'id': '', 'class' : 'form-control-sm' } }) }}
+	</div>
+	<div class="col-lg-2 col-md-2 col-sm-6">
+		{{ form_row(form.name, { 'attr': { 'id': '', 'class' : 'form-control-sm' } }) }}
+	</div>
+	<div class="col-lg-2 col-md-2 col-sm-6">
+		{{ form_row(form.surname1, { 'attr': { 'id': '', 'class' : 'form-control-sm' } }) }}
+	</div>
+	<div class="col-lg-2 col-md-2 col-sm-6">
+		{{ form_row(form.surname2, { 'attr': { 'id': '', 'class' : 'form-control-sm' } }) }}
+	</div>
+	<div class="col-lg-2 col-md-2 col-sm-6">
+		{{ form_row(form.labels, { 'attr': { 'id': '', 'class' : 'form-control-sm js-labels'} }) }}
+	</div>
+	<div class="col-lg-1 col-md-1 col-sm-6">
+		<button type="Submit" class="btn btn-primary ml-1">{{ "btn.search" | trans | capitalize }}</button>
+	</div>
+</div>
+<!-- Token CSRF -->
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false, 
+				   'attr': {'class': '',
+			       } 
+}) }}
