@@ -57,10 +57,10 @@ class SendingController extends AbstractController
                 ]);
             }
             try {
-//                $credit = 1000;
+                //                $credit = 1000;
                 $credit = $smsapi->getCredit();
             } catch (\Exception $e) {
-                $this->addFlash('error', 'An error has ocurred: '.$e->getMessage());
+                $this->addFlash('error', 'An error has ocurred: ' . $e->getMessage());
 
                 return $this->render('sending/list.html.twig', [
                     'form' => $form->createView(),
@@ -69,7 +69,7 @@ class SendingController extends AbstractController
                 ]);
             }
             if ($credit < count($telephones)) {
-                $this->addFlash('error', 'Not enough credit. Needed credtis %credits_needed% remaining %credits_remaining%');
+                $this->addFlash('error', 'Not enough credit. Needed credits %credits_needed% remaining %credits_remaining%');
 
                 return $this->render('sending/list.html.twig', [
                     'form' => $form->createView(),
@@ -96,7 +96,7 @@ class SendingController extends AbstractController
                     $audit->setMessage($response['message']);
                     $audit->setResponseCode($response['responseCode']);
                     $audit->setResponse(json_encode($response));
-                    $logger->info('API Response: '.json_encode($response));
+                    $logger->info('API Response: ' . json_encode($response));
                     $this->addFlash('success', '%messages_sent% messages sended successfully');
                 } else {
                     $this->addFlash('warning', 'The API has not responded');
@@ -107,14 +107,14 @@ class SendingController extends AbstractController
                 $form = $this->createForm(SendingType::class, new SendingDTO(), []);
 
                 return $this->render('sending/list.html.twig', [
-                'form' => $form->createView(),
-                'contacts' => [],
-                'messages_sent' => count($telephones),
-                'credits' => $smsapi->getCredit(),
-            ]);
+                    'form' => $form->createView(),
+                    'contacts' => [],
+                    'messages_sent' => count($telephones),
+                    'credits' => $smsapi->getCredit(),
+                ]);
             } catch (\Exception $e) {
                 $this->addFlash('error', 'There was an error processing the request: %error_message%');
-                $logger->error('There was an error processing the request: '.$e->getMessage());
+                $logger->error('There was an error processing the request: ' . $e->getMessage());
                 $em->persist($audit);
                 $em->flush();
 
@@ -205,11 +205,11 @@ class SendingController extends AbstractController
     private function utf8ToUnicode(&$str)
     {
         $mState = 0;     // cached expected number of octets after the current octet
-                       // until the beginning of the next UTF8 character sequence
-      $mUcs4 = 0;     // cached Unicode character
-      $mBytes = 1;     // cached expected number of octets in the current sequence
+        // until the beginning of the next UTF8 character sequence
+        $mUcs4 = 0;     // cached Unicode character
+        $mBytes = 1;     // cached expected number of octets in the current sequence
 
-      $out = array();
+        $out = array();
 
         $len = strlen($str);
         for ($i = 0; $i < $len; ++$i) {
@@ -283,13 +283,14 @@ class SendingController extends AbstractController
 
                         // From Unicode 3.1, non-shortest form is illegal
                         if (((2 == $mBytes) && ($mUcs4 < 0x0080)) ||
-                  ((3 == $mBytes) && ($mUcs4 < 0x0800)) ||
-                  ((4 == $mBytes) && ($mUcs4 < 0x10000)) ||
-                  (4 < $mBytes) ||
-                  // From Unicode 3.2, surrogate characters are illegal
-                  (0xD800 == ($mUcs4 & 0xFFFFF800)) ||
-                  // Codepoints outside the Unicode range are illegal
-                  ($mUcs4 > 0x10FFFF)) {
+                            ((3 == $mBytes) && ($mUcs4 < 0x0800)) ||
+                            ((4 == $mBytes) && ($mUcs4 < 0x10000)) ||
+                            (4 < $mBytes) ||
+                            // From Unicode 3.2, surrogate characters are illegal
+                            (0xD800 == ($mUcs4 & 0xFFFFF800)) ||
+                            // Codepoints outside the Unicode range are illegal
+                            ($mUcs4 > 0x10FFFF)
+                        ) {
                             return false;
                         }
                         if (0xFEFF != $mUcs4) {

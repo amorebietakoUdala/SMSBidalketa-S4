@@ -12,8 +12,6 @@ messages.appTitle: "SMSBidalketa"
 
 table.options: "Aukerak"
 
-
-
 ########################################################
 # Botones
 ########################################################
@@ -114,7 +112,7 @@ choice.dinahosting: "Dinahosting"
 "These contacts has not been loaded": "Ondorengo kontaktuak ez dira gorde"
 "Invalid contacts": "Txarto dauden kontaktuak"
 "Choose file": "Fitxategia hautatu"
-"Not enough credit. Needed credtis %credits_needed% remaining %credits_remaining%": "Ez dago kreditu nahikorik. %credits_remaining% geratzen dira eta %credits_needed% behar dira."
+"Not enough credit. Needed credits %credits_needed% remaining %credits_remaining%": "Ez dago kreditu nahikorik. %credits_remaining% geratzen dira eta %credits_needed% behar dira."
 "%messages_sent% messages sended successfully": "%messages_sent% mezu bidali dira."
 "No message entered": "Ez da mezu sartu"
 "No receivers found": "Ez da hartzailerik hautatu"
@@ -131,7 +129,7 @@ choice.dinahosting: "Dinahosting"
 "Remaining characters": "Geratzen den letra kopurua"
 "Message has invalid characters": "Mezuak karaktere ezegokiak dauzka. Onartutako karaktereak honako hauek dira: @£$¥èéùìòÇØøÅåΔ_ΦΓΛΩΠΨΣΘΞ^{}\\[~]|ÆæßÉ!\"#¤%'()+,-./:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà0123456789"
 "Max results reached: %maxLimit%": "Emaitza kopurua maximora heldu da: %maxLimit%. Bilaketa zehaztu"
-"Your remaing credits are %credits%" : "%credits% kredito geratzen dira."
+"Your remaing credits are %credits%": "%credits% kredito geratzen dira."
 
 messages.confirmacion: "Konfirmazioa"
 messages.results0: "Ez da emaitzarik aurkitu"

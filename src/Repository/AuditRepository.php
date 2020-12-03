@@ -12,7 +12,7 @@ class AuditRepository extends ServiceEntityRepository
         parent::__construct($registry, \App\Entity\Audit::class);
     }
 
-    public function findByTimestamp(array $criteria = null, array $order = null)
+    public function findByTimestamp(array $criteria = null, array $order = null, $limit = null)
     {
         $criteria = $this->__remove_blank_filters($criteria);
         $qb = $this->createQueryBuilder('a');
@@ -38,7 +38,7 @@ class AuditRepository extends ServiceEntityRepository
         } else {
             $qb->orderBy(array_key_first($order), array_value[array_key_first($order)]);
         }
-        $result = $qb->getQuery()->getResult();
+        $result = $qb->getQuery()->setMaxResults($limit)->getResult();
 
         return $result;
     }
@@ -47,7 +47,7 @@ class AuditRepository extends ServiceEntityRepository
     {
         if (count($criteriaEqual)) {
             foreach ($criteriaEqual as $field => $value) {
-                $qb->andWhere('a.'.$field.' = :'.$field)
+                $qb->andWhere('a.' . $field . ' = :' . $field)
                     ->setParameter($field, $value);
             }
         }
@@ -59,8 +59,8 @@ class AuditRepository extends ServiceEntityRepository
     {
         if (count($criteriaLike)) {
             foreach ($criteriaLike as $field => $value) {
-                $qb->andWhere('a.'.$field.' LIKE :'.$field)
-                        ->setParameter($field, '%'.$value.'%');
+                $qb->andWhere('a.' . $field . ' LIKE :' . $field)
+                    ->setParameter($field, '%' . $value . '%');
             }
         }
 

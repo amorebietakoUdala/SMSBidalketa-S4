@@ -19,7 +19,7 @@ class HistoryController extends AbstractController
      */
     public function listAction(Request $request)
     {
-        $maxLimit = 3000;
+        $maxLimit = $this->getParameter('historyMaxLimit');
         $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(HistorySearchType::class, new HistorySearchDTO());
