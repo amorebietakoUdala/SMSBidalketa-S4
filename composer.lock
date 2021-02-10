@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "55b8030158264e294fb46edd7dae86c1",
+    "content-hash": "7e55421d20f0eaf844f9af86446320f0",
     "packages": [
         {
             "name": "amorebietakoudala/smsservice-bundle",
-            "version": "1.1.3",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amorebietakoUdala/SMSServiceBundle.git",
-                "reference": "49e32613459b6e998a89f7442aeee8f5d0c1ce0b"
+                "reference": "9010245c04ba2a9dac41f59151371b3e23fd5683"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amorebietakoUdala/SMSServiceBundle/zipball/49e32613459b6e998a89f7442aeee8f5d0c1ce0b",
-                "reference": "49e32613459b6e998a89f7442aeee8f5d0c1ce0b",
+                "url": "https://api.github.com/repos/amorebietakoUdala/SMSServiceBundle/zipball/9010245c04ba2a9dac41f59151371b3e23fd5683",
+                "reference": "9010245c04ba2a9dac41f59151371b3e23fd5683",
                 "shasum": ""
             },
             "require": {
@@ -46,9 +46,9 @@
             ],
             "support": {
                 "issues": "https://github.com/amorebietakoUdala/SMSServiceBundle/issues",
-                "source": "https://github.com/amorebietakoUdala/SMSServiceBundle/tree/1.1.3"
+                "source": "https://github.com/amorebietakoUdala/SMSServiceBundle/tree/1.1.4"
             },
-            "time": "2020-11-23T14:00:07+00:00"
+            "time": "2021-02-10T08:37:24+00:00"
         },
         {
             "name": "amorebietakoudala/user-bundle",
