@@ -176,6 +176,16 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /* @var $data ContactDTO */
             $data = $form->getData();
+            $telephone = $data->getTelephone();
+            $contacts = $em->getRepository(Contact::class)->findBy(['telephone' => $telephone]);
+            if (count($contacts)) {
+                $this->addFlash('error', 'Repeated telephone');
+                return $this->render('contact/edit.html.twig', [
+                    'form' => $form->createView(),
+                    'readonly' => false,
+                    'new' => false,
+                ]);
+            }
             $labels = $data->getLabels();
             $this->__removeCollectionDuplicates($labels, $this->__removeLabelDuplicates($labels));
             $data->fill($contact);
