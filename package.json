@@ -11,7 +11,8 @@
     "regenerator-runtime": "^0.13.2",
     "sass-loader": "^9.0.1",
     "webpack-dev-server": "^3.11.0",
-    "webpack-notifier": "1.6.0"
+    "webpack-notifier": "1.6.0",
+    "y18n": "^4.0.1"
   },
   "dependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
