@@ -5,7 +5,7 @@ import 'bootstrap-table';
 import 'bootstrap-table/dist/extensions/export/bootstrap-table-export'
 import 'bootstrap-table/dist/locale/bootstrap-table-eu-EU';
 import 'bootstrap-table/dist/locale/bootstrap-table-es-ES';
-import 'tableexport.jquery.plugin/tableExport';
+import 'tableexport.jquery.plugin/tableExport.min';
 import 'jquery-ui';
 // import Swal from 'sweetalert2';
 
